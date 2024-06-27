@@ -1,0 +1,803 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Taoran">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="知识前置深度优先搜索(DFS)基于深度的搜索，一搜到底，有回溯。详见OI-Wiki。 广度优先搜索(BFS)基于广度的搜索，逐层加深搜索。详见OI-Wiki。  写在前面这部分讲的是增广路算法，预流推进算法还没写。  算法定义在有向图中，给定源点$s$和汇点$t$，图上$s\rightarrow t$能流过的最大流量成为网络的最大流。其中，$u\rightarrow v$的流量$f(u,\ v)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络最大流 - 增广路算法">
+<meta property="og:url" content="https://algo-x.cn/articles/Network-Flow-Algorithm/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:description" content="知识前置深度优先搜索(DFS)基于深度的搜索，一搜到底，有回溯。详见OI-Wiki。 广度优先搜索(BFS)基于广度的搜索，逐层加深搜索。详见OI-Wiki。  写在前面这部分讲的是增广路算法，预流推进算法还没写。  算法定义在有向图中，给定源点$s$和汇点$t$，图上$s\rightarrow t$能流过的最大流量成为网络的最大流。其中，$u\rightarrow v$的流量$f(u,\ v)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://algo-x.cn/img/29-01.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/29-02.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/29-03.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/29-04.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/29-05.jpg">
+<meta property="article:published_time" content="2024-05-19T09:27:26.000Z">
+<meta property="article:modified_time" content="2024-06-27T13:55:01.161Z">
+<meta property="article:author" content="Taoran">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://algo-x.cn/img/29-01.jpg">
+  
+  
+  
+  <title>网络最大流 - 增广路算法 - Algo-X.cn</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/articles/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chemistry/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>化学工具站</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="网络最大流 - 增广路算法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-19 17:27" pubdate>
+          2024年5月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">网络最大流 - 增广路算法</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年6月27日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="深度优先搜索-DFS"><a href="#深度优先搜索-DFS" class="headerlink" title="深度优先搜索(DFS)"></a>深度优先搜索(DFS)</h4><p>基于深度的搜索，一搜到底，有回溯。详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/search/dfs/">OI-Wiki</a>。</p>
+<h4 id="广度优先搜索-BFS"><a href="#广度优先搜索-BFS" class="headerlink" title="广度优先搜索(BFS)"></a>广度优先搜索(BFS)</h4><p>基于广度的搜索，逐层加深搜索。详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/search/bfs/">OI-Wiki</a>。</p>
+<hr>
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>这部分讲的是增广路算法，预流推进算法还没写。</p>
+<hr>
+<h3 id="算法定义"><a href="#算法定义" class="headerlink" title="算法定义"></a>算法定义</h3><p>在有向图中，给定源点$s$和汇点$t$，图上$s\rightarrow t$能流过的最大流量成为网络的最大流。<br>其中，$u\rightarrow v$的流量$f(u,\ v)$满足$0\le f(u,\ v)\le w(u,\ v)$，即流量必须小于等于边权。</p>
+<p>最大流算法就是求$s\rightarrow t$最大流的过程。</p>
+<hr>
+<h3 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h3><p>问题可以通过建模转化为最大流问题。<br>时间复杂度$O(n^2\times m)$，空间复杂度$O(n)$。</p>
+<hr>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="反向边"><a href="#反向边" class="headerlink" title="反向边"></a>反向边</h4><p>记录已使用流量和剩余流量，完成退流操作。</p>
+<p>以下面这张图为例：<br><img src="../../img/29-01.jpg" srcset="/img/loading.gif" lazyload alt="29-01" style="zoom:100%;" /><br>在最大流下，我们在每条边上作$x&#x2F;y$形式的标记，表示这条边最大流量为$y$，当前流量为$x$：<br><img src="../../img/29-02.jpg" srcset="/img/loading.gif" lazyload alt="29-02" style="zoom:100%;" /><br>建立反向边，流过去的加在反向边(红色)中，剩余流量在正向边(绿色)中：<br><img src="../../img/29-03.jpg" srcset="/img/loading.gif" lazyload alt="29-03" style="zoom:100%;" /><br>这样建反向边，既能保留剩下的流量，便于寻找增广路，又能记录流过的方便退流。</p>
+<p>查询反向边是有一个小技巧：从编号$0$开始建边，建完边有立刻建反向边，这样<code>编号^1</code>就是对应的反向边了。注意这样的话<code>head[]</code>数组需要全部设为$-1$，不能是$0$，同时反向边权值为$0$。</p>
+<h4 id="增广路"><a href="#增广路" class="headerlink" title="增广路"></a>增广路</h4><p>一条路径，起点为$s$，终点为$t$，并且经过的各条边上的剩余容量均大于$0$。<br>查询到增广路，意味着$s\rightarrow t$的流还可以更大。</p>
+<hr>
+<h3 id="一般增广路算法"><a href="#一般增广路算法" class="headerlink" title="一般增广路算法"></a>一般增广路算法</h3><p>又称Ford–Fulkerson增广，是最基础最简单的最大流算法。</p>
+<h4 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h4><p>每一次尝试找一条增广路，找到了就更新最大流。</p>
+<h4 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h4><p>步骤：<br>1.DFS找一条增广路，记录路径的最大流$f$；<br>2.在回溯过程中维护剩余容量，将当前边减去$f$，同时反向边加上$f$。<br>3.重复以上步骤，直到不存在增广路。</p>
+<p>由于每次都需要DFS查找增广路，并且一次只能处理一条增广路，效率很低。<br>时间复杂度$O(m\times k)$，其中$k$为增广路个数。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>例题 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3376">洛谷P3376</a> 网络最大流模板<br>84分，两个点会TLE。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>;<br>	<span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>;ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) &#123;x=(x&lt;&lt;<span class="hljs-number">3</span>)+(x&lt;&lt;<span class="hljs-number">1</span>)+(ch^<span class="hljs-number">48</span>);ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 210</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> M 5010</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INF 0x3f3f3f3f</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> v e[i].to</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> w e[i].val</span><br><span class="hljs-type">int</span> n, m, s, t, t1, t2, t3;<br>ll max_flow;<br><span class="hljs-type">int</span> head[N], tot, vis[N];<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">edge</span> &#123;<span class="hljs-type">int</span> to, nxt, val;&#125; e[M&lt;&lt;<span class="hljs-number">1</span>];<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add_edge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> </span>&#123;<br>	e[tot]=&#123;y, head[x], z&#125;, head[x]=tot++;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> minf)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (u==t||minf==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> minf;<br>	vis[u]=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=head[u]; i!=<span class="hljs-number">-1</span>; i=e[i].nxt) &#123;<br>		<span class="hljs-keyword">if</span> (w==<span class="hljs-number">0</span>||vis[v]) <span class="hljs-keyword">continue</span>;<br>		<span class="hljs-type">int</span> f=<span class="hljs-built_in">dfs</span>(v, <span class="hljs-built_in">min</span>(minf, w));<br>		<span class="hljs-keyword">if</span> (f&lt;=<span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>		e[i].val-=f, e[i^<span class="hljs-number">1</span>].val+=f;<br>		<span class="hljs-keyword">return</span> f;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FF</span><span class="hljs-params">()</span> </span>&#123;<br>	max_flow=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;<br>		<span class="hljs-built_in">memset</span>(vis, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(vis));<br>		<span class="hljs-type">int</span> f=<span class="hljs-built_in">dfs</span>(s, INF);<br>		<span class="hljs-keyword">if</span> (f==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;<br>		max_flow+=f;<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>(), s=<span class="hljs-built_in">read</span>(), t=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-built_in">memset</span>(head, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(head));<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) &#123;<br>		t1=<span class="hljs-built_in">read</span>(), t2=<span class="hljs-built_in">read</span>(), t3=<span class="hljs-built_in">read</span>();<br>		<span class="hljs-built_in">add_edge</span>(t1, t2, t3), <span class="hljs-built_in">add_edge</span>(t2, t1, <span class="hljs-number">0</span>);<br>	&#125;<br>	<span class="hljs-built_in">FF</span>(), <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, max_flow);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="最短增广路算法"><a href="#最短增广路算法" class="headerlink" title="最短增广路算法"></a>最短增广路算法</h3><p>又称Edmonds-Karp增广路算法。</p>
+<h4 id="算法原理-1"><a href="#算法原理-1" class="headerlink" title="算法原理"></a>算法原理</h4><p>使用BFS替换FF算法中的DFS，优化效率。<br>注意到每次BFS都会优先选择距离最小的增广路处理，所以随着次数的递增，残存网络上$s\rightarrow t$的最短路径也在递增。<br>这个算法的迭代次数上限是$O(n\times m)$，详细证明可以参考相关书目，再此不多赘述。</p>
+<h4 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h4><p>将DFS换成BFS即可，使用<code>pre</code>数组记录路径，集中处理剩余流量。<br>最坏情况下每次迭代需要进行$m$次修改，所以时间复杂度为$O(n\times m^2)$。</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><p>例题 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3376">洛谷P3376</a> 网络最大流模板</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>;<br>	<span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>;ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) &#123;x=(x&lt;&lt;<span class="hljs-number">3</span>)+(x&lt;&lt;<span class="hljs-number">1</span>)+(ch^<span class="hljs-number">48</span>);ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 210</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> M 5010</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INF 0x3f3f3f3f</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> v e[i].to</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> w e[i].val</span><br><span class="hljs-type">int</span> n, m, s, t, t1, t2, t3;<br>ll max_flow;<br><span class="hljs-type">int</span> head[N], tot, vis[N], pre[N], flow[N];<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">edge</span> &#123;<span class="hljs-type">int</span> to, nxt, val;&#125; e[M&lt;&lt;<span class="hljs-number">1</span>];<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add_edge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> </span>&#123;<br>	e[tot]=&#123;y, head[x], z&#125;, head[x]=tot++;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bfs</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-built_in">memset</span>(vis, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(vis));<br>	<span class="hljs-built_in">memset</span>(pre, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(pre));<br>	queue&lt;<span class="hljs-type">int</span>&gt; q; q.<span class="hljs-built_in">push</span>(s);<br>	vis[s]=<span class="hljs-number">1</span>, flow[s]=INF;<br>	<span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>		<span class="hljs-type">int</span> u=q.<span class="hljs-built_in">front</span>(); q.<span class="hljs-built_in">pop</span>();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=head[u]; i!=<span class="hljs-number">-1</span>; i=e[i].nxt) &#123;<br>			<span class="hljs-keyword">if</span> (w==<span class="hljs-number">0</span>||vis[v]) <span class="hljs-keyword">continue</span>;<br>			flow[v]=<span class="hljs-built_in">min</span>(flow[u], w);<br>			vis[v]=<span class="hljs-number">1</span>, pre[v]=i, q.<span class="hljs-built_in">push</span>(v);<br>			<span class="hljs-keyword">if</span> (v==t) <span class="hljs-keyword">return</span> flow[v];<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">EK</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-type">int</span> f=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (f=<span class="hljs-built_in">bfs</span>()) &#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> u=t, i; u!=s; u=e[i^<span class="hljs-number">1</span>].to) &#123;<br>			i=pre[u], e[i].val-=f, e[i^<span class="hljs-number">1</span>].val+=f;<br>		&#125;<br>		max_flow+=f;<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>(), s=<span class="hljs-built_in">read</span>(), t=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-built_in">memset</span>(head, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(head));<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) &#123;<br>		t1=<span class="hljs-built_in">read</span>(), t2=<span class="hljs-built_in">read</span>(), t3=<span class="hljs-built_in">read</span>();<br>		<span class="hljs-built_in">add_edge</span>(t1, t2, t3), <span class="hljs-built_in">add_edge</span>(t2, t1, <span class="hljs-number">0</span>);<br>	&#125;<br>	<span class="hljs-built_in">EK</span>(), <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, max_flow);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="连续最短增广路算法"><a href="#连续最短增广路算法" class="headerlink" title="连续最短增广路算法"></a>连续最短增广路算法</h3><p>又称Dinic算法，是比较优秀也比较常用的最短路算法。</p>
+<h4 id="算法原理-2"><a href="#算法原理-2" class="headerlink" title="算法原理"></a>算法原理</h4><p>注意到EK算法还是一次只能找出一条增广路进行迭代。</p>
+<h4 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h4><p>不断重复以下步骤，直到不存在增广路：<br>1.在残存网络中BFS求出节点层次，构造分层图；<br>2.在分层图上DFS寻找增广路，回溯更新容量。</p>
+<p>有一个剪枝，就是对于当前节点，上一次搜索和这一次搜索都是遍历所有出边，但是有一些是空的，很浪费时间。<br><img src="../../img/29-04.jpg" srcset="/img/loading.gif" lazyload alt="29-04" style="zoom:100%;" /><br>于是我们用<code>cur[]</code>替换<code>head[]</code>数组，这样上次从哪里结束的就可以被记录，不需要访问之前迭代空的边了。</p>
+<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><p>例题 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3376">洛谷P3376</a> 网络最大流模板</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>;<br>	<span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>;ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) &#123;x=(x&lt;&lt;<span class="hljs-number">3</span>)+(x&lt;&lt;<span class="hljs-number">1</span>)+(ch^<span class="hljs-number">48</span>);ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 210</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> M 5010</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INF 0x3f3f3f3f</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> v e[i].to</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> w e[i].val</span><br><span class="hljs-type">int</span> n, m, s, t;<br><span class="hljs-type">int</span> t1, t2, t3;<br>ll max_flow;<br><span class="hljs-type">int</span> head[N], cur[N], tot;<br><span class="hljs-type">int</span> d[N], vis[N];<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">edge</span> &#123;<br>	<span class="hljs-type">int</span> to, nxt, val;<br>&#125; e[M&lt;&lt;<span class="hljs-number">1</span>];<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add_edge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> </span>&#123;<br>	e[tot]=&#123;y, head[x], z&#125;, head[x]=tot++;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">bfs</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-built_in">memset</span>(d, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(d));<br>	queue&lt;<span class="hljs-type">int</span>&gt; q; q.<span class="hljs-built_in">push</span>(s), d[s]=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>		<span class="hljs-type">int</span> u=q.<span class="hljs-built_in">front</span>(); q.<span class="hljs-built_in">pop</span>();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=head[u]; i!=<span class="hljs-number">-1</span>; i=e[i].nxt) &#123;<br>			<span class="hljs-keyword">if</span> (w==<span class="hljs-number">0</span>||d[v]!=<span class="hljs-number">-1</span>) <span class="hljs-keyword">continue</span>;<br>			d[v]=d[u]+<span class="hljs-number">1</span>, q.<span class="hljs-built_in">push</span>(v);<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> d[t]!=<span class="hljs-number">-1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> minf)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (u==t||minf==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> minf;<br>	<span class="hljs-type">int</span> f, flow=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=cur[u]; i!=<span class="hljs-number">-1</span>; i=e[i].nxt) &#123;<br>		cur[u]=i;<br>		<span class="hljs-keyword">if</span> (d[v]!=d[u]+<span class="hljs-number">1</span>||!(f=<span class="hljs-built_in">dfs</span>(v, <span class="hljs-built_in">min</span>(minf, w)))) <span class="hljs-keyword">continue</span>;<br>		minf-=f, flow+=f;<br>		e[i].val-=f, e[i^<span class="hljs-number">1</span>].val+=f;<br>		<span class="hljs-keyword">if</span> (minf==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> flow;<br>	&#125;<br>	<span class="hljs-keyword">return</span> flow;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Dinic</span><span class="hljs-params">()</span> </span>&#123;<br>	max_flow=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (<span class="hljs-built_in">bfs</span>()) &#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) cur[i]=head[i];<br>		max_flow+=<span class="hljs-built_in">dfs</span>(s, INF);<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>(), s=<span class="hljs-built_in">read</span>(), t=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-built_in">memset</span>(head, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(head));<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) &#123;<br>		t1=<span class="hljs-built_in">read</span>(), t2=<span class="hljs-built_in">read</span>(), t3=<span class="hljs-built_in">read</span>();<br>		<span class="hljs-built_in">add_edge</span>(t1, t2, t3), <span class="hljs-built_in">add_edge</span>(t2, t1, <span class="hljs-number">0</span>);<br>	&#125;<br>	<span class="hljs-built_in">Dinic</span>(), <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, max_flow);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="常用技巧"><a href="#常用技巧" class="headerlink" title="常用技巧"></a>常用技巧</h3><p>1.拆点$\rightarrow$控制点流量。例如：<br><img src="../../img/29-05.jpg" srcset="/img/loading.gif" lazyload alt="29-05" style="zoom:100%;" /><br>2.建立超级源点和超级汇点$\rightarrow$多个源点&#x2F;汇点。</p>
+<hr>
+<h3 id="最小费用最大流"><a href="#最小费用最大流" class="headerlink" title="最小费用最大流"></a>最小费用最大流</h3><p>贪心算法<br>Dinic中的DFS改成SPFA<br>优先选择一条增广路，费用最小</p>
+<p>费用为距离，跑一遍SPFA，求起点到每一点的<br>总费用&#x3D;费用*流量，可以比较路径距离和</p>
+<p>规定最短路是多少就规定了增广路怎么流<br>SPFA跳过流量为零的边</p>
+<p>最小费用最大流：保证流是最大，满足最大流的前提下，找费用最小的一个增广路。<br>最大流是第一条件，然后是最小费用。</p>
+<p>费用作为权值，求源点到终点的最短路，SPFA<br>d[t]表示源点到终点的费用最短路<br>总费用&#x3D;d[t]*flow，一个流量走完需要d[t]，一共flow。</p>
+<hr>
+<h3 id="P2045-方格取数加强版"><a href="#P2045-方格取数加强版" class="headerlink" title="P2045 方格取数加强版"></a>P2045 方格取数加强版</h3><p>最大费用最大流。</p>
+<p>建立超级源点和超级汇点<br>源-&gt;左上，k。<br>右下-&gt;汇，k。<br>表示可以取k次。</p>
+<p>拆点，对于每个点内的边：<br>可以取到：流量为1，费用为a。<br>不能取到：流量为INF，费用为0。<br>两个边都建。</p>
+<p>取格子，取完了就为0。<br>边与边之间是流量INF，费用0。</p>
+<p>可以求最长路，也可以对费用取反。</p>
+<hr>
+<h3 id="最大权闭合子图"><a href="#最大权闭合子图" class="headerlink" title="最大权闭合子图"></a>最大权闭合子图</h3><p>两个集合$A$、$B$，$n$个点。点$i$被分到集合$A$收益$a[i]$，分到集合$B$收益$b[i]$。<br>如果$u$、$v$两点不在一个集合，额外获得$c[i]$的收益。</p>
+<p>例题 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2762">洛谷P2762</a> 太空飞行计划问题<br>有$n$个仪器，$m$个实验，每个实验需要选一些物品。<br>买仪器需要代价，完成实验可以获得报酬。</p>
+<p>仪器与实验间有关系，实验在左，仪器在右。<br>每个实验都和对应仪器连边。<br>实验连到超级源点，边权为报酬。<br>仪器连接到超级汇点，边权为费用。</p>
+<p>把点分为两个集合$S$、$T$，其中$s\in S$，$t\in T$。<br>$S\cap T&#x3D;\emptyset$，且$S\cup T&#x3D;U$。</p>
+<p>割的容量</p>
+<p>$$<br>c(S,\ T)&#x3D;\sum_{i\in S,\ j\in T}c(i,\ j)<br>$$</p>
+<p>跨过两个集合的边的权值的和就是割的容量，对于所有割，割的容量的最小值就是最小割。</p>
+<p>图的最大流量一定是最小割。</p>
+<p>首先不能切中间的边，不是最优。<br>切两边的边就意味着去掉一个实验。</p>
+<p>答案为所有实验的收益减去最小割，求最小割可以用最大流。</p>
+<hr>
+<h3 id="P2762-太空飞行计划问题"><a href="#P2762-太空飞行计划问题" class="headerlink" title="P2762 太空飞行计划问题"></a>P2762 太空飞行计划问题</h3><p>有向图<strong>最大权闭合子图</strong>问题。</p>
+<p>一个点对应所有出边的点都要选，最大化权值和。</p>
+<p>源点s和汇点t，连s或连t。<br>i要连s，就要割掉t。</p>
+<p>最大价值是最大割，转化为最小割解决。</p>
+<p>最大割&#x3D;$-miuncut+\sum_{a_i&gt;0}a[i]$。</p>
+<p>总结：<br>如果这个点是正的，就拿源点连它。负的就连汇点。<br>统计所有大于0的边的和，减去最小割就是答案。</p>
+<p>必须选的边，最小割就设成+inf，不能割。换回来就是-inf。</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>二分图最大匹配问题、最小割问题等都可以转化为网络流问题解决。<br>熟练背过板子，可以帮助我们快速切题。<br>不要忘记初始化<code>head[]</code>为$-1$，反向边的$val$记得初始化为$0$。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>网络最大流 - 增广路算法</div>
+      <div>https://algo-x.cn/articles/Network-Flow-Algorithm/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Taoran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月19日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年6月27日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/Maintaining-XOR-Extrema/" title="维护异或极值">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">维护异或极值</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/Solution-of-P1084/" title="洛谷P1084 题解">
+                        <span class="hidden-mobile">洛谷P1084 题解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <body>×</body> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

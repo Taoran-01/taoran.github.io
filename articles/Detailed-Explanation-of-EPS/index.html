@@ -1,0 +1,761 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Taoran">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="写在前面不会用$eps$请不要担心，这是高阶算法内容。就算没有判或判错了很大可能只影响算法复杂度，最多多跑一层，无需担心。但是某些特定情况下需要特别关注$eps$，不过这是极少数情况。 这篇文章很长，如果只是想了解一下$eps$，不追求理解原理，请前往解决方案一节，或在洛谷剪贴板中查看。  引言Taoran第一次见到$eps$是在李超树模板里。 1234567891011121314151617">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eps详解">
+<meta property="og:url" content="https://algo-x.cn/articles/Detailed-Explanation-of-EPS/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:description" content="写在前面不会用$eps$请不要担心，这是高阶算法内容。就算没有判或判错了很大可能只影响算法复杂度，最多多跑一层，无需担心。但是某些特定情况下需要特别关注$eps$，不过这是极少数情况。 这篇文章很长，如果只是想了解一下$eps$，不追求理解原理，请前往解决方案一节，或在洛谷剪贴板中查看。  引言Taoran第一次见到$eps$是在李超树模板里。 1234567891011121314151617">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://algo-x.cn/img/19-01.jpg">
+<meta property="article:published_time" content="2024-03-21T13:39:15.000Z">
+<meta property="article:modified_time" content="2024-06-27T13:51:45.779Z">
+<meta property="article:author" content="Taoran">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://algo-x.cn/img/19-01.jpg">
+  
+  
+  
+  <title>eps详解 - Algo-X.cn</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/articles/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chemistry/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>化学工具站</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="eps详解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-21 21:39" pubdate>
+          2024年3月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">eps详解</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年6月27日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>不会用$eps$请不要担心，这是高阶算法内容。<br>就算没有判或判错了很大可能只影响算法复杂度，最多多跑一层，无需担心。<br>但是某些特定情况下需要特别关注$eps$，不过这是极少数情况。</p>
+<p>这篇文章很长，如果只是想了解一下$eps$，不追求理解原理，请前往<a href="../Detailed-Explanation-of-EPS/#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">解决方案</a>一节，或在<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/paste/ox2b3zgd">洛谷剪贴板</a>中查看。</p>
+<hr>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>Taoran第一次见到$eps$是在李超树模板里。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 100010</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> eps 1e-8</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> LS (p&lt;&lt;1)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> RS ((p&lt;&lt;1)+1)</span><br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">line</span> &#123;<br>	<span class="hljs-type">double</span> k, b;<br>	<span class="hljs-type">int</span> id;<br>	<span class="hljs-built_in">line</span>() &#123;&#125;<br>	<span class="hljs-built_in">line</span>(<span class="hljs-type">double</span> x0, <span class="hljs-type">double</span> y0, <span class="hljs-type">double</span> x1, <span class="hljs-type">double</span> y1, <span class="hljs-type">int</span> _id) &#123;<br>		id=_id;<br>		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(x1-x0)&lt;eps) k=<span class="hljs-number">0</span>, b=<span class="hljs-built_in">max</span>(y0, y1);<br>		<span class="hljs-keyword">else</span> k=(y1-y0)/(x1-x0), b=y0-k*x0;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">val</span><span class="hljs-params">(<span class="hljs-type">double</span> x)</span> </span>&#123;<span class="hljs-keyword">return</span> k*x+b;&#125;<br>&#125; t[N&lt;&lt;<span class="hljs-number">2</span>];<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> pl, <span class="hljs-type">int</span> pr, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, line y)</span> </span>&#123;<br>	<span class="hljs-type">int</span> mid=(pl+pr)&gt;&gt;<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">if</span> (l&lt;=pl&amp;&amp;pr&lt;=r) &#123;<br>		<span class="hljs-keyword">if</span> (t[p].id==<span class="hljs-number">0</span>) &#123;t[p]=y; <span class="hljs-keyword">return</span>;&#125;<br>		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(t[p].<span class="hljs-built_in">val</span>(mid)-y.<span class="hljs-built_in">val</span>(mid))&lt;eps) &#123;<br>			<span class="hljs-keyword">if</span> (t[p].id&gt;y.id) <span class="hljs-built_in">swap</span>(t[p], y);<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (t[p].<span class="hljs-built_in">val</span>(mid)&lt;y.<span class="hljs-built_in">val</span>(mid)) <span class="hljs-built_in">swap</span>(t[p], y);<br>		<span class="hljs-keyword">if</span> (t[p].<span class="hljs-built_in">val</span>(pl)&lt;y.<span class="hljs-built_in">val</span>(pl)+eps) <span class="hljs-built_in">insert</span>(LS, pl, mid, l, r, y);<br>		<span class="hljs-keyword">if</span> (t[p].<span class="hljs-built_in">val</span>(pr)&lt;y.<span class="hljs-built_in">val</span>(pr)+eps) <span class="hljs-built_in">insert</span>(RS, mid+<span class="hljs-number">1</span>, pr, l, r, y);<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (l&lt;=mid) <span class="hljs-built_in">insert</span>(LS, pl, mid, l, r, y);<br>	<span class="hljs-keyword">if</span> (r&gt;=mid+<span class="hljs-number">1</span>) <span class="hljs-built_in">insert</span>(RS, mid+<span class="hljs-number">1</span>, pr, l, r, y);<br>&#125;<br><br><span class="hljs-function">line <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> pl, <span class="hljs-type">int</span> pr, <span class="hljs-type">int</span> x)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (pl==pr) <span class="hljs-keyword">return</span> t[p];<br>	<span class="hljs-type">int</span> mid=(pl+pr)&gt;&gt;<span class="hljs-number">1</span>;<br>	line res;<br>	<span class="hljs-keyword">if</span> (x&lt;=mid) res=<span class="hljs-built_in">ask</span>(LS, pl, mid, x);<br>	<span class="hljs-keyword">else</span> res=<span class="hljs-built_in">ask</span>(RS, mid+<span class="hljs-number">1</span>, pr, x);<br>	<span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(res.<span class="hljs-built_in">val</span>(x)-t[p].<span class="hljs-built_in">val</span>(x))&lt;eps) &#123;<br>		<span class="hljs-keyword">if</span> (res.id&lt;t[p].id) <span class="hljs-keyword">return</span> res;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> t[p];<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-keyword">if</span> (res.<span class="hljs-built_in">val</span>(x)&gt;t[p].<span class="hljs-built_in">val</span>(x)) <span class="hljs-keyword">return</span> res;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> t[p];<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>$eps$出现在<code>line</code>、<code>insert</code>和<code>ask</code>这三个函数的<code>double</code>关系判断中。</p>
+<hr>
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="C-中的浮点类型"><a href="#C-中的浮点类型" class="headerlink" title="C++中的浮点类型"></a>C++中的浮点类型</h4><p>详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/lang/var/#%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B">OI-Wiki</a>。</p>
+<h4 id="小数部分的进制转换"><a href="#小数部分的进制转换" class="headerlink" title="小数部分的进制转换"></a>小数部分的进制转换</h4><p>自己学去。</p>
+<hr>
+<h3 id="double类型的内存"><a href="#double类型的内存" class="headerlink" title="double类型的内存"></a>double类型的内存</h3><p>我们可以使用下面这段程序查看<code>double</code>类型的内存。<br>输入一个小数，输出它精确到小数点后40位的存储，及所存储的64bit数据。<br>这里借助<code>union</code>结合体将<code>double</code>类型的内存共享给空间大小相等的<code>long long</code>类型，再使用位运算逐位输出。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-keyword">union</span> <span class="hljs-title class_">tmp</span> &#123;<br>	<span class="hljs-type">double</span> d;<br>	ll l;<br>&#125; t;<br><br>ll ans[<span class="hljs-number">100</span>];<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lf&quot;</span>, &amp;t.d);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.40lf\n&quot;</span>, t.d);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">64</span>; ++i) ans[<span class="hljs-number">65</span>-i]=t.l&amp;<span class="hljs-number">1</span>, t.l&gt;&gt;=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">64</span>; ++i) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, ans[i]);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>本篇文章中，将以$11.25$与$11.3$为例解释。</p>
+<hr>
+<h3 id="C-中的小数存储"><a href="#C-中的小数存储" class="headerlink" title="C++中的小数存储"></a>C++中的小数存储</h3><p>在C++中，不论是<code>float</code>、<code>double</code>还是<code>long double</code>，它们都是以科学计数法的形式存储小数的。<br>举个例子，$11.25$用科学计数法可以表示成$1.125\times10^{-1}$，用二进制可以表示成$(1011.01)_2$，而在计算机中它被表示成$(1.01101)_2\times2^3$。</p>
+<hr>
+<h3 id="理想状态"><a href="#理想状态" class="headerlink" title="理想状态"></a>理想状态</h3><p>$11.25$精确到小数点后$40$位的输出：$11.2500000000000000000000000000000000000000$<br>$010000000010\ 0110100000000000000000000000000000000000000000000000$<br>前$16$位为$2$的次幂，后$48$位为小数部分。<br>注意，为节省空间，小数部分被省去了第一个$1$，只存储$.01101$。</p>
+<p>显然，$11.25$根本难不倒<code>double</code>，输出小数点后40位依然正确。这是因为$0.25$恰好能被有限位二进制小数表示。但如果换一个呢？</p>
+<hr>
+<h3 id="爆精度"><a href="#爆精度" class="headerlink" title="爆精度"></a>爆精度</h3><p>$11.3$精确到小数点后$40$位的输出：$11.3000000000000007105427357601001858711243$<br>$0100000000100110\ 100110011001100110011001100110011001100110011010$</p>
+<p>出问题了，$11.3$的小数部分$0.3$并不能被二进制小数表示尽，出现循环，而计算机存储的数据量是有限的，从而导致精度下降。<br>小数在C++中，有时并不能被精确表示。</p>
+<hr>
+<h3 id="大小判断缺陷"><a href="#大小判断缺陷" class="headerlink" title="大小判断缺陷"></a>大小判断缺陷</h3><p>我们做一个实验。<br>两数$a$、$b$初始值均为$11.3$，其中$b$加上一个数后再减去，判断两数是否相等。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-keyword">union</span> <span class="hljs-title class_">tmp</span> &#123;<br>	<span class="hljs-type">double</span> d;<br>	ll l;<br>&#125; a, b;<br><br>ll ans[<span class="hljs-number">100</span>];<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	a.d=b.d=<span class="hljs-number">11.3</span>;<br>	b.d+=<span class="hljs-number">21.0426</span>;<br>	b.d-=<span class="hljs-number">21.0426</span>;<br>	<span class="hljs-built_in">puts</span>((a.d==b.d)?<span class="hljs-string">&quot;True&quot;</span>:<span class="hljs-string">&quot;False&quot;</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.40lf\n&quot;</span>, a.d);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">64</span>; ++i) ans[<span class="hljs-number">65</span>-i]=a.l&amp;<span class="hljs-number">1</span>, a.l&gt;&gt;=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">64</span>; ++i) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, ans[i]); <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;&quot;</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.40lf\n&quot;</span>, b.d);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">64</span>; ++i) ans[<span class="hljs-number">65</span>-i]=b.l&amp;<span class="hljs-number">1</span>, b.l&gt;&gt;=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">64</span>; ++i) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, ans[i]); <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">False</span><br><span class="hljs-attribute">11</span>.<span class="hljs-number">3000000000000007105427357601001858711243</span><br><span class="hljs-attribute">0100000000100110100110011001100110011001100110011001100110011010</span><br><span class="hljs-attribute">11</span>.<span class="hljs-number">3000000000000042632564145606011152267456</span><br><span class="hljs-attribute">0100000000100110100110011001100110011001100110011001100110011100</span><br></code></pre></td></tr></table></figure>
+<p>结果令人吃惊，变化后两数不相等。<br>仔细看数据就会发现，内存的<strong>最后三位</strong>发生了变化。$010\rightarrow100$，正是这小小的变化改变了C++对于小数的判断。</p>
+<p>这意味着，C++没有相等容忍区间，任何一点小的变动都会影响到大小判断。</p>
+<hr>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>既然C++本身没有容忍区间，我们可以给它加上一个。</p>
+<p>设一个常数$eps&#x3D;1\times10^{-8}$，通常认为：<br>$a&#x3D;b\Rightarrow a-b\in [-eps,\ eps]$<br>$a&gt;b\Rightarrow a-b&gt; eps$<br>$a\ge b\Rightarrow a-b\ge-eps$</p>
+<p>带着图简单理解一下：<br><img src="../../img/19-01.jpg" srcset="/img/loading.gif" lazyload alt="19-01" style="zoom:100%;" />  </p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由于C++浮点数储存原理的缺陷，浮点数的精度不能保证，在关系判断中精度差会导致判断错误。<br>一般来说，浮点类型的大小关系判断需要使用$eps$给定宽容区间，否则算法会出现错误，导致更高的时间复杂度甚至错误答案。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>eps详解</div>
+      <div>https://algo-x.cn/articles/Detailed-Explanation-of-EPS/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Taoran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月21日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年6月27日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/Divide-and-Conquer-on-Trees/" title="点分治">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">点分治</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/Solution-of-P3478/" title="洛谷P3478 题解">
+                        <span class="hidden-mobile">洛谷P3478 题解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <body>×</body> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Taoran">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言这是一道物理题，是初高衔接课材料里的题；老师却不讲，因为它严重超纲。拍照搜题搜不到，于是我决定自己做。找寻答案的过程一波三折，很有参考价值。我把这道题的完整结题过程记录了下来，方便大家学习。在此特别感谢硕硕和学校物理老师们给予的帮助！  题目如图所示，所有电阻的阻值都等于$R$，求A、B间的等效电阻。注意：中间没有连接，注意观察圆点。  思路过程特别说明：以下三个思路都是错的，请移步正解找寻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="等效电阻 例题">
+<meta property="og:url" content="https://algo-x.cn/articles/An-Example-of-Equivalent-Resistance/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:description" content="前言这是一道物理题，是初高衔接课材料里的题；老师却不讲，因为它严重超纲。拍照搜题搜不到，于是我决定自己做。找寻答案的过程一波三折，很有参考价值。我把这道题的完整结题过程记录了下来，方便大家学习。在此特别感谢硕硕和学校物理老师们给予的帮助！  题目如图所示，所有电阻的阻值都等于$R$，求A、B间的等效电阻。注意：中间没有连接，注意观察圆点。  思路过程特别说明：以下三个思路都是错的，请移步正解找寻">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://algo-x.cn/img/05-01.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-02.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-03.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-04.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-05.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-06.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-07.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-08.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-09.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-10.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-11.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/05-12.jpg">
+<meta property="article:published_time" content="2023-12-30T02:13:07.000Z">
+<meta property="article:modified_time" content="2024-06-27T14:03:58.660Z">
+<meta property="article:author" content="Taoran">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://algo-x.cn/img/05-01.jpg">
+  
+  
+  
+  <title>等效电阻 例题 - Algo-X.cn</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/articles/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chemistry/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>化学工具站</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="等效电阻 例题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-30 10:13" pubdate>
+          2023年12月30日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">等效电阻 例题</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年6月27日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这是一道物理题，是初高衔接课材料里的题；老师却不讲，因为它严重超纲。<br>拍照搜题搜不到，于是我决定自己做。找寻答案的过程一波三折，很有参考价值。我把这道题的完整结题过程记录了下来，方便大家学习。<br>在此特别感谢<a target="_blank" rel="noopener" href="https://wild-donkey.github.io/">硕硕</a>和学校物理老师们给予的帮助！</p>
+<hr>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>如图所示，所有电阻的阻值都等于$R$，求A、B间的等效电阻。<br><img src="../../img/05-01.jpg" srcset="/img/loading.gif" lazyload alt="05-01" style="zoom:50%;" /><br>注意：中间没有连接，注意观察圆点。</p>
+<hr>
+<h3 id="思路过程"><a href="#思路过程" class="headerlink" title="思路过程"></a>思路过程</h3><p>特别说明：以下三个思路都是<strong>错的</strong>，请移步<strong>正解</strong>找寻答案，这里只是简单说明思路过程。<br>变量命名不标准，没有按照题目要求，请见谅。</p>
+<h4 id="错误解法1-Dijkstra"><a href="#错误解法1-Dijkstra" class="headerlink" title="错误解法1 - Dijkstra"></a>错误解法1 - Dijkstra</h4><p>思路来自<a target="_blank" rel="noopener" href="https://codeforces.com/profile/__Algo_3F__">__Algo_3F__</a>。<br><img src="../../img/05-02.jpg" srcset="/img/loading.gif" lazyload alt="05-02" style="zoom:25%;" /><br>显然，这个答案小于$R$，因为有电流通过上面的电路中。</p>
+<h4 id="错误解法2-节点法"><a href="#错误解法2-节点法" class="headerlink" title="错误解法2 - 节点法"></a>错误解法2 - 节点法</h4><p>首先，我先用节点法尝试了一下。<br>标记电势，考虑到已经有了A、B，使用小写字母代替，电势由高到低分别标记为$a\rightarrow b\rightarrow c\rightarrow d$。<br><img src="../../img/05-03.jpg" srcset="/img/loading.gif" lazyload alt="05-03" style="zoom:50%;" /><br>不难发现，此时电路变为了三段并联。其中，$a\rightarrow d$先并联了一个单独的电阻，然后$a\rightarrow b$中有两个电阻，$b\rightarrow c$中有三个电阻，$c\rightarrow d$中有两个电阻。<br>那答案就迎刃而解了，ab段电阻$\frac{1}{2}R$，bc段电阻$\frac{1}{3}R$，cd段电阻$\frac{1}{2}R$，ad两个支路分别为$\frac{4}{3}R$和$R$，并起来一共$\frac{4}{7}R$。<br>显然，这道题不是这么简单的。注意看，在刚才的过程中，我们将所有连接b、c两个电势的都视作了并联，但事实上在中间交叉的电阻中，中间交点并不与其他等电势的地方相接。倒回去，如果按照这个思路，电路图应该如下图所示，其中颜色与上图对应。<br><img src="../../img/05-04.jpg" srcset="/img/loading.gif" lazyload alt="05-04" style="zoom:50%;" /><br>我们无法证明这种方法的正确性，因为这种方法多连了两根导线，把电阻扯到一边去了，相当于分摊了电流。因此这个答案不一定是正确的。经过后续计算得知，这种方法是错误的。</p>
+<h4 id="错误解法3-对称性"><a href="#错误解法3-对称性" class="headerlink" title="错误解法3 - 对称性"></a>错误解法3 - 对称性</h4><p>接下来尝试化简电路，化简结果如下，其中最中间奇怪方式连接的电阻是原图中最上面的与AB平行的电阻。<br><img src="../../img/05-05.jpg" srcset="/img/loading.gif" lazyload alt="05-05" style="zoom:75%;" /><br>然后就没有然后了，接下来问的硕硕才知道解法。<br>显然，最上面的电阻是并联进去的，所以先不考虑，先把下面复杂的单独拆出来。根据对称性，上下两个支路电流相等，所以设总电流为$I$，则每条支路的电流都为$\frac{I}{2}$，如图所示。<br><img src="../../img/05-06.jpg" srcset="/img/loading.gif" lazyload alt="05-06" style="zoom:75%;" /><br>因为每个电阻是相等的，设每个电阻为$r$，总电阻为$R$。设总电压为$U$，根据对称性设左上和右下电阻为$r$，则左下右上电阻为$2r$，因为电流相等，电阻为二倍，所以电压为二倍。<br>这样列出等量关系式$U&#x3D;3u$，$r&#x3D;\frac{u}{\frac{I}{2}}&#x3D;\frac{2u}{I}$，$R&#x3D;\frac{U}{I}&#x3D;\frac{3u}{I}&#x3D;\frac{3}{2}\times\frac{2u}{I}&#x3D;\frac{3}{2}r$<br>所以这段电路的总电阻是单个电阻的$\frac{3}{2}$倍，和之前单拎的电阻并联起来就是$\frac{1}{\frac{2}{3r}+\frac{1}{r}}&#x3D;\frac{3}{5}r$<br>就这么结束了，我和硕硕都觉得这是个完美的解法。然而我们忽略了一个关键点：没考虑中间电阻，即没考虑标蓝的电流。这个电流的加入会导致左上、右下电流增加，导致电压不为二倍。<br><img src="../../img/05-07.jpg" srcset="/img/loading.gif" lazyload alt="05-07" style="zoom:25%;" /></p>
+<h4 id="错误解法4-等电流"><a href="#错误解法4-等电流" class="headerlink" title="错误解法4 - 等电流"></a>错误解法4 - 等电流</h4><p>按照分电流的思路继续往前走，我们发现在这个复杂电路中共有三条电流，如图是这三条电流分别途径的电路。<br><img src="../../img/05-08.jpg" srcset="/img/loading.gif" lazyload alt="05-08" style="zoom:50%;" /><br><img src="../../img/05-09.jpg" srcset="/img/loading.gif" lazyload alt="05-09" style="zoom:50%;" /><br><img src="../../img/05-10.jpg" srcset="/img/loading.gif" lazyload alt="05-10" style="zoom:50%;" /><br>不难看出，这三条电路的电阻相等，电压相等都等于电源电压，所以电流也相等，相当于三个等流并联，得到这部分电阻为$R$，再并上单个的电阻，总电阻为$\frac{1}{2}R$。<br>很简单，很直接，但这个思路是错的。硕硕说欧姆定律的应用条件是闭合电路，但这个电路不闭合，所以不能推出等流这一结论。</p>
+<hr>
+<h3 id="正解"><a href="#正解" class="headerlink" title="正解"></a>正解</h3><p>正解由硕硕提供，我整理的过程稍微有些不规范。<br>思路：列方程求出中间电流，进而求出总电流和总电压的关系。</p>
+<p>首先考虑下面复杂电路的电阻，将直接连接$AB$的电阻分开，剩下电路化简如下。<br><img src="../../img/05-11.jpg" srcset="/img/loading.gif" lazyload alt="05-11" style="zoom:75%;" /><br>设这部分电路总电压为$U$，通过$R_1$的电流为$I$，通过$R_0$的电流为$i$，$R_1$两端电压为$u$。<br>由对称性可得，$I_{R_2}&#x3D;I$，$U_{R_2}&#x3D;u$。<br>因为$R_0$与$R_5$、$R_6$一起分走$R_1$电流，所以$I_{R_5}&#x3D;I_{R_6}&#x3D;I_{R_1}-I_{R_0}&#x3D;I-i$。$I_{R_3}$、$I_{R_4}$由对称性也可得。故该段电路总电流$I_{sum}&#x3D;I_{R_1}+I_{R_3}&#x3D;2I-i$<br>因为$R_1$、$R_5$和$R_6$构成串联，所以$U_{R_5}+U_{R_6}&#x3D;U-U_{R_1}&#x3D;U-u$。因为$R_5&#x3D;R_6$，根据正比分压可得$U_5&#x3D;U_6&#x3D;\frac{U-u}{2}$。$U_{R_3}$、$U_{R_4}$由对称性也可得。<br>因为$R_1$、$R_0$和$R_2$构成串联，所以$U_{R_0}&#x3D;U-U_{R_1}-U_{R_2}&#x3D;U-2u$。</p>
+<p>由此，所有电阻的电流电压均已得，故可求电阻：<br>$U_{R_0}&#x3D;U-2u,\ I_{R_0}&#x3D;i,\ R_0&#x3D;\frac{U-2u}{i}$<br>$U_{R_1}&#x3D;u,\ I_{R_1}&#x3D;I,\ R_1&#x3D;\frac{u}{I}$<br>$U_{R_2}&#x3D;u,\ I_{R_2}&#x3D;I,\ R_2&#x3D;\frac{u}{I}$<br>$U_{R_3}&#x3D;\frac{U-u}{2},\ I_{R_3}&#x3D;I-i,\ R_3&#x3D;\frac{U-u}{2I-2i}$<br>$U_{R_4}&#x3D;\frac{U-u}{2},\ I_{R_4}&#x3D;I-i,\ R_4&#x3D;\frac{U-u}{2I-2i}$<br>$U_{R_5}&#x3D;\frac{U-u}{2},\ I_{R_5}&#x3D;I-i,\ R_5&#x3D;\frac{U-u}{2I-2i}$<br>$U_{R_6}&#x3D;\frac{U-u}{2},\ I_{R_6}&#x3D;I-i,\ R_6&#x3D;\frac{U-u}{2I-2i}$<br>$U_{sum}&#x3D;U,\ I_{sum}&#x3D;2I-i,\ R_{sum}&#x3D;\frac{U}{2I-i}$</p>
+<p>因为每个电阻都相等，得$R_0&#x3D;R_1&#x3D;R_3$，即$\frac{U-2u}{i}&#x3D;\frac{u}{I}&#x3D;\frac{U-u}{2I-2i}$，解得$i&#x3D;\frac{1}{3}I$。将其代入，得$\frac{U-2u}{i}&#x3D;\frac{u}{3i}&#x3D;\frac{U-u}{4i}$，解得$U&#x3D;\frac{7}{3}u$<br>$R_{sum}&#x3D;\frac{U}{2I-i}&#x3D;\frac{\frac{7}{3}u}{\frac{5}{3}I}&#x3D;\frac{7}{5}\times\frac{u}{I}&#x3D;\frac{7}{5}R_2&#x3D;\frac{7}{5}R$<br>故这段电路的总电阻为$\frac{7}{5}R$，再与原先阻值为$R$的电阻并联，得到$\frac{1}{\frac{5}{7R}+\frac{1}{R}}&#x3D;\frac{7}{12}R$<br>故答案为$\frac{7}{12}R$</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>硕硕的一句话足以概括<br><img src="../../img/05-12.jpg" srcset="/img/loading.gif" lazyload alt="05-12" style="zoom:25%;" /></p>
+<hr>
+<h3 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h3><p>结束了，题做出来了。<br>硕硕说，这个题目很有意思，让他想起了中学物理的知识。<br>我觉得这个题目挺难的，但有意思的地方在解题思路上。一次一次的错误，一次一次的改正。如果这个题给我在考试里做，我可能直接就放弃了，也不会这么曲折地做出来。当然最终找到答案也是十分开心的。</p>
+<p>最后硕硕提出用模拟软件校验一下，相差不大，所以这个答案应该是对的。<br>如果你认为这个答案不对，欢迎指出，万一这个答案也是错误的呢？也许这个思路也会成错误解法之一。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%89%A9%E7%90%86/" class="category-chain-item">物理</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>等效电阻 例题</div>
+      <div>https://algo-x.cn/articles/An-Example-of-Equivalent-Resistance/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Taoran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月30日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年6月27日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/Fuel-Card-SHMCEE-2023/" title="加油卡 - 2023上海中考数学">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">加油卡 - 2023上海中考数学</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/You-Have-Been-Cheated/" title="你被骗了">
+                        <span class="hidden-mobile">你被骗了</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <body>×</body> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

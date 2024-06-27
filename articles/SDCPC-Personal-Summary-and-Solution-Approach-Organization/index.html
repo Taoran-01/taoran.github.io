@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Taoran &amp; SUA Team">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="赛前几天Abut Day -20报名，因为太菜主动单调队列了。 Day -3被告知一位队员需要参加考试，ltr队有一个名额。另外整个年纪的信竞都去了，周六下午没课上，只能跟着去。 Day -2确定比赛场地，了解比赛规则，和往届选手浅谈了一下比赛策略。 Day -1复习网络流，感觉会考到。翻开书，谁知满书上竟只写了两个字：“不会”。 Day 0和两位大佬队友汇合，试机。测试题最后一题在洛谷上过了，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCPC山东省大学生程序设计竞赛 个人总结与解题思路整理">
+<meta property="og:url" content="https://algo-x.cn/articles/SDCPC-Personal-Summary-and-Solution-Approach-Organization/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:description" content="赛前几天Abut Day -20报名，因为太菜主动单调队列了。 Day -3被告知一位队员需要参加考试，ltr队有一个名额。另外整个年纪的信竞都去了，周六下午没课上，只能跟着去。 Day -2确定比赛场地，了解比赛规则，和往届选手浅谈了一下比赛策略。 Day -1复习网络流，感觉会考到。翻开书，谁知满书上竟只写了两个字：“不会”。 Day 0和两位大佬队友汇合，试机。测试题最后一题在洛谷上过了，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-26T14:22:34.000Z">
+<meta property="article:modified_time" content="2024-06-27T13:57:45.840Z">
+<meta property="article:author" content="Taoran">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>CCPC山东省大学生程序设计竞赛 个人总结与解题思路整理 - Algo-X.cn</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/articles/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chemistry/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>化学工具站</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CCPC山东省大学生程序设计竞赛 个人总结与解题思路整理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-26 22:22" pubdate>
+          2024年5月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">CCPC山东省大学生程序设计竞赛 个人总结与解题思路整理</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年6月27日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h3 id="赛前几天"><a href="#赛前几天" class="headerlink" title="赛前几天"></a>赛前几天</h3><h4 id="Abut-Day-20"><a href="#Abut-Day-20" class="headerlink" title="Abut Day -20"></a>Abut Day -20</h4><p>报名，因为太菜主动单调队列了。</p>
+<h4 id="Day-3"><a href="#Day-3" class="headerlink" title="Day -3"></a>Day -3</h4><p>被告知一位队员需要参加考试，ltr队有一个名额。<br>另外整个年纪的信竞都去了，周六下午没课上，只能跟着去。</p>
+<h4 id="Day-2"><a href="#Day-2" class="headerlink" title="Day -2"></a>Day -2</h4><p>确定比赛场地，了解比赛规则，和往届选手浅谈了一下比赛策略。</p>
+<h4 id="Day-1"><a href="#Day-1" class="headerlink" title="Day -1"></a>Day -1</h4><p>复习网络流，感觉会考到。翻开书，谁知满书上竟只写了两个字：“不会”。</p>
+<h4 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h4><p>和两位大佬队友汇合，试机。<br>测试题最后一题在洛谷上过了，但是现场评测机过不了，不得其解。<br>那天很累，晚上六点半就睡了。</p>
+<hr>
+<h3 id="队伍成员"><a href="#队伍成员" class="headerlink" title="队伍成员"></a>队伍成员</h3><p>&gt; 具有丰富CCPC比赛经验的大佬，去年曾组队切掉5题：<br><strong>队长：高一 ltr</strong><br>- 妥妥的信竞大佬，实力最强的一个。<br><strong>队员：高一 wzx</strong><br>- 退竞半年但实力依然强悍，熟练掌握计算几何。</p>
+<p>&gt; 第一次参赛的蒟蒻，只会看代码和造数据，三分之一时间都在打酱油：<br><strong>队员：高零 gtr</strong><br>- 妥妥的信竞蒟蒻，实力最弱的一个。</p>
+<hr>
+<h3 id="早上"><a href="#早上" class="headerlink" title="早上"></a>早上</h3><p>04:00 起床。<br>07:45 到达比赛场地，但记错时间。<br>07:55 换好衣服，跑去打印店打印材料。<br>08:30 坐在位子上等待比赛开始。</p>
+<hr>
+<h3 id="比赛过程中"><a href="#比赛过程中" class="headerlink" title="比赛过程中"></a>比赛过程中</h3><p>我从11:10开始吃的东西，还停不下来。wzx说得对，吃了东西之后脑子转速会降不少。<br>纸、笔、饮料和吃的都不缺，书也派上了一些用场，唯一的问题是我没带身份证（</p>
+<hr>
+<h3 id="试题"><a href="#试题" class="headerlink" title="试题"></a>试题</h3><h4 id="I-左移"><a href="#I-左移" class="headerlink" title="I. 左移"></a>I. 左移</h4><p>我还没看完题两位大佬就写好了，还没造完数据就A了。</p>
+<h4 id="A-打印机"><a href="#A-打印机" class="headerlink" title="A. 打印机"></a>A. 打印机</h4><p>第一次WA了，发现界限开小了，$2\times10^{18}\rightarrow1\times10^{18}$，第二次过了。</p>
+<h4 id="F-分割序列"><a href="#F-分割序列" class="headerlink" title="F. 分割序列"></a>F. 分割序列</h4><p>非常顺利地一遍过。</p>
+<h4 id="C-多彩的线段-2"><a href="#C-多彩的线段-2" class="headerlink" title="C. 多彩的线段 2"></a>C. 多彩的线段 2</h4><p>先是按右端点排序，结果WA$\times2$，调试无果，暂时停下。<br>做完K之后用左端点排序+优先队列，过了。</p>
+<h4 id="K-矩阵"><a href="#K-矩阵" class="headerlink" title="K. 矩阵"></a>K. 矩阵</h4><p>ltr和我各给出一个构造，使用了ltr的，成圈排，过了。</p>
+<h4 id="J-多彩的生成树"><a href="#J-多彩的生成树" class="headerlink" title="J. 多彩的生成树"></a>J. 多彩的生成树</h4><p>我一开始读错题了，误以为同种颜色之间连接不需要代价（<br>想了一阵，一遍过了。</p>
+<h4 id="D-王国英雄"><a href="#D-王国英雄" class="headerlink" title="D. 王国英雄"></a>D. 王国英雄</h4><p>最曲折的一道题。<br>一开始我误以为拿初始的钱倒卖就行了，但是看了一眼榜发现没这么简单，于是认真读题（<br>我们写出了暴力代码，测试各种极端条件都过了，于是自信地交了上去，结果TLE。<br>于是开始分析时间复杂度，确定为$O(\sqrt n)$，构造各种极端样例和随机样例，分析卡死循环的条件……百试无果。<br>最后wzx给出除法加速循环的优化，过了样例，但是WA。改了条件，过了样例，但是TLE。<br>然后继续分析时间复杂度，确定为$O(\sqrt n)$，构造各种极端样例和随机样例，分析卡死循环的条件……百试无果。</p>
+<p>看着代码，绞尽脑汁思考着能卡住的样例，我的手上全是汗，眼里尽是绝望，吃饭的心都有了。<br>wzx一直对我们说“稳住，稳住……”，自己冷静地分析代码的漏洞。终于在剩余10分钟时，他发现了问题：<code>pp</code>这个变量是除法中的分母的一部分，在特定条件下会很小，导致除法无法加速循环，导致超时。<br>改正，提交。第8发，293分钟，AC。</p>
+<h4 id="H-阻止城堡"><a href="#H-阻止城堡" class="headerlink" title="H. 阻止城堡"></a>H. 阻止城堡</h4><p>这道题ltr想出来了二分图最大匹配的正解，但是剩下7分钟没时间写了。</p>
+<h4 id="M-回文多边形"><a href="#M-回文多边形" class="headerlink" title="M. 回文多边形"></a>M. 回文多边形</h4><p>wzx整理了一晚上的计算几何，但是他看了许久也不会做，有点可惜。</p>
+<hr>
+<h3 id="比赛后"><a href="#比赛后" class="headerlink" title="比赛后"></a>比赛后</h3><p>赞助商宣讲好无聊，但是有吃的喝的也听得津津有味。<br>滚榜好无聊，但是有了主持人和有趣的队名也看得津津有味。<br>最后队名牌子和气球都带了回来。</p>
+<hr>
+<h3 id="试题解题思路"><a href="#试题解题思路" class="headerlink" title="试题解题思路"></a>试题解题思路</h3><p>不想详细看的请前往<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/paste/vjs8f0c5">剪贴板</a>，这里是现场简单记录的。<br>以下的题解来自<a target="_blank" rel="noopener" href="https://sua.ac/">SUA程序设计竞赛命题组</a><strong>现场讲解的PPT</strong>中，最简单的几道题没记。详细题解SUA在几天后会更新到<a target="_blank" rel="noopener" href="https://sua.ac/wiki/">这里</a>。</p>
+<h4 id="前面的题"><a href="#前面的题" class="headerlink" title="前面的题"></a>前面的题</h4><p>比较简单，所以没转录。</p>
+<h4 id="A-打印机-1"><a href="#A-打印机-1" class="headerlink" title="A. 打印机"></a>A. 打印机</h4><p>二分答案$x$，计算每台打印机在$x$秒内能打印多少试题，看加起来是否大于等于$k$。<br>最差情况下，$k&#x3D;t_i&#x3D;w_i&#x3D;1\times10^9$，$l_i&#x3D;1$，所以二分上界是$2\times10^{18}$。<br>然而$x&#x3D;2\times10^{18}$时，如果打印机每$1$秒打印一份题，$n&#x3D;100$台打印机一共可以打印$2\times10^{20}$份，超出了<code>long long</code>的上界。所以二分过程需要判断和已经大于$k$时提前返回$true$。<br>复杂度$O(n\log x)$。</p>
+<h4 id="F-分割序列-1"><a href="#F-分割序列-1" class="headerlink" title="F. 分割序列"></a>F. 分割序列</h4><p>设最后$m$段元素的总和为$p_m$，其中$p_k&#x3D;\sum a_i$，则目标式可以改写为$\sum^k_{i&#x3D;1}p_i$。<br>所以答案就是从$(n-1)$个后缀里，选最大的$(k-1)$个加起来，再加上序列的和。预处理后缀和并排序即可。复杂度$O(n\log n)$。</p>
+<h4 id="C-多彩的线段-2-1"><a href="#C-多彩的线段-2-1" class="headerlink" title="C. 多彩的线段 2"></a>C. 多彩的线段 2</h4><p>（说实话我觉得讲得太复杂了）</p>
+<p>首先考虑$k$最小是几，答案才能大于$0$。<br>这就是经典的interval partitioning问题：最少把区间分成几组，才能让组内区间不相交。<br>贪心解法是：所有区间按左端点从小到大排序，维护每一组的右端点$g_j$。若存在一组右端点小于当前区间的左端点$l_i$，则将当前区间分入那一组（如果多组满足要求，随便选一组都可以）；否则新开一组。</p>
+<p>从这个思路出发，如果我们把$g_j&lt;l_i$的组都看成$g_j&#x3D;0$可以发现，无论把区间分到哪一组，排序后的$g$序列都是一样的。因为我们把所有区间按左端点排序了，所以$g_j&#x3D;0$将一直保持，直到有个区间分到了那一组里。所以答案就是每次$g_j&#x3D;0$的数量乘起来。<br>因为$k$很大，所以用一个堆只维护$g_j\neq0$的值即可。复杂度$O(n\log n)$。</p>
+<p>如果从弦图的角度解释，本题其实就是弦图的色多项式$P_G(X)&#x3D;\prod^n_{i&#x3D;1}(x-d_{G_i}(v_i))$。详见《弦图与区间图》(陈丹琦) 定理2.5。</p>
+<h4 id="J-多彩的生成树-1"><a href="#J-多彩的生成树-1" class="headerlink" title="J. 多彩的生成树"></a>J. 多彩的生成树</h4><p>对每种颜色需要维护：这个颜色的所有点是否在同一连通块内，以及颜色之间的并查集。<br>模仿Kruskal算法的过程，按边权从小到大考虑每对颜色$(u,\ v)$的连边，并分类讨论。</p>
+<p>情况一：$u&#x3D;v$<br>若颜色$u$所有点都已在同一连通块内则跳过。<br>否则连$(a_u-1)$条边，标记这个颜色所有点都在同一连通块内。</p>
+<p>情况二：$u\neq v$<br>若颜色$u$和$v$在同一连通块内则跳过。<br>否则若$u$和$v$所有点都不在同一连通块内，连$(a_u+a_v-1)$条边。<br>否则若$u$所有点都不在同一连通块内，连$(a_u-1)$条边。$v$同理。<br>否则连$1$条边即可。<br>连边结束后，标记$u$和$v$的所有点在同一连通块内，并连接颜色的并查集。</p>
+<h4 id="D-王国英雄-1"><a href="#D-王国英雄-1" class="headerlink" title="D. 王国英雄"></a>D. 王国英雄</h4><p>每次交易额外花费$(b+d)$秒，所以在时间足够的前提下，每次交易一定尽可能多花钱买入商品，以减少交易的次数。</p>
+<p>注意到如果$\lfloor\frac m p\rfloor$相同，那么每次交易的结果也是相同的。而每次交易后$m$在不断增加，因此可以通过除法$O(1)$地把$\lfloor\frac m p\rfloor$相同的交易合起来处理。设一共需要处理$k$种交易。<br>由于买卖一件物品至少需要花费$2$秒，$(1+2+\cdots+k)\times2\le t$得出$k\sim O(\sqrt t)$。所以复杂度$O(\sqrt t)$。</p>
+<h4 id="H-阻止城堡-1"><a href="#H-阻止城堡-1" class="headerlink" title="H. 阻止城堡"></a>H. 阻止城堡</h4><p>放一个障碍物最多可以阻止一横一竖两对城堡的攻击，称这种放障碍物的位置为好位置。<br>把处于同一行，且能相互攻击的一对城堡，看成二分图左边的点；同样地，把处于同一列，且可以相互攻击到的一对城堡，看成二分图右边的点。这样所有的好位置就连接了一个二分图左边的点，和一个二分图右边的点。<br>为了最小化额外障碍的数量，我们要选尽可能多的好位置。求这张二分图的最大匹配即可。因为可能是完全二分图，所以直接用匈牙利算法，在$O(n^3)$的复杂度下求最大匹配。<br>添加完二分图对应的好位置之后，剩下的位置最多只能阻止一对城堡互相攻击。这种障碍物直接放在对应城堡的旁边即可。<br>如何维护方案？可以给每一行以及每一列都维护一个<code>set</code>，保存这一行哪些列，或这一列哪些行有城堡或障碍物。这样就能快速将障碍物插入到<code>set</code>里，以及检查某一行或列是否有两座城堡之间有没有障碍物。</p>
+<h4 id="M-回文多边形-1"><a href="#M-回文多边形-1" class="headerlink" title="M. 回文多边形"></a>M. 回文多边形</h4><p>设$f(l,r)$表示从顶点$l$逆时针转到顶点$r$，能构成回文序列的最大凸包面积($a_l&#x3D;a_r$)。有转移方程$f(l,r)&#x3D;\max{f(l’,r’)+S_{\triangle ll’r’}+S_{\triangle lr’r}}$。其中$l’$和$r’$位于$l$和$r$之间，且$a_r&#x3D;a_{r’}$。<br>直接计算这个转移方程的复杂度是$O(n^4)$的。注意到对于每种权值，最优情况下，$f$和$r’$其中之一肯定市这个权值在$(l,r)$开区间内最靠近左&#x2F;右端点的顶点，否则额外选择最两边的顶点，面积能变得更大。<br>因此枚举$f$可以直接确定$r’$，枚举$r’$可以直接确定$f$。复杂度降至$O(n^3)$。</p>
+<h4 id="后面的题"><a href="#后面的题" class="headerlink" title="后面的题"></a>后面的题</h4><p>太难了，所以不想整。</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这次收获还挺大的，有了比赛和团队协作的经验，也不像之前那么慌了。<br>下一次争取参与到解题上来，别光造数据啥的。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CCPC山东省大学生程序设计竞赛 个人总结与解题思路整理</div>
+      <div>https://algo-x.cn/articles/SDCPC-Personal-Summary-and-Solution-Approach-Organization/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Taoran & SUA Team</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月26日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年6月27日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/Solution-of-CF191A/" title="CF191A 题解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CF191A 题解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/Maintaining-XOR-Extrema/" title="维护异或极值">
+                        <span class="hidden-mobile">维护异或极值</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <body>×</body> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

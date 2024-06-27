@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Taoran">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="知识前置并查集一个维护元素所属集合的数据结构，基本操作如下： 12345int fa[N];void init() &#123;for (int i&#x3D;1; i&lt;&#x3D;n; ++i) fa[i]&#x3D;i;&#125;int find(int x) &#123;return fa[x]&#x3D;&#x3D;x?x:fa[x]&#x3D;find(fa[x]);&#125;void merge(int x, int y) &amp;#12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="带权并查集">
+<meta property="og:url" content="https://algo-x.cn/articles/Union-Find-with-Weights/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:description" content="知识前置并查集一个维护元素所属集合的数据结构，基本操作如下： 12345int fa[N];void init() &#123;for (int i&#x3D;1; i&lt;&#x3D;n; ++i) fa[i]&#x3D;i;&#125;int find(int x) &#123;return fa[x]&#x3D;&#x3D;x?x:fa[x]&#x3D;find(fa[x]);&#125;void merge(int x, int y) &amp;#12">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://algo-x.cn/img/34-01.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/34-02.jpg">
+<meta property="article:published_time" content="2024-06-23T12:13:22.000Z">
+<meta property="article:modified_time" content="2024-06-27T14:02:22.291Z">
+<meta property="article:author" content="Taoran">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://algo-x.cn/img/34-01.jpg">
+  
+  
+  
+  <title>带权并查集 - Algo-X.cn</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/articles/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chemistry/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>化学工具站</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="带权并查集"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-23 20:13" pubdate>
+          2024年6月23日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">带权并查集</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年6月27日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h4><p>一个维护元素所属集合的数据结构，基本操作如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> fa[N];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) fa[i]=i;&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<span class="hljs-keyword">return</span> fa[x]==x?x:fa[x]=<span class="hljs-built_in">find</span>(fa[x]);&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;fa[<span class="hljs-built_in">find</span>(x)]=<span class="hljs-built_in">find</span>(y);&#125;<br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">chk</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">find</span>(x)==<span class="hljs-built_in">find</span>(y);&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="递归算法"><a href="#递归算法" class="headerlink" title="递归算法"></a>递归算法</h4><p>详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/basic/divide-and-conquer/#%E9%80%92%E5%BD%92">OI-Wiki</a>。</p>
+<hr>
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>如果你将<code>merge</code>函数单独写，并且RE了，不妨检查一下你的<code>merge</code>函数返回类型。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;fa[<span class="hljs-built_in">find</span>(x)]=<span class="hljs-built_in">find</span>(y);&#125; <span class="hljs-comment">// 你可能写成了这样</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="算法定义"><a href="#算法定义" class="headerlink" title="算法定义"></a>算法定义</h3><p>在对并查集进行路径压缩和合并操作时，这些权值具有一定属性，即可将他们与父节点的关系，变化为与所在树的根结点关系。<br>在并查集的边上定义某种权值、以及这种权值在路径压缩时产生的运算，从而解决更多的问题，这种算法叫带权并查集。</p>
+<hr>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p>以最普遍的维护到父节点距离为例。<br>合并操作一般不以函数形式独立呈现，而是在主函数内。这里为了展示方便，独立写成了<code>merge()</code>函数。</p>
+<h4 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h4><p>原理如图，<code>x</code>断开与<code>t</code>的联系，直接连到祖先根节点。<br><img src="../../img/34-01.jpg" srcset="/img/loading.gif" lazyload alt="34-01" style="zoom:75%;" />  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (fa[x]!=x) &#123;<span class="hljs-type">int</span> t=fa[x]; fa[x]=<span class="hljs-built_in">find</span>(fa[x]), d[x]+=d[t];&#125;<br>	<span class="hljs-keyword">return</span> fa[x];<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这段代码在原先路径压缩的基础上，添加了对$d$数组的维护操作。即在路径压缩时，将到父节点的距离额外加上父节点到父父节点的距离，递归后即可直接得到当前节点到根节点的距离。<br>注意：一定要先记录<code>t</code>，完成对父节点的路径压缩后，再处理<code>x</code>，三个顺序不可颠倒。</p>
+<h4 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h4><p>原理如图，合并后<code>fx</code>断开与<code>fa[fx]</code>的连接，直接连接<code>fy</code>。路径压缩可由处理前的<code>find()</code>完成。<br><img src="../../img/34-02.jpg" srcset="/img/loading.gif" lazyload alt="34-02" style="zoom:75%;" />  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> </span>&#123;<br>	<span class="hljs-type">int</span> fx=<span class="hljs-built_in">find</span>(x), fy=<span class="hljs-built_in">find</span>(y);<br>	d[fx]=d[y]+z-d[x], fa[fx]=fy;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这段代码在原先合并的基础上，添加了对$d$数组的维护操作。即在合并时，将$X$父节点的距离替换为到$Y$父节点的距离。</p>
+<h4 id="判断合法性"><a href="#判断合法性" class="headerlink" title="判断合法性"></a>判断合法性</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">x=<span class="hljs-built_in">read</span>(), y=<span class="hljs-built_in">read</span>(), c=<span class="hljs-built_in">read</span>(), fx=<span class="hljs-built_in">find</span>(x), fy=<span class="hljs-built_in">find</span>(y);<br><span class="hljs-keyword">if</span> (fx==fy) &#123;<br>	<span class="hljs-keyword">if</span>(d[x]-d[y]!=c) &#123;++cnt; <span class="hljs-keyword">continue</span>;&#125;<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-built_in">merge</span>(x, y, c);<br></code></pre></td></tr></table></figure>
+<p>判断已推导出的$x$与$y$的距离是否等于$c$。这里<code>fx==fy</code>意味着它们在同一集合内，可以判断关系；而<code>d[x]-d[y]</code>表示到父节点的距离差，即为两点距离差。<br>注意，如果查询不保证类似左小右大的关系，<strong>取绝对值</strong>后再判断。</p>
+<hr>
+<h3 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2024">洛谷P2024</a> [NOI2001] 食物链</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>$A$吃$B$，$B$吃$C$，$C$吃$A$。<br>现有$N$个动物，以$1 \sim N$编号。每个动物都是$A,B,C$中的一种。<br>给定两种关系：<code>1 X Y</code>表示$X$与$Y$是同类，<code>2 X Y</code>表示$X$吃$Y$。<br>一共有$K$条描述关系的话，有的是真的，有的是假的。与前面冲突或不符合逻辑的是假话。输出假话的总数。</p>
+<p>数据范围：$1\le N\le5\times10^4$，$1\le k\le1\times10^5$。</p>
+<h4 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h4><p>扩展域并查集，开三倍空间，维护三个并查集。<br>设$x$为自身，$x+n$为猎物，$x+2n$为天敌。<br>对于$1$操作，如果$X$与$Y$互为猎物-天敌关系，则是假话；否则合并三组并查集，共享猎物与天敌。<br>对于$2$操作，如果$X$与$Y$是同类，则是假话；否则合并三组并查集，建立猎物-天敌关系。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 1000010</span><br><span class="hljs-type">int</span> n, m, opt, t1, t2, ans, fa[N];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<span class="hljs-keyword">return</span> x==fa[x]?x:fa[x]=<span class="hljs-built_in">find</span>(fa[x]);&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;fa[<span class="hljs-built_in">find</span>(x)]=<span class="hljs-built_in">find</span>(y);&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;b.in&quot;, &quot;r&quot;, stdin);</span><br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n*<span class="hljs-number">3</span>; ++i) fa[i]=i;<br>	<span class="hljs-keyword">while</span> (m--) &#123;<br>		opt=<span class="hljs-built_in">read</span>(), t1=<span class="hljs-built_in">read</span>(), t2=<span class="hljs-built_in">read</span>();<br>		<span class="hljs-keyword">if</span> (t1&gt;n||t2&gt;n) &#123;++ans; <span class="hljs-keyword">continue</span>;&#125;<br>		<span class="hljs-keyword">if</span> (opt==<span class="hljs-number">1</span>) &#123;<br>			<span class="hljs-keyword">if</span> (<span class="hljs-built_in">find</span>(t1+n)==<span class="hljs-built_in">find</span>(t2)||<span class="hljs-built_in">find</span>(t1)==<span class="hljs-built_in">find</span>(t2+n)) &#123;++ans; <span class="hljs-keyword">continue</span>;&#125;<br>			<span class="hljs-built_in">merge</span>(t1, t2), <span class="hljs-built_in">merge</span>(t1+n, t2+n), <span class="hljs-built_in">merge</span>(t1+n+n, t2+n+n);<br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (opt==<span class="hljs-number">2</span>) &#123;<br>			<span class="hljs-keyword">if</span> (<span class="hljs-built_in">find</span>(t1)==<span class="hljs-built_in">find</span>(t2)||<span class="hljs-built_in">find</span>(t1)==<span class="hljs-built_in">find</span>(t2+n)) &#123;++ans; <span class="hljs-keyword">continue</span>;&#125;<br>			<span class="hljs-built_in">merge</span>(t1, t2+n+n), <span class="hljs-built_in">merge</span>(t1+n, t2), <span class="hljs-built_in">merge</span>(t1+n+n, t2+n);<br>		&#125;<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, ans);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>如果$N$很大，或者关系状态很多，不允许开$K$倍空间，这种办法就无效了。</p>
+<h4 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h4><p>带权并查集，参照上方，有小变动。<br>令<code>d[x]</code>表示当前节点与父节点的关系。具体的，<code>d[x]=0</code>表示$x$与父节点是同种生物，<code>d[x]=1</code>表示$x$是父节点的食物，<code>d[x]=1</code>表示$x$是父节点的天敌。<br>状态只有三种，转移通过运算与取模实现。<br>路径压缩：<code>d[x]=(d[x]+d[t])%3</code>，其中$t$为$x$原父节点。<br>合并：<code>d[fx]=c+d[y]-d[x]</code>，其中$c$表示$x$与$y$关系。</p>
+<hr>
+<h3 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h3><h4 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2294">洛谷P2294</a> [HNOI2005] 狡猾的商人</p>
+<p>$T$组数据，每组给出序列长度$N$和$M$对数$l_i,\ r_i,\ s_i$，表示区间$[l_i,\ r_i]$的和为$S_i$，判断是否合法。</p>
+<p>数据范围：$T\le100$，$N\le100$，$M\le1000$。</p>
+<h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><p>将区间和视作到父节点的距离<code>d[i]</code>，即$sum\ fa[i]\sim i-1$。<br>路径压缩：<code>d[x]+=d[t]</code>，其中$t$为$x$原父节点。<br>合并：<code>d[fx]=d[y]+z-d[x], fa[fx]=fy</code>。</p>
+<p>注意这里需要<code>l--</code>。</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 5010</span><br><span class="hljs-type">int</span> T, n, m, l, r, v, fr, f2;<br><span class="hljs-type">int</span> fa[N], d[N]; <span class="hljs-type">bool</span> flag;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (fa[x]!=x) &#123;<span class="hljs-type">int</span> t=fa[x]; fa[x]=<span class="hljs-built_in">find</span>(fa[x]), d[x]+=d[t];&#125;<br>	<span class="hljs-keyword">return</span> fa[x];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;d.in&quot;, &quot;r&quot;, stdin);</span><br>	T=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">while</span> (T--) &#123;<br>		n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>(), flag=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;=n; ++i) fa[i]=i, d[i]=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">while</span> (m--) &#123;<br>			l=<span class="hljs-built_in">read</span>()<span class="hljs-number">-1</span>, r=<span class="hljs-built_in">read</span>(), v=<span class="hljs-built_in">read</span>(), fr=<span class="hljs-built_in">find</span>(l), f2=<span class="hljs-built_in">find</span>(r);<br>			<span class="hljs-keyword">if</span> (fr==f2&amp;&amp;d[l]+v!=d[r]) flag=<span class="hljs-number">1</span>;<br>			d[f2]=d[l]+v-d[r], fa[f2]=fr;<br>		&#125;<br>		<span class="hljs-built_in">puts</span>(flag?<span class="hljs-string">&quot;false&quot;</span>:<span class="hljs-string">&quot;true&quot;</span>);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="例题3"><a href="#例题3" class="headerlink" title="例题3"></a>例题3</h3><h4 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h4><p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=3047">HDU 3047</a> Zjnu Stadium<br><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15127607/3619803">Source</a></p>
+<p>$n$个人坐在体育馆里，给出$m$个他们之间的距离<code>A B X</code>，表示$B$的座位比$A$多$X$。求有多少条错误的关系。</p>
+<p>数据范围$N\le5\times10^4$，$M\le1\times10^5$。</p>
+<h4 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h4><p>到父节点的距离<code>d[i]</code>，维护同上。<br>路径压缩：<code>d[x]+=d[t]</code>，其中$t$为$x$原父节点。<br>合并：<code>d[fx]=d[y]+z-d[x], fa[fx]=fy</code>。</p>
+<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 50010</span><br><span class="hljs-type">int</span> n, m, a, fa1, b, fb, c, cnt;<br><span class="hljs-type">int</span> fa[N], d[N];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (fa[x]!=x) &#123;<span class="hljs-type">int</span> t=fa[x]; fa[x]=<span class="hljs-built_in">find</span>(fa[x]), d[x]+=d[t];&#125;<br>	<span class="hljs-keyword">return</span> fa[x];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;c.in&quot;, &quot;r&quot;, stdin);</span><br>	<span class="hljs-keyword">while</span> (<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;n, &amp;m)!=EOF) &#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) fa[i]=i, d[i]=<span class="hljs-number">0</span>; cnt=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">while</span> (m--) &#123;<br>			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>, &amp;a, &amp;b, &amp;c), fa1=<span class="hljs-built_in">find</span>(a), fb=<span class="hljs-built_in">find</span>(b);<br>			<span class="hljs-keyword">if</span> (fa1==fb) &#123;<br>				<span class="hljs-keyword">if</span>(d[b]-d[a]!=c) &#123;++cnt; <span class="hljs-keyword">continue</span>;&#125;<br>			&#125; <span class="hljs-keyword">else</span> fa[fb]=fa1, d[fb]=c+d[a]-d[b];<br>		&#125;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, cnt);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>统计方案数等计数问题、查询矛盾等逻辑问题可能是用并查集做。<br>考察朴素并查集的概率比较少，大多都是加权并查集或扩展域并查集。</p>
+<p>加权并查集可以维护到父节点的信息，会在路径压缩过程中处理。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>带权并查集</div>
+      <div>https://algo-x.cn/articles/Union-Find-with-Weights/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Taoran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年6月23日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年6月27日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/Solution-of-CF191A/" title="CF191A 题解">
+                        <span class="hidden-mobile">CF191A 题解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <body>×</body> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
