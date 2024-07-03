@@ -16,18 +16,18 @@
   <meta name="author" content="Taoran">
   <meta name="keywords" content="">
   
-    <meta name="description" content="项目背景研制气氧乙醇液体火箭发动机。  书籍参考液体火箭发动机燃烧过程建模与数值仿真&#x2F;王振国编著.—北京：国防工业出版社，2012.10ISBN 978-7-118-08525-9 I. ①液··· II. ①王··· III. ①液体推进剂火箭发动机—燃烧过程—建立模型②液体推进剂火箭发动机—燃烧过程—数值方法 IV ①V434 中国版本图书馆CIP数据核字（2012）第279370">
+    <meta name="description" content="项目背景研制气氧乙醇液体火箭发动机。  液体火箭发动机基本结构由推力室（由喷注器、燃烧室和喷管构成）、推进剂供应系统、推进剂贮箱和各种自动调节器等部分组成。  推进剂供应系统 挤压式供应系统：使用挤压气体的方式输送推进剂，高压储存于气瓶或由燃气发生器生成，通常使用惰性气体。 泵压式供应系统：通过涡轮驱动泵实现供应，最常见循环方案：燃气发生器循环、膨胀循环和分级燃烧循环。 电泵循环供应系统：书里面">
 <meta property="og:type" content="article">
 <meta property="og:title" content="研究笔记 24-06-30">
 <meta property="og:url" content="https://algo-x.cn/articles/Note-24-06-30/index.html">
 <meta property="og:site_name" content="Algo-X.cn">
-<meta property="og:description" content="项目背景研制气氧乙醇液体火箭发动机。  书籍参考液体火箭发动机燃烧过程建模与数值仿真&#x2F;王振国编著.—北京：国防工业出版社，2012.10ISBN 978-7-118-08525-9 I. ①液··· II. ①王··· III. ①液体推进剂火箭发动机—燃烧过程—建立模型②液体推进剂火箭发动机—燃烧过程—数值方法 IV ①V434 中国版本图书馆CIP数据核字（2012）第279370">
+<meta property="og:description" content="项目背景研制气氧乙醇液体火箭发动机。  液体火箭发动机基本结构由推力室（由喷注器、燃烧室和喷管构成）、推进剂供应系统、推进剂贮箱和各种自动调节器等部分组成。  推进剂供应系统 挤压式供应系统：使用挤压气体的方式输送推进剂，高压储存于气瓶或由燃气发生器生成，通常使用惰性气体。 泵压式供应系统：通过涡轮驱动泵实现供应，最常见循环方案：燃气发生器循环、膨胀循环和分级燃烧循环。 电泵循环供应系统：书里面">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://aerospaceweb.org/design/aerospike/figures/fig02.jpg">
 <meta property="article:published_time" content="2024-06-30T10:40:24.000Z">
-<meta property="article:modified_time" content="2024-07-01T10:23:26.059Z">
+<meta property="article:modified_time" content="2024-07-03T02:27:20.377Z">
 <meta property="article:author" content="Taoran">
-<meta property="article:tag" content="气氧乙醇液体火箭发动机">
+<meta property="article:tag" content="火箭发动机">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://aerospaceweb.org/design/aerospike/figures/fig02.jpg">
   
@@ -71,7 +71,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -299,7 +299,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年7月1日 晚上
+                    本文最后更新于 2024年7月3日 上午
                   
                 
               </p>
@@ -309,10 +309,6 @@
                 
                 <hr>
 <h3 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h3><p>研制气氧乙醇液体火箭发动机。</p>
-<hr>
-<h3 id="书籍参考"><a href="#书籍参考" class="headerlink" title="书籍参考"></a>书籍参考</h3><p>液体火箭发动机燃烧过程建模与数值仿真&#x2F;王振国编著.—北京：国防工业出版社，2012.10<br>ISBN 978-7-118-08525-9</p>
-<p>I. ①液··· II. ①王··· III. ①液体推进剂火箭发动机—燃烧过程—建立模型②液体推进剂火箭发动机—燃烧过程—数值方法 IV ①V434</p>
-<p>中国版本图书馆CIP数据核字（2012）第279370号</p>
 <hr>
 <h3 id="液体火箭发动机基本结构"><a href="#液体火箭发动机基本结构" class="headerlink" title="液体火箭发动机基本结构"></a>液体火箭发动机基本结构</h3><p>由推力室（由喷注器、燃烧室和喷管构成）、推进剂供应系统、推进剂贮箱和各种自动调节器等部分组成。</p>
 <hr>
@@ -377,6 +373,10 @@ m(O_2):m(C_2H_5OH)=16:23$$-->
 <h4 id="燃烧室选择"><a href="#燃烧室选择" class="headerlink" title="燃烧室选择"></a>燃烧室选择</h4><p>使用技术成熟、造价低廉的圆筒形燃烧室。</p>
 <h4 id="喷管选择"><a href="#喷管选择" class="headerlink" title="喷管选择"></a>喷管选择</h4><p>鉴于时间和资金问题，暂时采用锥形喷管，后面再研制钟形喷管。</p>
 <h4 id="冷却方案选择"><a href="#冷却方案选择" class="headerlink" title="冷却方案选择"></a>冷却方案选择</h4><p>鉴于目前发动机设计和方便后续实验，结合电泵完成技术成熟、实现成本较低的再生冷却技术。</p>
+<hr>
+<h3 id="书籍参考"><a href="#书籍参考" class="headerlink" title="书籍参考"></a>书籍参考</h3><p>液体火箭发动机燃烧过程建模与数值仿真&#x2F;王振国编著.—北京：国防工业出版社，2012.10<br>ISBN 978-7-118-08525-9</p>
+<p>I. ①液··· II. ①王··· III. ①液体推进剂火箭发动机—燃烧过程—建立模型②液体推进剂火箭发动机—燃烧过程—数值方法 IV ①V434</p>
+<p>中国版本图书馆CIP数据核字（2012）第279370号</p>
 
                 
               </div>
@@ -417,7 +417,7 @@ m(O_2):m(C_2H_5OH)=16:23$$-->
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B0%94%E6%B0%A7%E4%B9%99%E9%86%87%E6%B6%B2%E4%BD%93%E7%81%AB%E7%AE%AD%E5%8F%91%E5%8A%A8%E6%9C%BA/" class="print-no-link">#气氧乙醇液体火箭发动机</a>
+        <a href="/tags/%E7%81%AB%E7%AE%AD%E5%8F%91%E5%8A%A8%E6%9C%BA/" class="print-no-link">#火箭发动机</a>
       
     </div>
   
@@ -448,7 +448,7 @@ m(O_2):m(C_2H_5OH)=16:23$$-->
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月1日</div>
+          <div>2024年7月3日</div>
         </div>
       
       
@@ -484,6 +484,12 @@ m(O_2):m(C_2H_5OH)=16:23$$-->
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/" title="火箭发动机工作过程中的性能参数">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">火箭发动机工作过程中的性能参数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
