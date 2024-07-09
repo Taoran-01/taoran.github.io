@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Taoran">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="知识前置二叉搜索树左子树点权均小于根节点，右子树点权都大于根节点的二叉树。它有很多好的性质，详见OI-Wiki。 平衡树左右子树高度差不太大的二叉树，详见OI-Wiki。阅读本文，你并不需要了解平衡树的旋转操作。 Treap&#x3D;Tree+Heap，同时满足二叉搜索树和堆的性质。详见OI-Wiki。 范浩强IOI金牌，天才AI少年，旷世奇才。自己百度一下感受强者风范。本文所介绍的FHQ T">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FHQ Treap">
+<meta property="og:url" content="https://algo-x.cn/articles/FHQ-Treap/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:description" content="知识前置二叉搜索树左子树点权均小于根节点，右子树点权都大于根节点的二叉树。它有很多好的性质，详见OI-Wiki。 平衡树左右子树高度差不太大的二叉树，详见OI-Wiki。阅读本文，你并不需要了解平衡树的旋转操作。 Treap&#x3D;Tree+Heap，同时满足二叉搜索树和堆的性质。详见OI-Wiki。 范浩强IOI金牌，天才AI少年，旷世奇才。自己百度一下感受强者风范。本文所介绍的FHQ T">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-09T12:37:41.000Z">
+<meta property="article:modified_time" content="2024-07-09T15:04:18.111Z">
+<meta property="article:author" content="Taoran">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>FHQ Treap - Algo-X.cn</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/articles/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chemistry/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>化学工具站</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="FHQ Treap"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-09 20:37" pubdate>
+          2024年7月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">FHQ Treap</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年7月9日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h4><p><strong>左子树</strong>点权均<strong>小于</strong>根节点，<strong>右子树</strong>点权都<strong>大于</strong>根节点的二叉树。<br>它有很多好的性质，详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/bst/#%E5%AE%9A%E4%B9%89">OI-Wiki</a>。</p>
+<h4 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h4><p>左右子树高度差不太大的二叉树，详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/bst/#%E5%B9%B3%E8%A1%A1%E6%A0%91%E7%AE%80%E4%BB%8B">OI-Wiki</a>。<br>阅读本文，你并不需要了解平衡树的旋转操作。</p>
+<h4 id="Treap"><a href="#Treap" class="headerlink" title="Treap"></a>Treap</h4><p>&#x3D;Tree+Heap，同时满足二叉搜索树和堆的性质。详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/treap/">OI-Wiki</a>。</p>
+<h4 id="范浩强"><a href="#范浩强" class="headerlink" title="范浩强"></a>范浩强</h4><p>IOI金牌，天才AI少年，旷世奇才。自己<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=%E8%8C%83%E6%B5%A9%E5%BC%BA">百度一下</a>感受强者风范。<br>本文所介绍的FHQ Treap正是这位大佬发明的，实现方法尤为<strong>精妙</strong>。</p>
+<hr>
+<h3 id="算法定义"><a href="#算法定义" class="headerlink" title="算法定义"></a>算法定义</h3><p>FHQ Treap (也叫非旋Treap)，是一个数据结构，可以通过分裂和合并完成插入、删除和查询排名等操作。<br>与其它维护平衡树的基本算法不同，FHQ Treap不需要旋转。</p>
+<p>维护信息：左右儿子 $ls$、$rs$，权值 $val$、子树大小 $siz$ 及随机优先级 $rnd$。</p>
+<hr>
+<h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><h4 id="新建节点"><a href="#新建节点" class="headerlink" title="新建节点"></a>新建节点</h4><p>赋值 $val\leftarrow v$，$siz\leftarrow1$。<br>$rnd$ 赋值为某个随机数即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<span class="hljs-keyword">return</span> val[++tot]=v, rnd[tot]=<span class="hljs-built_in">rand</span>(), siz[tot]=<span class="hljs-number">1</span>, tot;&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="更新答案"><a href="#更新答案" class="headerlink" title="更新答案"></a>更新答案</h4><p>将左右儿子的答案更新到父节点。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> p)</span> </span>&#123;siz[p]=siz[ls[p]]+siz[rs[p]]+<span class="hljs-number">1</span>;&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="分裂"><a href="#分裂" class="headerlink" title="分裂"></a>分裂</h4><p>一般按权值分裂，少数题目需要按子树大小分裂。(按大小分裂我还没搞明白，可以多看看相关题目的题解自主学习。)</p>
+<p>通过按权值分裂与合并维护的FHQ Treap满足右儿子大于左儿子。即，对于任意节点 $u$，满足 $val_{ls}\le val_u&lt;val_{rs}$。</p>
+<p>若将原平衡树 $T$ 按权值 $v$ 分裂为两个平衡树 $T_x$ 和 $T_y$，则对于任意 $i\in T_x$，$j\in T_y$，均满足 $val_i\le v&lt;val_j$。</p>
+<p>设当前节点为 $p$。<br>1.如果 $val_p\le v$，则 $p$ 属于 $T_x$，同时 $p$ 的左子树 $T_{ls_p}$ 中所有节点权值也均小于或等于 $v$，属于 $T_x$。<br>2.如果 $val_p&gt;v$，则 $p$ 属于 $T_y$，同时 $p$ 的右子树 $T_{rs_p}$ 中所有节点权值也均大于 $v$，属于 $T_y$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 将子树p按权值v分裂为以x和y为根节点的两棵树</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">spl</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> v, <span class="hljs-type">int</span> &amp;x, <span class="hljs-type">int</span> &amp;y)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (!p) <span class="hljs-keyword">return</span> x=y=<span class="hljs-number">0</span>, <span class="hljs-built_in">void</span>();<br>	<span class="hljs-keyword">if</span> (val[p]&lt;=v) <span class="hljs-built_in">spl</span>(rs[p], v, rs[x=p], y);<br>	<span class="hljs-keyword">else</span> <span class="hljs-built_in">spl</span>(ls[p], v, x, ls[y=p]);<br>	<span class="hljs-built_in">push</span>(p);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h4><p>合并两棵树 $T_x$、$T_y$，必须满足对于任意 $i\in T_x$，$j\in T_y$，都有 $val_i&lt;val_j$，即 $T_x$ 树上最大节点小于 $T_y$ 树上最小节点。</p>
+<p>FHQ Treap的合并遵循Treap的原则，以 $rnd$ 作为判断节点父子关系的标准，以 $val$ 作为判断左右儿子的标准。至于为什么 $rnd$ 决定上下，在后文里会解释。</p>
+<p>假设合并节点 $x$、$y$，且 $val_x&lt;val_y$。<br>1.当 $rnd_x&gt;rnd_y$，即 $x$ 为 $y$ 的父亲时，$y$ 是 $x$ 的右儿子。将 $T_y$ 合并到 $x$ 右子树上，$rs_x$ 赋值为 $\operatorname{merge}(rs_x,y)$ 即可。<br>2.当 $rnd_x\le rnd_y$，即 $y$ 为 $x$ 的父亲时，$x$ 是 $y$ 的左儿子。将 $T_x$ 合并到 $y$ 左子树上，$ls_y$ 赋值为 $\operatorname{merge}(ls_y,x)$ 即可。<br>3.当 $T_x$ 或 $T_y$ 为空时，返回非空的那棵树即可。<br>合并完成后需要更新答案(push)。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 将根节点为x和y的两棵数合并，返回合并后的根节点</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">mer</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (!x||!y) <span class="hljs-keyword">return</span> x|y;<br>	<span class="hljs-keyword">if</span> (rnd[x]&lt;rnd[y]) <span class="hljs-keyword">return</span> ls[y]=<span class="hljs-built_in">mer</span>(x, ls[y]), <span class="hljs-built_in">push</span>(y), y;<br>	<span class="hljs-keyword">return</span> rs[x]=<span class="hljs-built_in">mer</span>(rs[x], y), <span class="hljs-built_in">push</span>(x), x;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">mer</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> </span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">mer</span>(x, <span class="hljs-built_in">mer</span>(y, z));&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="复杂操作"><a href="#复杂操作" class="headerlink" title="复杂操作"></a>复杂操作</h3><h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>将树分裂为两部分后，在中间插入新节点。<br>分裂时按新节点权值分裂，以保证有序。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 在树rt中插入权值为v的点</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ins</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<span class="hljs-type">int</span> x=<span class="hljs-number">0</span>, y=<span class="hljs-number">0</span>; <span class="hljs-built_in">spl</span>(rt, v<span class="hljs-number">-1</span>, x, y), rt=<span class="hljs-built_in">mer</span>(x, <span class="hljs-built_in">add</span>(v), y);&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>假设需要删除的点的权值为 $k$，将原树 $T$ 按 $v$ 拆为 $T_x$、$T_y$、$T_z$ 三个子树。<br>对于任意 $p\in T_x$，$val_p\le v-1$；<br>对于任意 $p\in T_y$，$val_p&#x3D;v$；<br>对于任意 $p\in T_z$，$val_p&gt; v$。</p>
+<p>接着，将 $T_y$ 的根节点删除，再将左右子树合并构成新的 $T_y$，然后将 $T_x$、$T_y$ 和 $T_z$ 依次合并还原原树 $T$。<br>这样，保证删去的点恰为一个，且权值为 $k$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 在树rt中删除一个权值为v的点</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">del</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<br>	<span class="hljs-type">int</span> x=<span class="hljs-number">0</span>, y=<span class="hljs-number">0</span>, z=<span class="hljs-number">0</span>; <span class="hljs-built_in">spl</span>(rt, v<span class="hljs-number">-1</span>, x, y), <span class="hljs-built_in">spl</span>(y, v, y, z);<br>	y=<span class="hljs-built_in">mer</span>(ls[y], rs[y]), rt=<span class="hljs-built_in">mer</span>(x, y, z);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="查询第k大"><a href="#查询第k大" class="headerlink" title="查询第k大"></a>查询第k大</h4><p>根据FHQ Treap的有序性，只需要根据子树大小决定前往左&#x2F;右子树查找即可。</p>
+<p>假设需要查找第 $k$ 大，且当前遍历到了点 $p$。<br>1.若 $k&lt;siz_{ls_p}+1$，则说明找的 $p$ 过了，需要向左儿子递归。<br>2.若 $k&#x3D;siz_{ls_p}+1$，则说明找的 $p$ 恰好是第 $k$ 个，返回即可。<br>3.若 $k&gt;siz_{ls_p}+1$，则说明找的 $p$ 少了，需要向右儿子递归。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 查询第k大的节点权值并返回</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">kth</span><span class="hljs-params">(<span class="hljs-type">int</span> k)</span> </span>&#123;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p=rt; ; ) &#123;<br>		<span class="hljs-keyword">if</span> (k&lt;siz[ls[p]]+<span class="hljs-number">1</span>) p=ls[p];<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (k&gt;siz[ls[p]]+<span class="hljs-number">1</span>) k-=siz[ls[p]]+<span class="hljs-number">1</span>, p=rs[p];<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> val[p];<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="查询前驱-后继"><a href="#查询前驱-后继" class="headerlink" title="查询前驱&#x2F;后继"></a>查询前驱&#x2F;后继</h4><p>下面是第一种做法，在 $T$ 中查询 $val_p&#x3D;v\plusmn1$ 的点。<br>借助FHQ Treap的有序性，大了向左子树找，小了向右子树找，直到叶子节点。每一次存下答案，以便找小于 $k$ 的最大值(前驱)或大于 $k$ 的最小值(后继)。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 查询权值小于v的最大权值</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pre</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p=rt, ans=<span class="hljs-number">0</span>; ; ) &#123;<br>		<span class="hljs-keyword">if</span> (!p) <span class="hljs-keyword">return</span> ans;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (v&lt;=val[p]) p=ls[p];<br>		<span class="hljs-keyword">else</span> ans=val[p], p=rs[p];<br>	&#125;<br>&#125;<br><span class="hljs-comment">// 查询权值大于v的最小权值</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">suc</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p=rt, ans=<span class="hljs-number">0</span>; ; ) &#123;<br>		<span class="hljs-keyword">if</span> (!p) <span class="hljs-keyword">return</span> ans;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (v&gt;=val[p]) p=rs[p];<br>		<span class="hljs-keyword">else</span> ans=val[p], p=ls[p];<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>还有一种基于分裂的做法。<br>1.前驱：按权值 $v-1$ 将原树 $T$ 分为 $T_x$ 和 $T_y$，使得任意 $p\in T_x$，均满足 $val_p\le v-1$。再从 $T_x$ 中沿右儿子遍历到叶子节点，找最大节点，即为前缀。<br>2.后继：按权值 $v$ 将原树 $T$ 分为 $T_x$ 和 $T_y$，使得任意 $p\in T_y$，均满足 $val_p&gt;v$。再从 $T_y$ 中沿左儿子遍历到叶子节点，找最小节点，即为后继。<br>3.合并 $T_x$、$T_y$，复原原树 $T$。</p>
+<p>代码很简单不再写了，这种做法相较上一种常数较大。</p>
+<h4 id="查询排名"><a href="#查询排名" class="headerlink" title="查询排名"></a>查询排名</h4><p>按权值 $v-1$ 将原树 $T$ 分为 $T_x$ 和 $T_y$，使得任意 $p\in T_x$，均满足 $val_p\le v-1$。<br>这样，小于 $v$ 的点均位于 $T_x$ 上，$siz_x$ 即为前面的点的总数，而 $siz_x+1$ 即为排名。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 查询权值v的排名，相同大小的不跳过</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">rnk</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<br>	<span class="hljs-type">int</span> x=<span class="hljs-number">0</span>, y=<span class="hljs-number">0</span>, ans=<span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">spl</span>(rt, v<span class="hljs-number">-1</span>, x, y), ans=siz[x]+<span class="hljs-number">1</span>, rt=<span class="hljs-built_in">mer</span>(x, y);<br>	<span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="rnd生成目的"><a href="#rnd生成目的" class="headerlink" title="rnd生成目的"></a>rnd生成目的</h3><p>感性理解：Treap需要一个关键字 $val$，用以满足二叉树(Tree)的性质；需要一个顺序 $rnd$，以满足堆(Heap)的性质。<br>理性理解：如果没有 $rnd$，Treap会退化成一条<strong>链</strong>，进而无法达到 $O(\log n)$ 的时间复杂度，变为了 $O(n)$。</p>
+<p>我们需要一个 $rnd$ 保证Treap不会退化成链，保持其有层次；还需要一个权值 $val$ 保证Treap有秩序以解决问题。故 $rnd$ 是为了满足大根堆性质而取的随机数，真正的权值 $val$ 是关键字。</p>
+<p>由于 $rnd$ 是随机取的，所以FHQ Treap是期望平衡，不是严格平衡。而这也是其常数大于Splay算法的根本原因。</p>
+<hr>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3369">洛谷P3369</a> 普通平衡树</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>您需要写一种数据结构，来维护一些数，其中需要提供以下操作：<br>1.插入一个数 $x$。<br>2.删除一个数 $x$（若有多个相同的数，应只删除一个）。<br>3.定义排名为比当前数小的数的个数 $+1$。查询 $x$ 的排名。<br>4.查询数据结构中排名为 $x$ 的数。<br>5.求 $x$ 的前驱（前驱定义为小于 $x$，且最大的数）。<br>6.求 $x$ 的后继（后继定义为大于 $x$，且最小的数）。</p>
+<p>对于操作 3,5,6，不保证当前数据结构中存在数 $x$。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/161257312">AC</a> 2.21MB 194ms</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 100010</span><br><span class="hljs-type">int</span> n, opt, x;<br><br><span class="hljs-keyword">namespace</span> FHQ &#123;<br>	<span class="hljs-type">int</span> rt, tot;<br>	<span class="hljs-type">int</span> ls[N], rs[N], val[N], rnd[N], siz[N];<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> p)</span> </span>&#123;siz[p]=siz[ls[p]]+siz[rs[p]]+<span class="hljs-number">1</span>;&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">spl</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> v, <span class="hljs-type">int</span> &amp;x, <span class="hljs-type">int</span> &amp;y)</span> </span>&#123;<br>		<span class="hljs-keyword">if</span> (!p) <span class="hljs-keyword">return</span> x=y=<span class="hljs-number">0</span>, <span class="hljs-built_in">void</span>();<br>		<span class="hljs-keyword">if</span> (val[p]&lt;=v) <span class="hljs-built_in">spl</span>(rs[p], v, rs[x=p], y);<br>		<span class="hljs-keyword">else</span> <span class="hljs-built_in">spl</span>(ls[p], v, x, ls[y=p]);<br>		<span class="hljs-built_in">push</span>(p);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">mer</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>		<span class="hljs-keyword">if</span> (!x||!y) <span class="hljs-keyword">return</span> x|y;<br>		<span class="hljs-keyword">if</span> (rnd[x]&lt;rnd[y]) <span class="hljs-keyword">return</span> ls[y]=<span class="hljs-built_in">mer</span>(x, ls[y]), <span class="hljs-built_in">push</span>(y), y;<br>		<span class="hljs-keyword">return</span> rs[x]=<span class="hljs-built_in">mer</span>(rs[x], y), <span class="hljs-built_in">push</span>(x), x;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">mer</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> </span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">mer</span>(x, <span class="hljs-built_in">mer</span>(y, z));&#125;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<span class="hljs-keyword">return</span> val[++tot]=v, rnd[tot]=<span class="hljs-built_in">rand</span>(), siz[tot]=<span class="hljs-number">1</span>, tot;&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ins</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<span class="hljs-type">int</span> x=<span class="hljs-number">0</span>, y=<span class="hljs-number">0</span>; <span class="hljs-built_in">spl</span>(rt, v<span class="hljs-number">-1</span>, x, y), rt=<span class="hljs-built_in">mer</span>(x, <span class="hljs-built_in">add</span>(v), y);&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">del</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<br>		<span class="hljs-type">int</span> x=<span class="hljs-number">0</span>, y=<span class="hljs-number">0</span>, z=<span class="hljs-number">0</span>; <span class="hljs-built_in">spl</span>(rt, v<span class="hljs-number">-1</span>, x, y), <span class="hljs-built_in">spl</span>(y, v, y, z);<br>		y=<span class="hljs-built_in">mer</span>(ls[y], rs[y]), rt=<span class="hljs-built_in">mer</span>(x, y, z);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">kth</span><span class="hljs-params">(<span class="hljs-type">int</span> k)</span> </span>&#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p=rt; ; ) &#123;<br>			<span class="hljs-keyword">if</span> (k&lt;siz[ls[p]]+<span class="hljs-number">1</span>) p=ls[p];<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (k&gt;siz[ls[p]]+<span class="hljs-number">1</span>) k-=siz[ls[p]]+<span class="hljs-number">1</span>, p=rs[p];<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> val[p];<br>		&#125;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">pre</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p=rt, ans=<span class="hljs-number">0</span>; ; ) &#123;<br>			<span class="hljs-keyword">if</span> (!p) <span class="hljs-keyword">return</span> ans;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (v&lt;=val[p]) p=ls[p];<br>			<span class="hljs-keyword">else</span> ans=val[p], p=rs[p];<br>		&#125;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">suc</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p=rt, ans=<span class="hljs-number">0</span>; ; ) &#123;<br>			<span class="hljs-keyword">if</span> (!p) <span class="hljs-keyword">return</span> ans;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (v&gt;=val[p]) p=rs[p];<br>			<span class="hljs-keyword">else</span> ans=val[p], p=ls[p];<br>		&#125;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">rnk</span><span class="hljs-params">(<span class="hljs-type">int</span> v)</span> </span>&#123;<br>		<span class="hljs-type">int</span> x=<span class="hljs-number">0</span>, y=<span class="hljs-number">0</span>, ans=<span class="hljs-number">0</span>;<br>		<span class="hljs-built_in">spl</span>(rt, v<span class="hljs-number">-1</span>, x, y), ans=siz[x]+<span class="hljs-number">1</span>, rt=<span class="hljs-built_in">mer</span>(x, y);<br>		<span class="hljs-keyword">return</span> ans;<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	n=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) &#123;<br>		opt=<span class="hljs-built_in">read</span>(), x=<span class="hljs-built_in">read</span>();<br>		<span class="hljs-keyword">if</span> (opt==<span class="hljs-number">1</span>) FHQ::<span class="hljs-built_in">ins</span>(x);<br>		<span class="hljs-keyword">if</span> (opt==<span class="hljs-number">2</span>) FHQ::<span class="hljs-built_in">del</span>(x);<br>		<span class="hljs-keyword">if</span> (opt==<span class="hljs-number">3</span>) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, FHQ::<span class="hljs-built_in">rnk</span>(x));<br>		<span class="hljs-keyword">if</span> (opt==<span class="hljs-number">4</span>) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, FHQ::<span class="hljs-built_in">kth</span>(x));<br>		<span class="hljs-keyword">if</span> (opt==<span class="hljs-number">5</span>) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, FHQ::<span class="hljs-built_in">pre</span>(x));<br>		<span class="hljs-keyword">if</span> (opt==<span class="hljs-number">6</span>) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, FHQ::<span class="hljs-built_in">suc</span>(x));<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>范浩强太强了，能想出如此巧妙的平衡树实现方法！<br>FHQ Treap代码简洁，通俗易懂。虽速度最慢，但对初学选手相当友好。</p>
+<p>FHQ Treap通过分裂与合并，完成平衡树的插入、删除和查询等操作。<br>注意分裂时按什么标准去分，是 $v$，还是 $v+1$、$v-1$。<br>注意递归&#x2F;循环查询的终止条件。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>FHQ Treap</div>
+      <div>https://algo-x.cn/articles/FHQ-Treap/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Taoran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月9日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年7月9日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/" title="火箭发动机工作过程中的性能参数">
+                        <span class="hidden-mobile">火箭发动机工作过程中的性能参数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <body>×</body> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
