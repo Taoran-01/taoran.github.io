@@ -1,0 +1,752 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Taoran">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="分块的基本思想解决序列问题。通过对原数据进行适当划分，再对操作分成整块和零块，从而通过一般的暴力算法取得较优秀的时间复杂度。 本文将针对分块思想的三种经典应用场景，简要说明分块的一般形式，以及如何具体运用。  分块的基本性质分块的时间复杂度和空间复杂度都不及线段树优秀，但能处理许多线段树无法处理的区间问题。它的时空复杂度与分的块长密切相关，所以需要针对特定题目做出合适的块长选择。  区间和洛谷P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分块思想">
+<meta property="og:url" content="https://algo-x.cn/articles/Chunking/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:description" content="分块的基本思想解决序列问题。通过对原数据进行适当划分，再对操作分成整块和零块，从而通过一般的暴力算法取得较优秀的时间复杂度。 本文将针对分块思想的三种经典应用场景，简要说明分块的一般形式，以及如何具体运用。  分块的基本性质分块的时间复杂度和空间复杂度都不及线段树优秀，但能处理许多线段树无法处理的区间问题。它的时空复杂度与分的块长密切相关，所以需要针对特定题目做出合适的块长选择。  区间和洛谷P">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-11T12:48:33.000Z">
+<meta property="article:modified_time" content="2024-07-11T15:00:48.903Z">
+<meta property="article:author" content="Taoran">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>分块思想 - Algo-X.cn</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/articles/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chemistry/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>化学工具站</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="分块思想"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-11 20:48" pubdate>
+          2024年7月11日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">分块思想</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年7月11日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h3 id="分块的基本思想"><a href="#分块的基本思想" class="headerlink" title="分块的基本思想"></a>分块的基本思想</h3><p>解决序列问题。<br>通过对原数据进行适当划分，再对操作分成整块和零块，从而通过一般的暴力算法取得较优秀的时间复杂度。</p>
+<p>本文将针对分块思想的三种经典应用场景，简要说明分块的一般形式，以及如何具体运用。</p>
+<hr>
+<h3 id="分块的基本性质"><a href="#分块的基本性质" class="headerlink" title="分块的基本性质"></a>分块的基本性质</h3><p>分块的时间复杂度和空间复杂度都不及线段树优秀，但能处理许多线段树无法处理的区间问题。<br>它的时空复杂度与分的块长密切相关，所以需要针对特定题目做出合适的块长选择。</p>
+<hr>
+<h3 id="区间和"><a href="#区间和" class="headerlink" title="区间和"></a>区间和</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3372">洛谷P3372</a> 线段树 1</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>维护数列，支持以下操作：<br>1.区间 $[l,r]$ 全部加 $k$；<br>2.求区间 $[l,r]$ 的和。</p>
+<h4 id="数据分块"><a href="#数据分块" class="headerlink" title="数据分块"></a>数据分块</h4><p>我们将数列 ${a_n}$ 按每 $s$ 个元素分一个块，那么它看起来是这样的：<br>${a_n}&#x3D;\underline{a_1,a_2,a_3,\dots,a_s},\underline{a_{s+1},a_{s+2},\dots,a_{2s}},\dots,\underline{a_{n-?},\dots,a_{n-1},a_{n}}$<br>这样，原数据就被分为了 $\lceil\frac n s\rceil$ 块。</p>
+<p>不难发现，受 $n$ 的限制，最后一块往往不是整块。</p>
+<p>针对区间加&#x2F;查询操作，设 $sum_i$ 为第 $i$ 块的和；$add_i$ 为第 $i$ 块的懒标记，表示这一块额外加了多少(类似线段树中的LazyTag)。<br>对整块的懒标记 $add_i$ 不计入 $sum_i$ 中。</p>
+<h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4><p>将 $a_i$ 读入，预处理出 $sum_i$，将 $add_i$ 赋值为 $0$。<br>设 $t$ 为总块数，则 $t&#x3D;\lceil\frac ns\rceil$。<br>设 $bel_i$ 为 $a_i$ 所处的块，则 $bel_i&#x3D;\lfloor\frac{n-1}s\rfloor+1$。<br>设 $st_i$ 为第 $i$ 个块的起始位置(含)，则 $st_i&#x3D;(i-1)\times s+1$。<br>设 $ed_i$ 为第 $i$ 个块的结束位置(含)，则 $ed_i&#x3D;i\times s$。</p>
+<p>这样，第 $i$ 个数属于第 $bel_i$ 块，第 $i$ 个块对应数列下标 $[st_i,ed_i]$。</p>
+<h4 id="修改操作"><a href="#修改操作" class="headerlink" title="修改操作"></a>修改操作</h4><p>操作：区间 $[l,r]$ 所有数加 $k$。<br>为表示方便和代码简洁，设 $pl&#x3D;bel_l$，$pr&#x3D;bel_r$。</p>
+<p>当 $l$ 与 $r$ 在同一块内，即 $pl&#x3D;pr$ 时，直接暴力处理。<br>遍历 $i\in[l,r]$，$a_i\leftarrow a_i+k$。</p>
+<p>当 $l$ 与 $r$ 不在同一块内，即 $pl\neq pr$ 时，为充分发挥分块的优势，整块的应整块处理，零散的单独处理。<br>针对整块，其序号区间为 $[pl+1,pr-1]$ (因为 $pl$ 和 $pr$ 都是散块)。遍历 $i\in[pl+1,pr-1]$，$add_i\leftarrow add_i+k$。<br>针对散块，其对应数列下标为 $[l,ed_{pl}]\cup[st_{pr},r]$。遍历 $i\in[l,ed_{pl}]\cup[st_{pr},r]$，$a_i\leftarrow a_i+k$，$sum_i\leftarrow sum_i+k$。</p>
+<h4 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h4><p>操作：查询区间 $[l,r]$ 所有树的和。<br>为表示方便和代码简洁，设 $pl&#x3D;bel_l$，$pr&#x3D;bel_r$。</p>
+<p>当 $l$ 与 $r$ 在同一块内，即 $pl&#x3D;pr$ 时，直接暴力处理。<br>遍历 $i\in[l,r]$，$ans\leftarrow ans+a_i$。</p>
+<p>当 $l$ 与 $r$ 不在同一块内，即 $pl\neq pr$ 时，整块零散分别处理。<br>针对整块，其序号区间为 $[pl+1,pr-1]$ (因为 $pl$ 和 $pr$ 都是散块)。遍历 $i\in[pl+1,pr-1]$，$ans\leftarrow ans+sum_i$，$ans\leftarrow ans+add_i\times (ed_i-st_i+1)$。(这里不直接用块长是防止缺的块，虽然确实不可能对短块进行这个操作，但还是这样计算比较好。)<br>针对散块，其对应数列下标为 $[l,ed_{pl}]\cup[st_{pr},r]$。遍历 $i\in[l,ed_{pl}]\cup[st_{pr},r]$，$ans\leftarrow ans+k$，$ans\leftarrow ans+add_{pl&#x2F;pr}$。</p>
+<h4 id="小优化"><a href="#小优化" class="headerlink" title="小优化"></a>小优化</h4><p>注意到零散数据中，修改时的 $sum$ 每次都加了 $k$，查询时的 $add$ 每次都需要加。直接乘起来一起加即可，具体实现见代码。</p>
+<h4 id="确定块长"><a href="#确定块长" class="headerlink" title="确定块长"></a>确定块长</h4><p>时间复杂度 $O(\frac ns+s)$，由均值不等式得 $s&#x3D;\sqrt n$ 时最优。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/164148062">AC</a> 4.66MB 143ms (比我的线段树快了23ms)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 100010</span><br>ll n;<br>ll buildSource[N];<br><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt; <span class="hljs-keyword">struct</span> <span class="hljs-title class_">chunking_summation</span> &#123;<br>	ll block, t;<br>	ll st[N], ed[N], pos[N];<br>	T a[N], sum[N], add[N];<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">()</span> </span>&#123;<br>		block=<span class="hljs-built_in">sqrt</span>(n), t=n/block; <span class="hljs-keyword">if</span> (n%block) ++t;<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=t; ++i) st[i]=(i<span class="hljs-number">-1</span>)*block+<span class="hljs-number">1</span>, ed[i]=i*block; ed[t]=n;<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=n; ++i) pos[i]=(i<span class="hljs-number">-1</span>)/block+<span class="hljs-number">1</span>, a[i]=buildSource[i];<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=t; ++i) <span class="hljs-keyword">for</span> (ll j=st[i]; j&lt;=ed[i]; ++j) sum[i]+=a[j];<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(ll l, ll r, T k)</span> </span>&#123;<br>		ll pl=pos[l], pr=pos[r];<br>		<span class="hljs-keyword">if</span> (pl==pr) &#123;<br>			<span class="hljs-keyword">for</span> (ll i=l; i&lt;=r; ++i) a[i]+=k;<br>			sum[pl]+=k*(r-l+<span class="hljs-number">1</span>); <span class="hljs-keyword">return</span>;<br>		&#125;<br>		<span class="hljs-keyword">for</span> (ll i=pl+<span class="hljs-number">1</span>; i&lt;=pr<span class="hljs-number">-1</span>; ++i) add[i]+=k;<br>		<span class="hljs-keyword">for</span> (ll i=l; i&lt;=ed[pl]; ++i) a[i]+=k; sum[pl]+=k*(ed[pl]-l+<span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">for</span> (ll i=st[pr]; i&lt;=r; ++i) a[i]+=k; sum[pr]+=k*(r-st[pr]+<span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-function">T <span class="hljs-title">query</span><span class="hljs-params">(ll l, ll r)</span> </span>&#123;<br>		ll pl=pos[l], pr=pos[r]; T ans=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">if</span> (pl==pr) &#123;<br>			<span class="hljs-keyword">for</span> (ll i=l; i&lt;=r; ++i) ans+=a[i];<br>			ans+=add[pl]*(r-l+<span class="hljs-number">1</span>); <span class="hljs-keyword">return</span> ans;<br>		&#125;<br>		<span class="hljs-keyword">for</span> (ll i=pl+<span class="hljs-number">1</span>; i&lt;=pr<span class="hljs-number">-1</span>; ++i) ans+=sum[i]+add[i]*(ed[i]-st[i]+<span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">for</span> (ll i=l; i&lt;=ed[pl]; ++i) ans+=a[i]; ans+=add[pl]*(ed[pl]-l+<span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">for</span> (ll i=st[pr]; i&lt;=r; ++i) ans+=a[i]; ans+=add[pr]*(r-st[pr]+<span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">return</span> ans;<br>	&#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="区间排名"><a href="#区间排名" class="headerlink" title="区间排名"></a>区间排名</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2801">洛谷P2801</a> 教主的魔法</p>
+<h4 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h4><p>维护序列，支持以下操作：<br>1.区间 $[l,r]$ 整体加 $k$；<br>2.求区间 $[l,r]$ 由多少数大于等于 $k$。</p>
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>维护另一个块内单调不降序列 $b_i$。<br>修改后重新排序，保持单调性；查询时整块区间二分查找 $k$ 的位置，后面的就都是合法的。</p>
+<h4 id="数据分块-1"><a href="#数据分块-1" class="headerlink" title="数据分块"></a>数据分块</h4><p>区别于“区间和”，不需要维护 $sum$，需要对每个区间维护排序数组 $b_i$，确保 $b_i$ 单调不降。</p>
+<h4 id="预处理-1"><a href="#预处理-1" class="headerlink" title="预处理"></a>预处理</h4><p>每个区间内的 $b_i$ 排序，其余同上。</p>
+<h4 id="修改操作-1"><a href="#修改操作-1" class="headerlink" title="修改操作"></a>修改操作</h4><p>修改后每个区间内的 $b_i$ 排序，其余同上。</p>
+<h4 id="查询操作-1"><a href="#查询操作-1" class="headerlink" title="查询操作"></a>查询操作</h4><p>对于整块，二分查找 $k$ 的位置，根据单调性确定符合要求的数的数量；针对散数，暴力遍历，统计大于等于 $k$ 的数。其余同上。</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/164168788">AC</a> 38.92MB 415ms</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 1000010</span><br>ll n;<br>ll buildSource[N];<br><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt; <span class="hljs-keyword">struct</span> <span class="hljs-title class_">chunking_ranking</span> &#123;<br>	ll block, t;<br>	ll st[N], ed[N], pos[N];<br>	T a[N], b[N], add[N];<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">()</span> </span>&#123;<br>		block=<span class="hljs-built_in">sqrt</span>(n), t=n/block; <span class="hljs-keyword">if</span> (n%block) ++t;<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=t; ++i) st[i]=(i<span class="hljs-number">-1</span>)*block+<span class="hljs-number">1</span>, ed[i]=i*block; ed[t]=n;<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=n; ++i) pos[i]=(i<span class="hljs-number">-1</span>)/block+<span class="hljs-number">1</span>, a[i]=b[i]=buildSource[i];<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=t; ++i) <span class="hljs-built_in">sort</span>(b+st[i], b+ed[i]+<span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">reset</span><span class="hljs-params">(ll p)</span> </span>&#123;<br>		<span class="hljs-keyword">for</span> (ll i=st[p]; i&lt;=ed[p]; ++i) b[i]=a[i]; <span class="hljs-built_in">sort</span>(b+st[p], b+ed[p]+<span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-function">ll <span class="hljs-title">find</span><span class="hljs-params">(ll p, T k)</span> </span>&#123;<br>		ll l=st[p], r=ed[p], mid=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">while</span> (l&lt;=r) mid=l+r&gt;&gt;<span class="hljs-number">1</span>, (b[mid]&gt;=k)?r=mid<span class="hljs-number">-1</span>:l=mid+<span class="hljs-number">1</span>; <span class="hljs-keyword">return</span> ed[p]-l+<span class="hljs-number">1</span>;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(ll l, ll r, T k)</span> </span>&#123;<br>		ll pl=pos[l], pr=pos[r];<br>		<span class="hljs-keyword">if</span> (pl==pr) &#123;<span class="hljs-keyword">for</span> (ll i=l; i&lt;=r; ++i) a[i]+=k; <span class="hljs-built_in">reset</span>(pl); <span class="hljs-keyword">return</span>;&#125;<br>		<span class="hljs-keyword">for</span> (ll i=pl+<span class="hljs-number">1</span>; i&lt;=pr<span class="hljs-number">-1</span>; ++i) add[i]+=k;<br>		<span class="hljs-keyword">for</span> (ll i=l; i&lt;=ed[pl]; ++i) a[i]+=k; <span class="hljs-built_in">reset</span>(pl);<br>		<span class="hljs-keyword">for</span> (ll i=st[pr]; i&lt;=r; ++i) a[i]+=k; <span class="hljs-built_in">reset</span>(pr);<br>	&#125;<br>	<span class="hljs-function">ll <span class="hljs-title">query</span><span class="hljs-params">(ll l, ll r, T k)</span> </span>&#123;<br>		ll pl=pos[l], pr=pos[r], ans=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">if</span> (pl==pr) &#123;<br>			<span class="hljs-keyword">for</span> (ll i=l; i&lt;=r; ++i) <span class="hljs-keyword">if</span> (a[i]+add[pl]&gt;=k) ++ans;<br>			<span class="hljs-keyword">return</span> ans;<br>		&#125;<br>		<span class="hljs-keyword">for</span> (ll i=pl+<span class="hljs-number">1</span>; i&lt;=pr<span class="hljs-number">-1</span>; ++i) ans+=<span class="hljs-built_in">find</span>(i, k-add[i]);<br>		<span class="hljs-keyword">for</span> (ll i=l; i&lt;=ed[pl]; ++i) <span class="hljs-keyword">if</span> (a[i]+add[pl]&gt;=k) ++ans;<br>		<span class="hljs-keyword">for</span> (ll i=st[pr]; i&lt;=r; ++i) <span class="hljs-keyword">if</span> (a[i]+add[pr]&gt;=k) ++ans;<br>		<span class="hljs-keyword">return</span> ans;<br>	&#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="分块哈希"><a href="#分块哈希" class="headerlink" title="分块哈希"></a>分块哈希</h3><p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=4391">HDU4391</a> Paint The Wall</p>
+<h4 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h4><p>维护一个序列，支持以下操作：<br>1.区间 $[l,r]$ 全部变为 $k$；<br>2.查询区间 $[l,r]$ 有多少值为 $k$。</p>
+<h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>对每个块开一个map $mp$ 记录出现次数，$tag$ 表示全部设为多少。</p>
+<h4 id="预处理-2"><a href="#预处理-2" class="headerlink" title="预处理"></a>预处理</h4><p>$mp$ 清空，$tag\leftarrow -1$。</p>
+<h4 id="修改操作-2"><a href="#修改操作-2" class="headerlink" title="修改操作"></a>修改操作</h4><p>对于整块，$tag\leftarrow k$；对于散块，暴力修改 $map$ 即可。</p>
+<h4 id="更新操作"><a href="#更新操作" class="headerlink" title="更新操作"></a>更新操作</h4><p>将 $tag$ 清空并将数据转移到 $mp$ 上，用于每次散块操作前。</p>
+<h4 id="查询操作-2"><a href="#查询操作-2" class="headerlink" title="查询操作"></a>查询操作</h4><p>对于整块，判断是否有 $tag$，若有按全覆盖算，若无则统计 $mp$；对于散块，循环枚举统计即可。</p>
+<h4 id="确定块长-1"><a href="#确定块长-1" class="headerlink" title="确定块长"></a>确定块长</h4><p>由于使用了map，块长应为 $\sqrt{n\log n}$，但是我这里用了 $\sqrt n$。</p>
+<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/viewcode.php?rid=39418125">AC</a> 19.21MB 3775ms <a target="_blank" rel="noopener" href="https://vjudge.net/solution/52351917/zYyyz9BeEubG7leSMxzF">Another Link</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 200010</span><br>ll n;<br>ll buildSource[N];<br><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt; <span class="hljs-keyword">struct</span> <span class="hljs-title class_">chunking_hashing</span> &#123;<br>	ll block, t, st[N], ed[N], pos[N];<br>	T a[N], tag[N]; map&lt;T, ll&gt; mp[N];<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">()</span> </span>&#123;<br>		block=<span class="hljs-built_in">sqrt</span>(n), t=n/block; <span class="hljs-keyword">if</span> (n%block) ++t;<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=t; ++i) st[i]=(i<span class="hljs-number">-1</span>)*block+<span class="hljs-number">1</span>, ed[i]=<span class="hljs-built_in">min</span>(n,i*block);<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=n; ++i) pos[i]=(i<span class="hljs-number">-1</span>)/block+<span class="hljs-number">1</span>, a[i]=buildSource[i];<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=t; ++i) mp[i].<span class="hljs-built_in">clear</span>(), tag[i]=<span class="hljs-number">-1</span>;<br>		<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=n; ++i) mp[pos[i]][a[i]]++;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push_down</span><span class="hljs-params">(ll p)</span> </span>&#123;<br>		<span class="hljs-keyword">if</span> (!~tag[p]) <span class="hljs-keyword">return</span>; <span class="hljs-keyword">for</span> (ll i=st[p]; i&lt;=ed[p]; ++i) a[i]=tag[p];<br>		mp[p].<span class="hljs-built_in">clear</span>(), mp[p][tag[p]]=ed[p]-st[p]+<span class="hljs-number">1</span>, tag[p]=<span class="hljs-number">-1</span>; <span class="hljs-keyword">return</span>;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(ll l, ll r, T k)</span> </span>&#123;<br>		ll pl=pos[l], pr=pos[r]; <span class="hljs-built_in">push_down</span>(pl), <span class="hljs-built_in">push_down</span>(pr);<br>		<span class="hljs-keyword">if</span> (pl==pr) &#123;<br>			<span class="hljs-keyword">for</span> (ll i=l; i&lt;=r; ++i) --mp[pl][a[i]], a[i]=k, ++mp[pl][a[i]];<br>			<span class="hljs-keyword">return</span>;<br>		&#125;<br>		<span class="hljs-keyword">for</span> (ll i=pl+<span class="hljs-number">1</span>; i&lt;=pr<span class="hljs-number">-1</span>; ++i) tag[i]=k;<br>		<span class="hljs-keyword">for</span> (ll i=l; i&lt;=ed[pl]; ++i) --mp[pl][a[i]], a[i]=k, ++mp[pl][a[i]];<br>		<span class="hljs-keyword">for</span> (ll i=st[pr]; i&lt;=r; ++i) --mp[pr][a[i]], a[i]=k, ++mp[pr][a[i]];<br>	&#125;<br>	<span class="hljs-function">ll <span class="hljs-title">query</span><span class="hljs-params">(ll l, ll r, T k)</span> </span>&#123;<br>		ll pl=pos[l], pr=pos[r], ans=<span class="hljs-number">0</span>; <span class="hljs-built_in">push_down</span>(pl), <span class="hljs-built_in">push_down</span>(pr);<br>		<span class="hljs-keyword">if</span> (pl==pr) &#123;<span class="hljs-keyword">for</span> (ll i=l; i&lt;=r; ++i) ans+=a[i]==k; <span class="hljs-keyword">return</span> ans;&#125;<br>		<span class="hljs-keyword">for</span> (ll i=pl+<span class="hljs-number">1</span>; i&lt;=pr<span class="hljs-number">-1</span>; ++i) &#123;<br>			<span class="hljs-keyword">if</span> (~tag[i]) &#123;<span class="hljs-keyword">if</span> (tag[i]==k) ans+=ed[i]-st[i]+<span class="hljs-number">1</span>;&#125;<br>			<span class="hljs-keyword">else</span> &#123;<span class="hljs-keyword">if</span> (mp[i].<span class="hljs-built_in">count</span>(k)) ans+=mp[i][k];&#125;<br>		&#125;<br>		<span class="hljs-keyword">for</span> (ll i=l; i&lt;=ed[pl]; ++i) ans+=a[i]==k;<br>		<span class="hljs-keyword">for</span> (ll i=st[pr]; i&lt;=r; ++i) ans+=a[i]==k;<br>		<span class="hljs-keyword">return</span> ans;<br>	&#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>分块是一种思想，不同的题目有不同的做法，具体情况具体分析。<br>分块强调整块的统一处理，算法设计十分重要。</p>
+<p>块长直接决定了时间复杂度，合理选择块长能做到更短的时间。<br>有的题会卡分块，这时块长可以改 $\sqrt n\pm1$、$\sqrt{\frac n{\lg n}}$ 或常数 $\sqrt N$。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>分块思想</div>
+      <div>https://algo-x.cn/articles/Chunking/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Taoran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年7月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/The-Tarjan-Algorithm-for-Strongly-Connected-Components./" title="Tarjan算法求强连通分量">
+                        <span class="hidden-mobile">Tarjan算法求强连通分量</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <body>×</body> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
