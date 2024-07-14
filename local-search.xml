@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>CSP-S1 2024 注意事项</title>
+    <link href="/articles/CSP-S1-2024-Caution/"/>
+    <url>/articles/CSP-S1-2024-Caution/</url>
+    
+    <content type="html"><![CDATA[<hr><h3 id="Linux操作系统"><a href="#Linux操作系统" class="headerlink" title="Linux操作系统"></a>Linux操作系统</h3><ul><li><code>cd</code>进入目录，<code>cd ..</code>返回上一级目录。</li><li><code>ls</code>查看目录，<code>-a</code>用于查看隐藏文件。</li><li><code>mv</code>修改文件名。</li><li><code>&gt;</code>将结果打印到文件。</li><li><code>./文件名</code>执行可执行文件。</li><li><code>time ./文件名</code>测量可执行文件运行时间。</li><li><code>mkdir</code>创建新目录。</li><li><code>killall 进程名</code>杀掉后台进程</li></ul><hr><h3 id="寻址空间"><a href="#寻址空间" class="headerlink" title="寻址空间"></a>寻址空间</h3><p>32位系统最大支持 $4$ GB内存，64位系统很大。<br>指针变量：32位机上长度为 $4$ 字节，64位机上长度为 $8$ 字节。</p><hr><h3 id="存储空间"><a href="#存储空间" class="headerlink" title="存储空间"></a>存储空间</h3><p>KB、MB等是以 $10$ 为底的，进率 $1000$；KiB、Mib是以 $2$ 为底的，进率 $1024$。</p><hr><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ul><li><code>bool</code>类型只有<code>true</code>和<code>false</code>两种值，不是 $0$ 和 $1$。</li><li><code>short</code>二字节，<code>int=long</code>四字节，<code>long long</code>八字节。</li></ul><hr><h3 id="原码、补码和反码"><a href="#原码、补码和反码" class="headerlink" title="原码、补码和反码"></a>原码、补码和反码</h3><h4 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h4><p>符号位+真值的绝对值。<br>$+3\rightarrow 0000\ 0011$<br>$-3\rightarrow 1000\ 0011$</p><h4 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h4><p>在原码的基础上，除符号位以外，各位取反。<br>$+3\rightarrow 0111\ 1100$<br>$-3\rightarrow 1111\ 1100$</p><h4 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h4><p>正数的补码是其本身。<br>$+3\rightarrow 0000\ 0011$<br>负数的补码是除符号位外，各位取反后加 $1$，即反码 $+1$。<br>$-3\rightarrow 1111\ 1101$</p><hr><h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p>先根据结构将运算拆分成表达式树。</p><ul><li>前序遍历 - 前缀表达式 - 波兰式</li><li>中序遍历 - 中缀表达式</li><li>后序遍历 - 后缀表达式 - 逆波兰式</li></ul><hr><h3 id="运算顺序"><a href="#运算顺序" class="headerlink" title="运算顺序"></a>运算顺序</h3><p>详见<a href="https://oi-wiki.org/lang/op/#c-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7%E6%80%BB%E8%A1%A8">OI-Wiki</a>。</p><hr><h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><h4 id="稳定排序"><a href="#稳定排序" class="headerlink" title="稳定排序"></a>稳定排序</h4><p>在排序时不改变其序列，相等元素的相对位置不变。</p><p>对于序列 ${a_n}$，设其排序后为 ${b_n}$。<br>设 $a_{i_1}&#x3D;b_{i_2},\ a_{j_1}&#x3D;b_{j_2}$，对于所有的 $a_{i_1}&#x3D;a_{i_2}$，若满足 $i_1&lt;i_2$ 且 $j_1&lt;j_2$，则称该排序算法是稳定的。</p><p><strong>稳定</strong>的排序算法有插入排序、<strong>基数排序</strong>、<strong>归并排序</strong>、<strong>冒泡排序</strong>、计数排序等。<br><strong>不稳定</strong>的排序算法有<strong>快速排序</strong>、希尔排序、简单选择排序、<strong>堆排序</strong>等。</p><hr><h3 id="图的着色"><a href="#图的着色" class="headerlink" title="图的着色"></a>图的着色</h3><h4 id="点着色"><a href="#点着色" class="headerlink" title="点着色"></a>点着色</h4><p>对无向图顶点着色，且相邻顶点不能同色。</p><h4 id="边着色"><a href="#边着色" class="headerlink" title="边着色"></a>边着色</h4><p>对无向图的边着色，要求相邻的边涂不同种颜色。</p><hr><h3 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h3><p>无向图，将所有节点排序，使得排在前面的节点不能依赖于排在后面的节点。</p><p>每次先将入度为 $0$ 的点删除后放入列表，再将其连接的所有边删除，新产生的入度为 $0$ 的点进入队列。重复直到队列为空。<br>若列表元素个数 $&#x3D;n$，则说明原图无环，列表里即为已排序的点；<br>若列表元素个数 $&lt;n$，则说明原图有环。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>分块思想</title>
     <link href="/articles/Chunking/"/>
     <url>/articles/Chunking/</url>
