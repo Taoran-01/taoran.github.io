@@ -16,21 +16,24 @@
   <meta name="author" content="Taoran">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Linux操作系统 cd进入目录，cd ..返回上一级目录。 ls查看目录，-a用于查看隐藏文件。 mv修改文件名。 &gt;将结果打印到文件。 .&#x2F;文件名执行可执行文件。 time .&#x2F;文件名测量可执行文件运行时间。 mkdir创建新目录。 killall 进程名杀掉后台进程   寻址空间32位系统最大支持 $4$ GB内存，64位系统很大。指针变量：32位机上长度为 $4$ 字节，64位机上">
+    <meta name="description" content="知识前置排列组合详见OI-Wiki，后面会出一篇文章专门讲。 栈先进先出的数据结构，详见OI-WIki。 二叉搜索树左子树点权均小于根节点，右子树点权都大于根节点的二叉树。它有很多好的性质，详见OI-Wiki。  解决问题以下问题的答案都可以用 $\text{Catalan}$ 数 $H_n$ 表示。 一、进出栈问题一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSP-S1 2024 注意事项">
-<meta property="og:url" content="https://algo-x.cn/articles/CSP-S1-2024-Caution/index.html">
+<meta property="og:title" content="卡特兰数">
+<meta property="og:url" content="https://algo-x.cn/articles/Catalan/index.html">
 <meta property="og:site_name" content="Algo-X.cn">
-<meta property="og:description" content="Linux操作系统 cd进入目录，cd ..返回上一级目录。 ls查看目录，-a用于查看隐藏文件。 mv修改文件名。 &gt;将结果打印到文件。 .&#x2F;文件名执行可执行文件。 time .&#x2F;文件名测量可执行文件运行时间。 mkdir创建新目录。 killall 进程名杀掉后台进程   寻址空间32位系统最大支持 $4$ GB内存，64位系统很大。指针变量：32位机上长度为 $4$ 字节，64位机上">
+<meta property="og:description" content="知识前置排列组合详见OI-Wiki，后面会出一篇文章专门讲。 栈先进先出的数据结构，详见OI-WIki。 二叉搜索树左子树点权均小于根节点，右子树点权都大于根节点的二叉树。它有很多好的性质，详见OI-Wiki。  解决问题以下问题的答案都可以用 $\text{Catalan}$ 数 $H_n$ 表示。 一、进出栈问题一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-13T22:45:07.000Z">
-<meta property="article:modified_time" content="2024-07-15T02:29:34.223Z">
+<meta property="og:image" content="https://algo-x.cn/img/41-01.png">
+<meta property="og:image" content="https://algo-x.cn/img/41-02.jpg">
+<meta property="article:published_time" content="2024-07-15T03:42:52.000Z">
+<meta property="article:modified_time" content="2024-07-15T16:16:09.278Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://algo-x.cn/img/41-01.png">
   
   
   
-  <title>CSP-S1 2024 注意事项 - Algo-X.cn</title>
+  <title>卡特兰数 - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -220,7 +223,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="CSP-S1 2024 注意事项"></span>
+            <span id="subtitle" data-typed-text="卡特兰数"></span>
           
         </div>
 
@@ -231,8 +234,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-14 06:45" pubdate>
-          2024年7月14日 早上
+        <time datetime="2024-07-15 11:42" pubdate>
+          2024年7月15日 中午
         </time>
       </span>
     
@@ -243,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          700 字
+          843 字
         
       </span>
     
@@ -254,7 +257,7 @@
         
         
         
-          6 分钟
+          8 分钟
         
       </span>
     
@@ -291,12 +294,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">CSP-S1 2024 注意事项</h1>
+            <h1 id="seo-header">卡特兰数</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年7月15日 上午
+                    本文最后更新于 2024年7月16日 凌晨
                   
                 
               </p>
@@ -305,56 +308,32 @@
               <div class="markdown-body">
                 
                 <hr>
-<h3 id="Linux操作系统"><a href="#Linux操作系统" class="headerlink" title="Linux操作系统"></a>Linux操作系统</h3><ul>
-<li><code>cd</code>进入目录，<code>cd ..</code>返回上一级目录。</li>
-<li><code>ls</code>查看目录，<code>-a</code>用于查看隐藏文件。</li>
-<li><code>mv</code>修改文件名。</li>
-<li><code>&gt;</code>将结果打印到文件。</li>
-<li><code>./文件名</code>执行可执行文件。</li>
-<li><code>time ./文件名</code>测量可执行文件运行时间。</li>
-<li><code>mkdir</code>创建新目录。</li>
-<li><code>killall 进程名</code>杀掉后台进程</li>
-</ul>
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="排列组合"><a href="#排列组合" class="headerlink" title="排列组合"></a>排列组合</h4><p>详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/math/combinatorics/combination/">OI-Wiki</a>，后面会出一篇文章专门讲。</p>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><p>先进先出的数据结构，详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/stack/">OI-WIki</a>。</p>
+<h4 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h4><p><strong>左子树</strong>点权均<strong>小于</strong>根节点，<strong>右子树</strong>点权都<strong>大于</strong>根节点的二叉树。<br>它有很多好的性质，详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/bst/#%E5%AE%9A%E4%B9%89">OI-Wiki</a>。</p>
 <hr>
-<h3 id="寻址空间"><a href="#寻址空间" class="headerlink" title="寻址空间"></a>寻址空间</h3><p>32位系统最大支持 $4$ GB内存，64位系统很大。<br>指针变量：32位机上长度为 $4$ 字节，64位机上长度为 $8$ 字节。</p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>以下问题的答案<strong>都可以</strong>用 $\text{Catalan}$ 数 $H_n$ 表示。</p>
+<h4 id="一、进出栈问题"><a href="#一、进出栈问题" class="headerlink" title="一、进出栈问题"></a>一、进出栈问题</h4><p>一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不同的出栈序列。</p>
+<p>进一步，这个问题可以扩展为：<br>给定 $n$ 对括号，求合法配对的序列数。</p>
+<h4 id="二、凸多边形三角划分问题"><a href="#二、凸多边形三角划分问题" class="headerlink" title="二、凸多边形三角划分问题"></a>二、凸多边形三角划分问题</h4><p>在凸 $n$ 变形中，连接 $n-3$ 对不相邻顶点，使原多 $n$ 边形划分为 $n-2$ 个三角形，求划分方案数。<br><img src="../../img/41-01.png" srcset="/img/loading.gif" lazyload alt="41-01" style="zoom:50%;" />  </p>
+<p>进一步，这个问题可以扩展为：<br>在圆上选择 $2n$ 个点，求使用 $n$ 条不相交线段连接这些点的方案数。</p>
+<h4 id="三、二叉树"><a href="#三、二叉树" class="headerlink" title="三、二叉树"></a>三、二叉树</h4><p>给定 $n$ 个有不同<strong>序号</strong>的节点，求能构成的不同的二叉搜索树的个数。<br>或，给定 $n$ 个<strong>无序号</strong>节点，求能构成的不同的二叉树的个数。</p>
+<h4 id="四、矩阵路径问题"><a href="#四、矩阵路径问题" class="headerlink" title="四、矩阵路径问题"></a>四、矩阵路径问题</h4><p>在大小 $n\times n$ 的矩阵中，从起点 $(0,0)$ 走到终点 $(n,n)$，且不可走到对角线 $y&#x3D;x$ 上方，求不同的路径条数。<br><img src="../../img/41-02.jpg" srcset="/img/loading.gif" lazyload alt="41-02" style="zoom:50%;" />  </p>
 <hr>
-<h3 id="存储空间"><a href="#存储空间" class="headerlink" title="存储空间"></a>存储空间</h3><p>KB、MB等是以 $10$ 为底的，进率 $1000$；KiB、Mib是以 $2$ 为底的，进率 $1024$。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>设 $H_n$ 表示 $\text{Catalan}$ 数列中的第 $n$ 项，则有：<br>$$<br>\begin{array}{ccccccc}<br>H_0&amp;H_1&amp;H_2&amp;H_3&amp;H_4&amp;H_5&amp;H_6\\<br>\hline 1&amp;1&amp;2&amp;5&amp;14&amp;42&amp;132<br>\end{array}<br>$$<br>满足递推式及通项公式：<br>$$<br>\begin{gathered}<br>H_0&#x3D;1, H_1&#x3D;1,\ H_{n+1}&#x3D;\sum_{i&#x3D;0}^nH_i\times H_{n-i}\\<br>H_n&#x3D;\frac{\begin{pmatrix}2n\\n\end{pmatrix}}{n+1}<br>\end{gathered}<br>$$</p>
 <hr>
-<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ul>
-<li><code>bool</code>类型只有<code>true</code>和<code>false</code>两种值，不是 $0$ 和 $1$。</li>
-<li><code>short</code>二字节，<code>int=long</code>四字节，<code>long long</code>八字节。</li>
-</ul>
+<h3 id="其他公式"><a href="#其他公式" class="headerlink" title="其他公式"></a>其他公式</h3><p>$$<br>\begin{align}<br>H_n&#x3D;\frac{H_{n-1}(4n-2)}{n-1}\\<br>H_n&#x3D;\begin{pmatrix}2n\\n\end{pmatrix}-\begin{pmatrix}2n\\n-1\end{pmatrix}<br>\end{align}<br>$$<br>一般地，在程序设计中，通常使用公式 $H_n&#x3D;\frac{H_{n-1}(4n-2)}{n-1}$，而手算通常采用公式 $H_n&#x3D;\frac{\begin{pmatrix}2n\\n\end{pmatrix}}{n+1}$。</p>
 <hr>
-<h3 id="原码、补码和反码"><a href="#原码、补码和反码" class="headerlink" title="原码、补码和反码"></a>原码、补码和反码</h3><h4 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h4><p>符号位+真值的绝对值。<br>$+3\rightarrow 0000\ 0011$<br>$-3\rightarrow 1000\ 0011$</p>
-<h4 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h4><p>在原码的基础上，除符号位以外，各位取反。<br>$+3\rightarrow 0111\ 1100$<br>$-3\rightarrow 1111\ 1100$</p>
-<h4 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h4><p>正数的补码是其本身。<br>$+3\rightarrow 0000\ 0011$<br>负数的补码是除符号位外，各位取反后加 $1$，即反码 $+1$。<br>$-3\rightarrow 1111\ 1101$</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1044">洛谷P1044</a> 栈</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不同的出栈序列。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/166261131">AC</a> 680.00KB 15ms</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 30</span><br>ll n, h[N];<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;a.in&quot;, &quot;r&quot;, stdin);</span><br>	n=<span class="hljs-built_in">read</span>(), h[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=n; ++i) h[i]=h[i<span class="hljs-number">-1</span>]*(i*<span class="hljs-number">4</span><span class="hljs-number">-2</span>)/(i+<span class="hljs-number">1</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, h[n]);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 <hr>
-<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p>先根据结构将运算拆分成表达式树。</p>
-<ul>
-<li>前序遍历 - 前缀表达式 - 波兰式</li>
-<li>中序遍历 - 中缀表达式</li>
-<li>后序遍历 - 后缀表达式 - 逆波兰式</li>
-</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>注意事项：$\text{Catalan}$ 数列的前 $6$ 项 $1,2,5,14,42,132$ 在考 $\text{CSP-J1&#x2F;S1}$ 前是要背过的。</p>
+<p>在赛场上，不论是初赛还是复赛，你都不一定能看得出一道题是卡特兰数。<br>遇到排列组合题目，如果普通方法算不出来，优先往上面四种基本模型上套，看看是不是卡特兰数。</p>
 <hr>
-<h3 id="运算顺序"><a href="#运算顺序" class="headerlink" title="运算顺序"></a>运算顺序</h3><p>详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/lang/op/#c-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7%E6%80%BB%E8%A1%A8">OI-Wiki</a>。</p>
-<hr>
-<h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><h4 id="稳定排序"><a href="#稳定排序" class="headerlink" title="稳定排序"></a>稳定排序</h4><p>在排序时不改变其序列，相等元素的相对位置不变。</p>
-<p>对于序列 ${a_n}$，设其排序后为 ${b_n}$。<br>设 $a_{i_1}&#x3D;b_{i_2},\ a_{j_1}&#x3D;b_{j_2}$，对于所有的 $a_{i_1}&#x3D;a_{i_2}$，若满足 $i_1&lt;i_2$ 且 $j_1&lt;j_2$，则称该排序算法是稳定的。</p>
-<p><strong>稳定</strong>的排序算法有插入排序、<strong>基数排序</strong>、<strong>归并排序</strong>、<strong>冒泡排序</strong>、计数排序等。<br><strong>不稳定</strong>的排序算法有<strong>快速排序</strong>、希尔排序、简单选择排序、<strong>堆排序</strong>等。</p>
-<hr>
-<h3 id="图的着色"><a href="#图的着色" class="headerlink" title="图的着色"></a>图的着色</h3><h4 id="点着色"><a href="#点着色" class="headerlink" title="点着色"></a>点着色</h4><p>对无向图顶点着色，且相邻顶点不能同色。</p>
-<h4 id="边着色"><a href="#边着色" class="headerlink" title="边着色"></a>边着色</h4><p>对无向图的边着色，要求相邻的边涂不同种颜色。</p>
-<hr>
-<h3 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h3><p>无向图，将所有节点排序，使得排在前面的节点不能依赖于排在后面的节点。</p>
-<p>每次先将入度为 $0$ 的点删除后放入列表，再将其连接的所有边删除，新产生的入度为 $0$ 的点进入队列。重复直到队列为空。<br>若列表元素个数 $&#x3D;n$，则说明原图无环，列表里即为已排序的点；<br>若列表元素个数 $&lt;n$，则说明原图有环。</p>
-<hr>
-<h3 id="待学习"><a href="#待学习" class="headerlink" title="待学习"></a>待学习</h3><ul>
-<li>CCF成立时间、NOI系列赛事开始时间等。</li>
-<li>期望和概率。</li>
-<li>信息学相关奖项。</li>
-<li>信息学历史人物。</li>
-<li>计算机基本结构和发展历程。</li>
-</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/combinatorics/catalan/">OI-Wiki</a> - 卡特兰数<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/6125746">百度百科</a> - 卡特兰数</p>
 
                 
               </div>
@@ -362,6 +341,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E6%95%B0%E5%AD%A6/" class="category-chain-item">数学</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -372,8 +379,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSP-S1 2024 注意事项</div>
-      <div>https://algo-x.cn/articles/CSP-S1-2024-Caution/</div>
+      <div>卡特兰数</div>
+      <div>https://algo-x.cn/articles/Catalan/</div>
     </div>
     <div class="license-meta">
       
@@ -385,13 +392,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月14日</div>
+          <div>2024年7月15日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月15日</div>
+          <div>2024年7月16日</div>
         </div>
       
       
@@ -428,18 +435,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Catalan/" title="卡特兰数">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">卡特兰数</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Chunking/" title="分块思想">
-                        <span class="hidden-mobile">分块思想</span>
+                      <a href="/articles/CSP-S1-2024-Caution/" title="CSP-S1 2024 注意事项">
+                        <span class="hidden-mobile">CSP-S1 2024 注意事项</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

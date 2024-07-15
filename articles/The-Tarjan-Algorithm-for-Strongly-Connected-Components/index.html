@@ -1,0 +1,773 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Taoran">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="知识前置罗伯特·塔扬图灵奖得主，追求坚持和创新。发明了许多算法，持续在数学和计算机领域发光发热。 并查集、Toptree、Splay等算法都是他发明的。 DFS序在对树进行深度优先搜索遍历时，对于每个节点，在刚进入递归后记录一次该点的编号，得到的最后产生的长度为 $N$ 的节点序列。设点 $u$ 入栈时时间为 $dfs_u&#x3D;l_u$，出栈时时间为 $r_u$，若 $v\in T_u$，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tarjan算法求强连通分量">
+<meta property="og:url" content="https://algo-x.cn/articles/The-Tarjan-Algorithm-for-Strongly-Connected-Components/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:description" content="知识前置罗伯特·塔扬图灵奖得主，追求坚持和创新。发明了许多算法，持续在数学和计算机领域发光发热。 并查集、Toptree、Splay等算法都是他发明的。 DFS序在对树进行深度优先搜索遍历时，对于每个节点，在刚进入递归后记录一次该点的编号，得到的最后产生的长度为 $N$ 的节点序列。设点 $u$ 入栈时时间为 $dfs_u&#x3D;l_u$，出栈时时间为 $r_u$，若 $v\in T_u$，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://algo-x.cn/img/38-01.gif">
+<meta property="article:published_time" content="2024-07-10T12:37:27.000Z">
+<meta property="article:modified_time" content="2024-07-11T12:46:19.296Z">
+<meta property="article:author" content="Taoran">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://algo-x.cn/img/38-01.gif">
+  
+  
+  
+  <title>Tarjan算法求强连通分量 - Algo-X.cn</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/articles/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chemistry/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>化学工具站</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Tarjan算法求强连通分量"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-10 20:37" pubdate>
+          2024年7月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Tarjan算法求强连通分量</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年7月11日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="罗伯特·塔扬"><a href="#罗伯特·塔扬" class="headerlink" title="罗伯特·塔扬"></a>罗伯特·塔扬</h4><p>图灵奖得主，追求坚持和创新。<br>发明了许多算法，持续在数学和计算机领域发光发热。</p>
+<p>并查集、Toptree、Splay等算法都是他发明的。</p>
+<h4 id="DFS序"><a href="#DFS序" class="headerlink" title="DFS序"></a>DFS序</h4><p>在对树进行深度优先搜索遍历时，对于每个节点，在刚进入递归后记录一次该点的编号，得到的最后产生的长度为 $N$ 的节点序列。<br>设点 $u$ 入栈时时间为 $dfs_u&#x3D;l_u$，出栈时时间为 $r_u$，若 $v\in T_u$，则 $dfn_v\in[l_u,r_u]$。详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/dfs/#dfs-%E5%BA%8F%E5%88%97">OI-Wiki</a>。</p>
+<h4 id="DFS搜索树"><a href="#DFS搜索树" class="headerlink" title="DFS搜索树"></a>DFS搜索树</h4><p>如图所示，在一个有向图上跑DFS所生成的树。<br>DFS搜索树的所有边都由原图中的边组成。</p>
+<p>有以下几条边：<br>1.树边：表示DFS搜索顺序；<br>2.横叉边(斜向边)：兄弟节点之间的边；<br>3.前向边：由祖先指向儿子的边(不包含父亲)；<br>4.返祖边(后向边)：由子节点指向父亲或祖先的边。<br>对于后三种边，要求指向的节点已被访问。一般意义上，“搜索树上的边”仅指树边。</p>
+<p>如图所示：<br><img src="../../img/38-01.gif" srcset="/img/loading.gif" lazyload alt="38-02" style="zoom:100%;" />  </p>
+<h4 id="强连通分量"><a href="#强连通分量" class="headerlink" title="强连通分量"></a>强连通分量</h4><p>本文所述的<strong>强连通</strong>是对于有向图而言的。</p>
+<p>若有向图 $G&#x3D;(V,E)$ 强连通，则说明对于 $\forall u,v\in V$，总存在路径 $u\rightsquigarrow v$，使得 $u$、$v$ 两点联通。强连通分量指极大的强联通子图。</p>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><p>先进后出的数据结构，详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/stack/">OI-Wiki</a>。</p>
+<hr>
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>约定：$T_u$ 表示以 $u$ 为根的子树，且包含 $u$；一个点的祖先不包括其父节点。</p>
+<p>注意：DFS序 $\neq$ DFN。<br>DFN是一个时间戳，是一棵树在DFS过程中访问的相应次序。<br>DFS序记录了树上每个点进出的时间戳。</p>
+<hr>
+<h3 id="DFS生成树与强连通分量的关系"><a href="#DFS生成树与强连通分量的关系" class="headerlink" title="DFS生成树与强连通分量的关系"></a>DFS生成树与强连通分量的关系</h3><p>如果节点 $u$ 是DFS过程中遇到的第一个强连通分量中的点，则强连通分量中剩余的节点一定在 $T_u$ 中。我们称 $u$ 为强连通分量的根。</p>
+<hr>
+<h3 id="Tarjan算法求强连通分量"><a href="#Tarjan算法求强连通分量" class="headerlink" title="Tarjan算法求强连通分量"></a>Tarjan算法求强连通分量</h3><h4 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h4><p>点集 $S$ 表示 $T_u$ 中的节点及从 $T_u$ 通过一条不在搜索树上的边能到达的节点。</p>
+<p>$dfn_u$：点 $u$ 第一次被遍历的时间。<br>$low_u$：在 $T_u$ 中能够回溯到最早的已经在栈中的节点的 $dfn$，且 $low_u&#x3D;\min\limits_{v\in S}dfn_v$。至于为什么这两个是一个意思，后面会解释到。<br>$scc_u$：答案统计，表示 $u$ 在哪个强连通分量中。</p>
+<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><p>从根节点开始的一条路径中，$dfn$ 严格递增，$low$ 严格非降。即，$dfn_{fa}&lt;dfn_u$，$low_{fa}\le low_u$。<br>$dfn$ 递增性质可由定义得知。由于子节点的 $low$ 会被父节点取一次 $\min$，所以父节点的 $low$ 会大于或等于子节点的，$low$ 数组满足非降性质。</p>
+<h4 id="维护"><a href="#维护" class="headerlink" title="维护"></a>维护</h4><p>从根节点开始DFS，让搜索到的点入栈。每找到一个强连通分量就让强连通分量中的点出栈。<br>正确性：由于强连通分量是<strong>极大的联通子图</strong>，所以不会出现一个强连通分量包含另一个的情况。另外，使用栈维护，<strong>先进后出</strong>，可以确保当前强连通分量仅处于栈顶及附近位置，弹出时不会干扰到上层强连通分量的检索和记录。</p>
+<p>假设当前搜索到了点 $u$ ，先将点 $u$ 入栈。设 $u$ 可通过边 $e&#x3D;u\rightarrow v$ 到达点 $v$，则：<br>1.若 $v$ 未被访问，说明 $e$ 是搜索树上的边，$v\in T_u$。根据定义，$low_u&#x3D;\min{low_u,low_v}$。此时需继续对 $v$ 进行DFS。<br>2.若 $v$ 已被访问且在栈中，说明 $v\notin T_u$，$e$ 也不在搜索树中。根据定义，$low_u&#x3D;\min{low_u,dfn_v}$。此时不可继续对 $v$ 进行DFS，否则会死循环，且不满足 $low$ 的定义，答案正确性无法保证。<br>3.若 $v$ 已被访问且未在栈中，说明 $v$ 已搜索完毕，且所在强连通分量已被处理，无需进行任何操作。</p>
+<h4 id="答案处理"><a href="#答案处理" class="headerlink" title="答案处理"></a>答案处理</h4><p>根据 $low$ 的定义，当且仅当节点 $u$ 为强连通分量的根时，$dfn_u&#x3D;low_u$。<br>因为在强连通分量中，所有点都可到达根 $u$。这些点的 $low$ 值只可能大于或等于 $u$。<br>另外，强连通分量的剩余节点都在 $T_u$ 且都已搜索入栈，所以栈中 $u$ 之上的都是强连通分量中的点，而在 $u$ 之下的都不是。</p>
+<p>统计答案只需弹栈，弹完 $u$ 为止，弹栈前 $cnt$ 需要加一，表示新的强连通分量。设 $x$ 为栈顶元素，只需将 $scc_x$ 设为标记 $cnt$ 即可。</p>
+<h4 id="关于-low-的问题解答"><a href="#关于-low-的问题解答" class="headerlink" title="关于 $low$ 的问题解答"></a>关于 $low$ 的问题解答</h4><p>Q: 为什么 $low$ 也是在 $T_u$ 中能够回溯到最早的已经在栈中的节点的 $dfn$？<br>A: 分析上述维护过程，前两种情况中的 $v$ 都在栈中。(情况1在对 $v$ DFS之后 $v$ 就进了栈。)</p>
+<p>Q: 为什么需要一个 $low$ 辅助算法完成？为什么这样设计 $low$？<br>A: 通过 $low$ 的特殊性质，可以保证算法实现简便，同时有正确的答案和相当优秀的时间复杂度。至于如何想出来的，只能说是Tarjan的神力。</p>
+<hr>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/B3609">洛谷B3609</a> 强连通分量</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一张 $n$ 个点 $m$ 条边的有向图，求出其所有的强连通分量。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/163839824">AC</a> 2.36MB 8ms</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 10005</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> M 100005</span><br><span class="hljs-type">int</span> n, m, t1, t2;<br><span class="hljs-type">int</span> dfn[N], tim, low[N];<br><span class="hljs-type">int</span> stk[N], top; <span class="hljs-type">bool</span> instk[N];<br><span class="hljs-type">int</span> scc[N], cnt, siz[N];<br><br><span class="hljs-type">int</span> vis[N];<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> v e[i].to</span><br><span class="hljs-type">int</span> head[N], tot;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">edge</span> &#123;<span class="hljs-type">int</span> to, nxt;&#125; e[M&lt;&lt;<span class="hljs-number">1</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add_edge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;e[++tot]=&#123;y, head[x]&#125;, head[x]=tot;&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tarjan</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> </span>&#123;<br>	dfn[u]=low[u]=++tim, stk[++top]=u, instk[u]=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=head[u]; i; i=e[i].nxt) &#123;<br>		<span class="hljs-keyword">if</span> (!dfn[v]) <span class="hljs-built_in">tarjan</span>(v), low[u]=<span class="hljs-built_in">min</span>(low[u], low[v]);<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (instk[v]) low[u]=<span class="hljs-built_in">min</span>(low[u], dfn[v]);<br>	&#125;<br>	<span class="hljs-keyword">if</span> (dfn[u]==low[u]) &#123;<br>		++cnt;<br>		<span class="hljs-keyword">while</span> (stk[top+<span class="hljs-number">1</span>]!=u) scc[stk[top]]=cnt, instk[stk[top--]]=<span class="hljs-number">0</span>, ++siz[cnt];<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) t1=<span class="hljs-built_in">read</span>(), t2=<span class="hljs-built_in">read</span>(), <span class="hljs-built_in">add_edge</span>(t1, t2);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) <span class="hljs-keyword">if</span> (!dfn[i]) <span class="hljs-built_in">tarjan</span>(i);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, cnt);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) &#123;<br>		<span class="hljs-keyword">if</span> (vis[i]) <span class="hljs-keyword">continue</span>; <span class="hljs-type">int</span> x=scc[i];<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>; j&lt;=n; ++j) <span class="hljs-keyword">if</span> (scc[j]==x) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, j), vis[j]=<span class="hljs-number">1</span>;<br>		<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;&quot;</span>);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>无特殊说明，图均可能不连通，且均可能有重边或自环，所以<strong>特判</strong>千万不能忘！<br>一般关于scc的题目，都需要循环 $1\sim n$ DFS，以寻找全部的强连通分量。</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Tarjan算法求强连通分量关键在于 $low$ 的理解与运用。Tarjan算法还有许多变形，需要根据情况调整代码解决问题。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Tarjan算法求强连通分量</div>
+      <div>https://algo-x.cn/articles/The-Tarjan-Algorithm-for-Strongly-Connected-Components/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Taoran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月10日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年7月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/Chunking/" title="分块思想">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">分块思想</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/FHQ-Treap/" title="FHQ Treap">
+                        <span class="hidden-mobile">FHQ Treap</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <body>×</body> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
