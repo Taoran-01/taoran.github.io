@@ -16,24 +16,21 @@
   <meta name="author" content="Taoran">
   <meta name="keywords" content="">
   
-    <meta name="description" content="知识前置排列组合详见OI-Wiki，后面会出一篇文章专门讲。 栈先进先出的数据结构，详见OI-WIki。 二叉搜索树左子树点权均小于根节点，右子树点权都大于根节点的二叉树。它有很多好的性质，详见OI-Wiki。  解决问题以下问题的答案都可以用 $\text{Catalan}$ 数 $H_n$ 表示。 一、进出栈问题一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不">
+    <meta name="description" content="知识前置费马小定理若 $p$ 为素数，$\gcd(a,p)&#x3D;1$，则 $a^{p-1}\equiv1\ (\operatorname{mod} p)$，证明过程详见OI-WIki。 群论见另一篇文章，另外建议读完本文后详细阅读这一段，你也许会对乘法逆元有更深的理解。  定义若线性同余方程 $ax\equiv 1\ (\operatorname{mod} b)$，则称 $x$ 为 $a\">
 <meta property="og:type" content="article">
-<meta property="og:title" content="卡特兰数">
-<meta property="og:url" content="https://algo-x.cn/articles/Catalan/index.html">
+<meta property="og:title" content="乘法逆元">
+<meta property="og:url" content="https://algo-x.cn/articles/Modular-Multiplicative-Inverse/index.html">
 <meta property="og:site_name" content="Algo-X.cn">
-<meta property="og:description" content="知识前置排列组合详见OI-Wiki，后面会出一篇文章专门讲。 栈先进先出的数据结构，详见OI-WIki。 二叉搜索树左子树点权均小于根节点，右子树点权都大于根节点的二叉树。它有很多好的性质，详见OI-Wiki。  解决问题以下问题的答案都可以用 $\text{Catalan}$ 数 $H_n$ 表示。 一、进出栈问题一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不">
+<meta property="og:description" content="知识前置费马小定理若 $p$ 为素数，$\gcd(a,p)&#x3D;1$，则 $a^{p-1}\equiv1\ (\operatorname{mod} p)$，证明过程详见OI-WIki。 群论见另一篇文章，另外建议读完本文后详细阅读这一段，你也许会对乘法逆元有更深的理解。  定义若线性同余方程 $ax\equiv 1\ (\operatorname{mod} b)$，则称 $x$ 为 $a\">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://algo-x.cn/img/41-01.png">
-<meta property="og:image" content="https://algo-x.cn/img/41-02.jpg">
-<meta property="article:published_time" content="2024-07-15T03:42:52.000Z">
-<meta property="article:modified_time" content="2024-07-16T12:47:17.016Z">
+<meta property="article:published_time" content="2024-07-17T03:32:09.000Z">
+<meta property="article:modified_time" content="2024-07-17T15:34:21.608Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://algo-x.cn/img/41-01.png">
   
   
   
-  <title>卡特兰数 - Algo-X.cn</title>
+  <title>乘法逆元 - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -223,7 +220,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="卡特兰数"></span>
+            <span id="subtitle" data-typed-text="乘法逆元"></span>
           
         </div>
 
@@ -234,8 +231,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-15 11:42" pubdate>
-          2024年7月15日 中午
+        <time datetime="2024-07-17 11:32" pubdate>
+          2024年7月17日 中午
         </time>
       </span>
     
@@ -246,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          843 字
+          897 字
         
       </span>
     
@@ -294,12 +291,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">卡特兰数</h1>
+            <h1 id="seo-header">乘法逆元</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年7月16日 晚上
+                    本文最后更新于 2024年7月17日 晚上
                   
                 
               </p>
@@ -308,32 +305,50 @@
               <div class="markdown-body">
                 
                 <hr>
-<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="排列组合"><a href="#排列组合" class="headerlink" title="排列组合"></a>排列组合</h4><p>详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/math/combinatorics/combination/">OI-Wiki</a>，后面会出一篇文章专门讲。</p>
-<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><p>先进先出的数据结构，详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/stack/">OI-WIki</a>。</p>
-<h4 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h4><p><strong>左子树</strong>点权均<strong>小于</strong>根节点，<strong>右子树</strong>点权都<strong>大于</strong>根节点的二叉树。<br>它有很多好的性质，详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/bst/#%E5%AE%9A%E4%B9%89">OI-Wiki</a>。</p>
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h4><p>若 $p$ 为素数，$\gcd(a,p)&#x3D;1$，则 $a^{p-1}\equiv1\ (\operatorname{mod} p)$，证明过程详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/fermat/#%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86">OI-WIki</a>。</p>
+<h4 id="群论"><a href="#群论" class="headerlink" title="群论"></a>群论</h4><p>见另<a href="../Group-Theory/">一篇文章</a>，另外建议读完本文后详细阅读<a href="../Group-Theory/#%E6%AD%A3%E6%95%B4%E6%95%B0%E9%9B%86%E4%B8%8E%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E4%B9%98%E6%B3%95">这一段</a>，你也许会对乘法逆元有更深的理解。</p>
 <hr>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>以下问题的答案<strong>都可以</strong>用 $\text{Catalan}$ 数 $H_n$ 表示。</p>
-<h4 id="一、进出栈问题"><a href="#一、进出栈问题" class="headerlink" title="一、进出栈问题"></a>一、进出栈问题</h4><p>一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不同的出栈序列。</p>
-<p>进一步，这个问题可以扩展为：<br>给定 $n$ 对括号，求合法配对的序列数。</p>
-<h4 id="二、凸多边形三角划分问题"><a href="#二、凸多边形三角划分问题" class="headerlink" title="二、凸多边形三角划分问题"></a>二、凸多边形三角划分问题</h4><p>在凸 $n$ 变形中，连接 $n-3$ 对不相邻顶点，使原多 $n$ 边形划分为 $n-2$ 个三角形，求划分方案数。<br><img src="../../img/41-01.png" srcset="/img/loading.gif" lazyload alt="41-01" style="zoom:50%;" />  </p>
-<p>进一步，这个问题可以扩展为：<br>在圆上选择 $2n$ 个点，求使用 $n$ 条不相交线段连接这些点的方案数。</p>
-<h4 id="三、二叉树"><a href="#三、二叉树" class="headerlink" title="三、二叉树"></a>三、二叉树</h4><p>给定 $n$ 个有不同<strong>序号</strong>的节点，求能构成的不同的二叉搜索树的个数。<br>或，给定 $n$ 个<strong>无序号</strong>节点，求能构成的不同的二叉树的个数。</p>
-<h4 id="四、矩阵路径问题"><a href="#四、矩阵路径问题" class="headerlink" title="四、矩阵路径问题"></a>四、矩阵路径问题</h4><p>在大小 $n\times n$ 的矩阵中，从起点 $(0,0)$ 走到终点 $(n,n)$，且不可走到对角线 $y&#x3D;x$ 上方，求不同的路径条数。<br><img src="../../img/41-02.jpg" srcset="/img/loading.gif" lazyload alt="41-02" style="zoom:50%;" />  </p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>若线性同余方程 $ax\equiv 1\ (\operatorname{mod} b)$，则称 $x$ 为 $a\operatorname{mod}b$ 的逆元，记作 $a^{-1}$。</p>
 <hr>
-<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>设 $H_n$ 表示 $\text{Catalan}$ 数列中的第 $n$ 项，则有：<br>$$<br>\begin{array}{ccccccc}<br>H_0&amp;H_1&amp;H_2&amp;H_3&amp;H_4&amp;H_5&amp;H_6\\<br>\hline 1&amp;1&amp;2&amp;5&amp;14&amp;42&amp;132<br>\end{array}<br>$$<br>满足递推式及通项公式：<br>$$<br>\begin{gathered}<br>H_0&#x3D;1, H_1&#x3D;1,\ H_{n+1}&#x3D;\sum_{i&#x3D;0}^nH_i\times H_{n-i}\\<br>H_n&#x3D;\frac{\begin{pmatrix}2n\\n\end{pmatrix}}{n+1}<br>\end{gathered}<br>$$</p>
-<hr>
-<h3 id="其他公式"><a href="#其他公式" class="headerlink" title="其他公式"></a>其他公式</h3><p>$$<br>\begin{align}<br>H_n&#x3D;\frac{H_{n-1}(4n-2)}{n-1}\\<br>H_n&#x3D;\begin{pmatrix}2n\\n\end{pmatrix}-\begin{pmatrix}2n\\n-1\end{pmatrix}<br>\end{align}<br>$$<br>一般地，在程序设计中，通常使用公式 $H_n&#x3D;\frac{H_{n-1}(4n-2)}{n-1}$，而手算通常采用公式 $H_n&#x3D;\frac{\begin{pmatrix}2n\\n\end{pmatrix}}{n+1}$。</p>
-<hr>
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1044">洛谷P1044</a> 栈</p>
-<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不同的出栈序列。</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/166261131">AC</a> 680.00KB 15ms</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 30</span><br>ll n, h[N];<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;a.in&quot;, &quot;r&quot;, stdin);</span><br>	n=<span class="hljs-built_in">read</span>(), h[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=n; ++i) h[i]=h[i<span class="hljs-number">-1</span>]*(i*<span class="hljs-number">4</span><span class="hljs-number">-2</span>)/(i+<span class="hljs-number">1</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, h[n]);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="欧几里得算法求解逆元"><a href="#欧几里得算法求解逆元" class="headerlink" title="欧几里得算法求解逆元"></a>欧几里得算法求解逆元</h3><p>当 $a$ 与 $b$ 互质时，$a^{-1}$ 有解，反之无解。然后你就可以发现这是个线性同余方程问题。</p>
+<h4 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h4><p>由于蒟蒻还不会打 $\LaTeX$ 伪代码，所以就先这样写了。</p>
+<ol start="0">
+<li>$\quad$假设要求 $a$ 关于 $f$ 的逆元 $x&#x3D;a^{-1}$。</li>
+<li>$\quad(x_1,x_2,x_3)\leftarrow(1,0,b)$</li>
+<li>$\quad(y_1,y_2,y_3)\leftarrow(0,1,a)$</li>
+<li>$\quad\operatorname{while}\ \operatorname{true}$</li>
+<li>$\quad\qquad\operatorname{if}\ y_3&#x3D;0\ \operatorname{then}$</li>
+<li>$\quad\qquad\qquad\operatorname{do}\ x\leftarrow\operatorname{null}$</li>
+<li>$\quad\qquad\qquad\operatorname{break}$</li>
+<li>$\quad\qquad\operatorname{if}\ y_3&#x3D;1\ \operatorname{then}$</li>
+<li>$\quad\qquad\qquad\operatorname{do}\ x\leftarrow y_2$</li>
+<li>$\quad\qquad\qquad\operatorname{break}$</li>
+<li>$\quad\qquad q\leftarrow \lfloor\frac{x_3}{y_3}\rfloor$</li>
+<li>$\quad\qquad(t_1,t_2,t_3)\leftarrow(x_1-qy_1,x_2-qy_2,x_3-qy_3)$</li>
+<li>$\quad\qquad(x_1,x_2,x_3)\leftarrow(y_1,y_2,y_3)$</li>
+<li>$\quad\qquad(y_1,y_2,y_3)\leftarrow(t_1,t_2,t_3)$</li>
+</ol>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">ll <span class="hljs-title">exgcd</span><span class="hljs-params">(ll a, ll b, ll &amp;x, ll &amp;y)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (!a&amp;&amp;!b) <span class="hljs-keyword">return</span> <span class="hljs-number">-1ll</span>;<br>	<span class="hljs-keyword">if</span> (!b) <span class="hljs-keyword">return</span> x=<span class="hljs-number">1</span>, y=<span class="hljs-number">0</span>, a;<br>	ll res=<span class="hljs-built_in">exgcd</span>(b, a%b, y, x);<br>	<span class="hljs-keyword">return</span> y-=a/b*x, res;<br>&#125;<br><br><span class="hljs-function">ll <span class="hljs-title">inv</span><span class="hljs-params">(ll a, ll b)</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, y=<span class="hljs-number">0</span>, res=<span class="hljs-built_in">exgcd</span>(a, b, x, y);<br>	<span class="hljs-keyword">if</span> (res!=<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1ll</span>;<br>	<span class="hljs-keyword">return</span> x%b&lt;=<span class="hljs-number">0</span>?x%b+b:x%b;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>注意事项：$\text{Catalan}$ 数列的前 $6$ 项 $1,2,5,14,42,132$ 在考 $\text{CSP-J1&#x2F;S1}$ 前是要背过的。</p>
-<p>在赛场上，不论是初赛还是复赛，你都不一定能看得出一道题是卡特兰数。<br>遇到排列组合题目，如果普通方法算不出来，优先往上面四种基本模型上套，看看是不是卡特兰数。</p>
+<h3 id="快速幂求解逆元"><a href="#快速幂求解逆元" class="headerlink" title="快速幂求解逆元"></a>快速幂求解逆元</h3><p>由于使用到了费马小定理，该方法的前提条件是 $b$ 为<strong>素数</strong>（其实只要互质就可以）。</p>
+<p>$\because ax\equiv1\ (\operatorname{mod}b)\\therefore ax\equiv a^{b-1}\ (\operatorname{mod}b)\\therefore x\equiv a^{b-2}\ (\operatorname{mod} b)$<br>然后就可以使用快速幂来求逆元了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> inv(a, b) qpow(a, b-2, b)</span><br><span class="hljs-function">ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll a, ll b, ll mod)</span> </span>&#123;<br>	ll ans=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span> (b) &#123;<br>		<span class="hljs-keyword">if</span> (b&amp;<span class="hljs-number">1</span>) ans=ans*a%mod;<br>		a=a*a%mod, b&gt;&gt;=<span class="hljs-number">1</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> ans;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 <hr>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>卡特兰数 - <a target="_blank" rel="noopener" href="https://oi-wiki.org/math/combinatorics/catalan/">OI-Wiki</a><br>卡特兰数 - <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/6125746">百度百科</a></p>
+<h3 id="线性求逆元"><a href="#线性求逆元" class="headerlink" title="线性求逆元"></a>线性求逆元</h3><p>求 $1\sim n$ 关于 $p$ 的逆元，时间复杂度 $O(n)$。<br>为方便分析，先采用递归的方式转移逆元。</p>
+<h4 id="递归终点"><a href="#递归终点" class="headerlink" title="递归终点"></a>递归终点</h4><p>$1^{-1}\equiv1\ (\operatorname{mod} p)$。</p>
+<h4 id="转移过程"><a href="#转移过程" class="headerlink" title="转移过程"></a>转移过程</h4><p>对于 $i^{-1}$，令 $k&#x3D;\lfloor\frac pi\rfloor$，$j&#x3D;p\operatorname{mod} i$，有 $p&#x3D;ki+j$，在 $\operatorname{mod} p$ 意义下为 $ki+j\equiv 0\ (\operatorname{mod} p)$。</p>
+<p>同余号两边同时乘上 $i^{-1}\times j^{-1}$，可得 $kj^{-1}+i^{-1}\equiv0$，$i^{-1}\equiv -kj^{-1}$。</p>
+<p>此时将 $j&#x3D;p\operatorname{mod} i$ 代入回来，得 $i^{-1}\equiv-\lfloor\frac pi\rfloor(p\operatorname{mod}i)^{-1}\ (\operatorname{mod}p)$，说明 $i$ 的逆元可以由 $p\operatorname{mod}i$ 的逆元转移得来。</p>
+<p>由此，我们可以写下转移式：<br>$$<br>i^{-1}&#x3D;\begin{cases}<br>1,&amp;\operatorname{if}\ i&#x3D;1\\<br>-\lfloor\frac pi\rfloor(p\operatorname{mod}i)^{-1},&amp;\operatorname{otherwise}<br>\end{cases}\ (\operatorname{mod} p)<br>$$</p>
+<h4 id="递归转递推"><a href="#递归转递推" class="headerlink" title="递归转递推"></a>递归转递推</h4><p>注意到转移过程中总是满足 $p\operatorname{mod}i&lt;i$，所以可以直接按 $i$ 从小到大递推得到答案。</p>
+<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3811">洛谷P3811</a> 模意义下的乘法逆元</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/166768230">AC</a> 23.43MB 415ms</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 3000010</span><br>ll n, p, inv[N];<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	n=<span class="hljs-built_in">read</span>(), p=<span class="hljs-built_in">read</span>(), inv[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>; i&lt;=n; ++i) &#123;<br>		inv[i]=<span class="hljs-number">1LL</span>*(p-p/i)*inv[p%i]%p;<br>	&#125;<br>	<span class="hljs-keyword">for</span> (ll i=<span class="hljs-number">1</span>; i&lt;=n; ++i) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, inv[i]);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>乘法逆元 - <a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/inverse/">OI-Wiki</a><br>乘法逆元 - <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83/5831857">百度百科</a></p>
 
                 
               </div>
@@ -379,8 +394,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>卡特兰数</div>
-      <div>https://algo-x.cn/articles/Catalan/</div>
+      <div>乘法逆元</div>
+      <div>https://algo-x.cn/articles/Modular-Multiplicative-Inverse/</div>
     </div>
     <div class="license-meta">
       
@@ -392,13 +407,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月15日</div>
+          <div>2024年7月17日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月16日</div>
+          <div>2024年7月17日</div>
         </div>
       
       
@@ -435,18 +450,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Group-Theory/" title="群论简介">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">群论简介</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/CSP-S1-2024-Caution/" title="CSP-S1 2024 注意事项">
-                        <span class="hidden-mobile">CSP-S1 2024 注意事项</span>
+                      <a href="/articles/Group-Theory/" title="群论简介">
+                        <span class="hidden-mobile">群论简介</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

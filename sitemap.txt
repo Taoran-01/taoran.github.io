@@ -1,4 +1,7 @@
+https://algo-x.cn/articles/Modular-Multiplicative-Inverse/
+https://algo-x.cn/articles/Group-Theory/
 https://algo-x.cn/articles/Catalan/
+https://algo-x.cn/articles/Mobius-Inversion/
 https://algo-x.cn/articles/CSP-S1-2024-Caution/
 https://algo-x.cn/articles/Note-24-06-30/
 https://algo-x.cn/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/
@@ -7,7 +10,6 @@ https://algo-x.cn/articles/Chunking/
 https://algo-x.cn/articles/The-Tarjan-Algorithm-for-Strongly-Connected-Components/
 https://algo-x.cn/articles/FHQ-Treap/
 https://algo-x.cn/articles/Anecdotes-from-Class-6/
-https://algo-x.cn/articles/Mobius-Inversion/
 https://algo-x.cn/chemistry/index.html
 https://algo-x.cn/articles/About-This-Website/
 https://algo-x.cn/about/index.html
