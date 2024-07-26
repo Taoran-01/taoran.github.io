@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://algo-x.cn/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/</loc>
+    <lastmod>2024-07-26</lastmod>
+  </url>
+  <url>
     <loc>https://algo-x.cn/articles/Modular-Multiplicative-Inverse/</loc>
     <lastmod>2024-07-17</lastmod>
   </url>
