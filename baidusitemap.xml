@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://algo-x.cn/articles/Minimum-Positive-Number-of-Linear-Combinations-of-Coefficients/</loc>
+    <lastmod>2024-07-27</lastmod>
+  </url>
+  <url>
+    <loc>https://algo-x.cn/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/</loc>
+    <lastmod>2024-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://algo-x.cn/articles/Note-24-06-30/</loc>
+    <lastmod>2024-07-26</lastmod>
+  </url>
+  <url>
     <loc>https://algo-x.cn/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/</loc>
     <lastmod>2024-07-26</lastmod>
   </url>
@@ -23,14 +35,6 @@
   <url>
     <loc>https://algo-x.cn/articles/CSP-S1-2024-Caution/</loc>
     <lastmod>2024-07-15</lastmod>
-  </url>
-  <url>
-    <loc>https://algo-x.cn/articles/Note-24-06-30/</loc>
-    <lastmod>2024-07-11</lastmod>
-  </url>
-  <url>
-    <loc>https://algo-x.cn/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/</loc>
-    <lastmod>2024-07-11</lastmod>
   </url>
   <url>
     <loc>https://algo-x.cn/articles/Solution-of-CF191A/</loc>

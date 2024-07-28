@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>整系数线性组合的最小正数</title>
+    <link href="/articles/Minimum-Positive-Number-of-Linear-Combinations-of-Coefficients/"/>
+    <url>/articles/Minimum-Positive-Number-of-Linear-Combinations-of-Coefficients/</url>
+    
+    <content type="html"><![CDATA[<hr><h3 id="带余除法与线性组合"><a href="#带余除法与线性组合" class="headerlink" title="带余除法与线性组合"></a>带余除法与线性组合</h3><p>带余除法得到的商和余数是一种线性组合。</p><p>$a\div b&#x3D;q\dots r$，亦可记作 $a&#x3D;bq+r\r&#x3D;a-bq$。<br>注意到此时 $r$ 是 $a$ 与 $b$ 的一种线性组合。</p><hr><h3 id="线性组合"><a href="#线性组合" class="headerlink" title="线性组合"></a>线性组合</h3><p>标量的线性组合为标量集合 ${a_1,a_2,\dots,a_n}$ 与权重集合 ${w_1,w_2,\dots,w_n}$ 一一对应相乘后再相加，即 $a_1w_1+a_2w_2+\dots+a_nw_n$。详见<a href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%88/8664061">百度百科</a>。</p><hr><h3 id="两个数整系数线性组合的最小正数"><a href="#两个数整系数线性组合的最小正数" class="headerlink" title="两个数整系数线性组合的最小正数"></a>两个数整系数线性组合的最小正数</h3><p>设两个整数为 $a,b$。求它们的整系数线性组合的最小正数，就是寻找一个正数 $c&#x3D;ax+by$，其中 $x,y\in\mathbb Z$。</p><hr><h3 id="引理1"><a href="#引理1" class="headerlink" title="引理1"></a>引理1</h3><p>两个数整系数线性组合的最小整数等于它们的最大公因数，即 $c&#x3D;\gcd(a,b)&#x3D;d$。</p><h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>设 $c$ 为 $a,b$ 两个数的整系数线性组合的最小整数。</p><p>设 $q&#x3D;\lfloor\frac ac\rfloor$，$r&#x3D;a\operatorname{mod}c$。<br>此时余数 $r$ 满足 $0\le r&#x3D;a-cq&lt;c$。<br>将 $c&#x3D;ax+by$ 代入，得 $r&#x3D;a-axq-byq&#x3D;a(1-xq)+b(-yq)$，其中 $1-xq,-yq\in\mathbb Z$。<br>根据线性组合的定义，$r$ 是 $a$ 与 $b$ 的<strong>整系数线性组合</strong>。<br>因为 $c$ 为 $a,b$ 的<strong>整系数线性组合的最小正数</strong>，而 $0\le r&lt;c$，所以 $r&#x3D;0$。<br>所以 $a&#x3D;cq$，$c\mid a$。</p><p>同理可证 $c\mid b$，所以 $c\mid d&#x3D;\gcd(a,b)$。</p><p>$c&#x3D;ax+by$，其中 $a,b,x,y\in\mathbb Z$。<br>因为 $d\mid a$，$d\mid b$，所以 $d\mid ax$，$d\mid ay$，$d\mid c&#x3D;ax+ay$。</p><p>综上，$c\mid d$，$d\mid c$，可得 $d&#x3D;c$ ，即两个数整系数线性组合的最小整数等于它们的最大公因数。得证。</p><hr><h3 id="裴蜀定理"><a href="#裴蜀定理" class="headerlink" title="裴蜀定理"></a>裴蜀定理</h3><p>$\forall a,b\in\mathbb Z$，$\gcd(a,b)&#x3D;d$，则对于 $\forall x,y\in\mathbb Z$，$d\mid ax+by$。特别地，$\exists x,y\in\mathbb Z$，使得 $ax+by&#x3D;d$。</p><p>证明：对于命题 $1$，可使用整除性质解释。对于命题 $2$，可使用引理 $1$ 证明。</p><hr><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>线性组合 - <a href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%88/8664061">百度百科</a><br>裴蜀定理 - <a href="https://baike.baidu.com/item/%E8%A3%B4%E8%9C%80%E5%AE%9A%E7%90%86/5186593">百度百科</a><br>裴蜀定理 - <a href="https://oi-wiki.org/math/number-theory/bezouts/">OI-Wiki</a><br>数论入门 - SDSC 2024 D1</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>SDSC 2024</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>基于值域预处理的快速GCD算法</title>
     <link href="/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/"/>
     <url>/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/</url>
@@ -178,6 +205,12 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>液体火箭发动机</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -198,6 +231,12 @@
       
     </categories>
     
+    
+    <tags>
+      
+      <tag>液体火箭发动机</tag>
+      
+    </tags>
     
   </entry>
   

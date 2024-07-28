@@ -16,22 +16,22 @@
   <meta name="author" content="Taoran">
   <meta name="keywords" content="">
   
-    <meta name="description" content="对于整个火箭发动机系统下面这个公式适用于多火箭发动机的总参数。 $$(I_s)_{oa}&#x3D;\frac{\sum F}{\sum \dot\omega}&#x3D;\frac{\sum F}{g_0\sum\dot m}$$ $$\dot\omega_{oa}&#x3D;\sum\dot\omega\ \text{或}\ \dot m_{oa}&#x3D;\sum\dot m$$ $$\">
+    <meta name="description" content="带余除法与线性组合带余除法得到的商和余数是一种线性组合。 $a\div b&#x3D;q\dots r$，亦可记作 $a&#x3D;bq+r\r&#x3D;a-bq$。注意到此时 $r$ 是 $a$ 与 $b$ 的一种线性组合。  线性组合标量的线性组合为标量集合 ${a_1,a_2,\dots,a_n}$ 与权重集合 ${w_1,w_2,\dots,w_n}$ 一一对应相乘后再相加，即 $a_">
 <meta property="og:type" content="article">
-<meta property="og:title" content="火箭发动机工作过程中的性能参数">
-<meta property="og:url" content="https://algo-x.cn/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/index.html">
+<meta property="og:title" content="整系数线性组合的最小正数">
+<meta property="og:url" content="https://algo-x.cn/articles/Minimum-Positive-Number-of-Linear-Combinations-of-Coefficients/index.html">
 <meta property="og:site_name" content="Algo-X.cn">
-<meta property="og:description" content="对于整个火箭发动机系统下面这个公式适用于多火箭发动机的总参数。 $$(I_s)_{oa}&#x3D;\frac{\sum F}{\sum \dot\omega}&#x3D;\frac{\sum F}{g_0\sum\dot m}$$ $$\dot\omega_{oa}&#x3D;\sum\dot\omega\ \text{或}\ \dot m_{oa}&#x3D;\sum\dot m$$ $$\">
+<meta property="og:description" content="带余除法与线性组合带余除法得到的商和余数是一种线性组合。 $a\div b&#x3D;q\dots r$，亦可记作 $a&#x3D;bq+r\r&#x3D;a-bq$。注意到此时 $r$ 是 $a$ 与 $b$ 的一种线性组合。  线性组合标量的线性组合为标量集合 ${a_1,a_2,\dots,a_n}$ 与权重集合 ${w_1,w_2,\dots,w_n}$ 一一对应相乘后再相加，即 $a_">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-03T01:38:10.000Z">
-<meta property="article:modified_time" content="2024-07-26T11:59:46.724Z">
+<meta property="article:published_time" content="2024-07-26T12:28:28.000Z">
+<meta property="article:modified_time" content="2024-07-27T04:58:08.514Z">
 <meta property="article:author" content="Taoran">
-<meta property="article:tag" content="液体火箭发动机">
+<meta property="article:tag" content="SDSC 2024">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>火箭发动机工作过程中的性能参数 - Algo-X.cn</title>
+  <title>整系数线性组合的最小正数 - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="火箭发动机工作过程中的性能参数"></span>
+            <span id="subtitle" data-typed-text="整系数线性组合的最小正数"></span>
           
         </div>
 
@@ -232,8 +232,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-03 09:38" pubdate>
-          2024年7月3日 上午
+        <time datetime="2024-07-26 20:28" pubdate>
+          2024年7月26日 晚上
         </time>
       </span>
     
@@ -244,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          691 字
+          515 字
         
       </span>
     
@@ -255,7 +255,7 @@
         
         
         
-          6 分钟
+          5 分钟
         
       </span>
     
@@ -292,12 +292,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">火箭发动机工作过程中的性能参数</h1>
+            <h1 id="seo-header">整系数线性组合的最小正数</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年7月26日 晚上
+                    本文最后更新于 2024年7月27日 下午
                   
                 
               </p>
@@ -306,23 +306,24 @@
               <div class="markdown-body">
                 
                 <hr>
-<h3 id="对于整个火箭发动机系统"><a href="#对于整个火箭发动机系统" class="headerlink" title="对于整个火箭发动机系统"></a>对于整个火箭发动机系统</h3><p>下面这个公式适用于多火箭发动机的总参数。</p>
-<p>$$(I_s)_{oa}&#x3D;\frac{\sum F}{\sum \dot\omega}&#x3D;\frac{\sum F}{g_0\sum\dot m}$$</p>
-<p>$$\dot\omega_{oa}&#x3D;\sum\dot\omega\ \text{或}\ \dot m_{oa}&#x3D;\sum\dot m$$</p>
-<p>$$\gamma_{oa}&#x3D;\frac{\sum\dot\omega_0}{\sum\dot\omega_f}&#x3D;\frac{\sum\dot m_0}{\sum\dot m_f}$$</p>
-<p>下标$oa$、$o$和$f$分别表示整个发动机系统、氧化剂和燃料。<br>$\dot\omega$表示流量重力，单位$N&#x2F;s$。<br>$\dot m$表示流量质量，单位$kg&#x2F;s$。<br>$\gamma_{oa}$表示表示整个系统的混合比。</p>
+<h3 id="带余除法与线性组合"><a href="#带余除法与线性组合" class="headerlink" title="带余除法与线性组合"></a>带余除法与线性组合</h3><p>带余除法得到的商和余数是一种线性组合。</p>
+<p>$a\div b&#x3D;q\dots r$，亦可记作 $a&#x3D;bq+r\r&#x3D;a-bq$。<br>注意到此时 $r$ 是 $a$ 与 $b$ 的一种线性组合。</p>
 <hr>
-<h3 id="总冲"><a href="#总冲" class="headerlink" title="总冲"></a>总冲</h3><p>整个燃烧时间$t$内推力$P$的积分，单位$N\cdot s$，即<br>$$I_t&#x3D;\int_0^tPdt$$<br>总冲是火箭发动机的重要性能参数，它包括发动机推力所持续的时间，反应了综合工作能力的大小。</p>
+<h3 id="线性组合"><a href="#线性组合" class="headerlink" title="线性组合"></a>线性组合</h3><p>标量的线性组合为标量集合 ${a_1,a_2,\dots,a_n}$ 与权重集合 ${w_1,w_2,\dots,w_n}$ 一一对应相乘后再相加，即 $a_1w_1+a_2w_2+\dots+a_nw_n$。详见<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%88/8664061">百度百科</a>。</p>
 <hr>
-<h3 id="比冲"><a href="#比冲" class="headerlink" title="比冲"></a>比冲</h3><p>指燃料燃烧$1kg$推进剂所产生的冲量，单位$s$。设$m_p$为推进剂有效总质量，则平均比冲<br>$$I_s&#x3D;\frac{I_t}{m_p}$$<br>对液体火箭发动机而言，比冲的含义是每秒钟消耗$1kg$质量的推进剂所产生的推力大小，即<br>$$I_s&#x3D;\frac{I_t}{\dot m}\ \text{或}\ I_s&#x3D;\frac P{\dot m}$$<br>比冲是火箭发动机的一个重要性能参数，它对运载火箭、航天器性能有较大影响。比冲越高，意味着在消耗相同质量的推进剂时，火箭发动机能够产生更大的推力，或者在产生相同推力的情况下消耗更少的推进剂。高比冲的发动机可以更有效地将火箭送入太空，因为它们能够更有效地转换推进剂的化学能为火箭的动能。</p>
+<h3 id="两个数整系数线性组合的最小正数"><a href="#两个数整系数线性组合的最小正数" class="headerlink" title="两个数整系数线性组合的最小正数"></a>两个数整系数线性组合的最小正数</h3><p>设两个整数为 $a,b$。求它们的整系数线性组合的最小正数，就是寻找一个正数 $c&#x3D;ax+by$，其中 $x,y\in\mathbb Z$。</p>
 <hr>
-<h3 id="密度比冲"><a href="#密度比冲" class="headerlink" title="密度比冲"></a>密度比冲</h3><p>定义为单位体积推进剂流量所产生的推力，单位$s\cdot kg&#x2F;m^3$，即<br>$$I_{s,\rho}&#x3D;\frac PV&#x3D;\frac P{\dot m&#x2F;\rho_T}&#x3D;I_s\rho_t$$<br>其中$\rho_T$表示推进剂密度。</p>
+<h3 id="引理1"><a href="#引理1" class="headerlink" title="引理1"></a>引理1</h3><p>两个数整系数线性组合的最小整数等于它们的最大公因数，即 $c&#x3D;\gcd(a,b)&#x3D;d$。</p>
+<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>设 $c$ 为 $a,b$ 两个数的整系数线性组合的最小整数。</p>
+<p>设 $q&#x3D;\lfloor\frac ac\rfloor$，$r&#x3D;a\operatorname{mod}c$。<br>此时余数 $r$ 满足 $0\le r&#x3D;a-cq&lt;c$。<br>将 $c&#x3D;ax+by$ 代入，得 $r&#x3D;a-axq-byq&#x3D;a(1-xq)+b(-yq)$，其中 $1-xq,-yq\in\mathbb Z$。<br>根据线性组合的定义，$r$ 是 $a$ 与 $b$ 的<strong>整系数线性组合</strong>。<br>因为 $c$ 为 $a,b$ 的<strong>整系数线性组合的最小正数</strong>，而 $0\le r&lt;c$，所以 $r&#x3D;0$。<br>所以 $a&#x3D;cq$，$c\mid a$。</p>
+<p>同理可证 $c\mid b$，所以 $c\mid d&#x3D;\gcd(a,b)$。</p>
+<p>$c&#x3D;ax+by$，其中 $a,b,x,y\in\mathbb Z$。<br>因为 $d\mid a$，$d\mid b$，所以 $d\mid ax$，$d\mid ay$，$d\mid c&#x3D;ax+ay$。</p>
+<p>综上，$c\mid d$，$d\mid c$，可得 $d&#x3D;c$ ，即两个数整系数线性组合的最小整数等于它们的最大公因数。得证。</p>
 <hr>
-<h3 id="推进剂混合比"><a href="#推进剂混合比" class="headerlink" title="推进剂混合比"></a>推进剂混合比</h3><p>定义为氧化剂流量与燃烧剂流量之比，即<br>$$MR&#x3D;\frac{m_0}{m_f}$$<br>混合比直接影响燃烧室内的化学反应。一个适当的混合比可以确保燃料和氧化剂完全燃烧，从而最大化能量的释放。混合比会影响比冲的大小，一个合适的混合比可以提高比冲，从而提高火箭的有效载荷能力。</p>
+<h3 id="裴蜀定理"><a href="#裴蜀定理" class="headerlink" title="裴蜀定理"></a>裴蜀定理</h3><p>$\forall a,b\in\mathbb Z$，$\gcd(a,b)&#x3D;d$，则对于 $\forall x,y\in\mathbb Z$，$d\mid ax+by$。特别地，$\exists x,y\in\mathbb Z$，使得 $ax+by&#x3D;d$。</p>
+<p>证明：对于命题 $1$，可使用整除性质解释。对于命题 $2$，可使用引理 $1$ 证明。</p>
 <hr>
-<h3 id="书籍参考"><a href="#书籍参考" class="headerlink" title="书籍参考"></a>书籍参考</h3><p>液体火箭发动机燃烧过程建模与数值仿真&#x2F;王振国编著.—北京：国防工业出版社，2012.10<br>ISBN 978-7-118-08525-9</p>
-<p>I. ①液··· II. ①王··· III. ①液体推进剂火箭发动机—燃烧过程—建立模型②液体推进剂火箭发动机—燃烧过程—数值方法 IV ①V434</p>
-<p>中国版本图书馆CIP数据核字（2012）第279370号</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>线性组合 - <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%88/8664061">百度百科</a><br>裴蜀定理 - <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%A3%B4%E8%9C%80%E5%AE%9A%E7%90%86/5186593">百度百科</a><br>裴蜀定理 - <a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/bezouts/">OI-Wiki</a><br>数论入门 - SDSC 2024 D1</p>
 
                 
               </div>
@@ -346,7 +347,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%89%A9%E7%90%86/" class="category-chain-item">物理</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -363,7 +364,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B6%B2%E4%BD%93%E7%81%AB%E7%AE%AD%E5%8F%91%E5%8A%A8%E6%9C%BA/" class="print-no-link">#液体火箭发动机</a>
+        <a href="/tags/SDSC-2024/" class="print-no-link">#SDSC 2024</a>
       
     </div>
   
@@ -375,8 +376,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>火箭发动机工作过程中的性能参数</div>
-      <div>https://algo-x.cn/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/</div>
+      <div>整系数线性组合的最小正数</div>
+      <div>https://algo-x.cn/articles/Minimum-Positive-Number-of-Linear-Combinations-of-Coefficients/</div>
     </div>
     <div class="license-meta">
       
@@ -388,13 +389,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月3日</div>
+          <div>2024年7月26日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月26日</div>
+          <div>2024年7月27日</div>
         </div>
       
       
@@ -431,18 +432,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/FHQ-Treap/" title="FHQ Treap">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">FHQ Treap</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Note-24-06-30/" title="研究笔记 24-06-30">
-                        <span class="hidden-mobile">研究笔记 24-06-30</span>
+                      <a href="/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/" title="基于值域预处理的快速GCD算法">
+                        <span class="hidden-mobile">基于值域预处理的快速GCD算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
