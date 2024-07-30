@@ -1,3 +1,4 @@
+https://algo-x.cn/articles/Two-Dimensional-Hash-Solution-of-P10474/
 https://algo-x.cn/articles/Minimum-Positive-Number-of-Linear-Combinations-of-Coefficients/
 https://algo-x.cn/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/
 https://algo-x.cn/articles/Modular-Multiplicative-Inverse/
@@ -7,4 +8,3 @@ https://algo-x.cn/articles/CSP-S1-2024-Caution/
 https://algo-x.cn/articles/Chunking/
 https://algo-x.cn/articles/The-Tarjan-Algorithm-for-Strongly-Connected-Components/
 https://algo-x.cn/articles/FHQ-Treap/
-https://algo-x.cn/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/

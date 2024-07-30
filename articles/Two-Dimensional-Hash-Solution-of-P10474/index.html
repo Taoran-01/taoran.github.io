@@ -1,0 +1,782 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Taoran">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="知识前置哈希一种映射，从大值域到小值域。本文中的哈希均指字符串哈希，即将数列 ${a_n}$ 视作 $p$ 进制数后对 $M$ 取模的结果，即 $H(a)&#x3D;(\sum\limits_{i&#x3D;1}^na_i\times p^{n-i})\operatorname{mod}M$。其中，$p$ 称为底，$M$ 称为模数。有以下性质：  当在数列 ${a_n}$ 的末尾插入数 $d$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二维哈希 - 洛谷P10474 题解">
+<meta property="og:url" content="https://algo-x.cn/articles/Two-Dimensional-Hash-Solution-of-P10474/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:description" content="知识前置哈希一种映射，从大值域到小值域。本文中的哈希均指字符串哈希，即将数列 ${a_n}$ 视作 $p$ 进制数后对 $M$ 取模的结果，即 $H(a)&#x3D;(\sum\limits_{i&#x3D;1}^na_i\times p^{n-i})\operatorname{mod}M$。其中，$p$ 称为底，$M$ 称为模数。有以下性质：  当在数列 ${a_n}$ 的末尾插入数 $d$">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-28T01:12:11.000Z">
+<meta property="article:modified_time" content="2024-07-30T05:56:26.265Z">
+<meta property="article:author" content="Taoran">
+<meta property="article:tag" content="SDSC 2024">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>二维哈希 - 洛谷P10474 题解 - Algo-X.cn</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/articles/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>文章</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chemistry/" target="_self">
+                <i class="iconfont icon-exp-fill"></i>
+                <span>化学工具站</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="二维哈希 - 洛谷P10474 题解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-28 09:12" pubdate>
+          2024年7月28日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">二维哈希 - 洛谷P10474 题解</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年7月30日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <hr>
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h4><p>一种映射，从大值域到小值域。本文中的哈希均指字符串哈希，即将数列 ${a_n}$ 视作 $p$ 进制数后对 $M$ 取模的结果，即 $H(a)&#x3D;(\sum\limits_{i&#x3D;1}^na_i\times p^{n-i})\operatorname{mod}M$。其中，$p$ 称为底，$M$ 称为模数。有以下性质：</p>
+<ol>
+<li>当在数列 ${a_n}$ 的末尾插入数 $d$ 时，数列 ${a_{n+1}}$ 的哈希值 $H(a+d)&#x3D;(H(a)\times p+d)\operatorname{mod} M$。</li>
+<li>已知数列 ${c_{n+m}}$ 的哈希值为 $H(c)$，数列 ${a_n}$ 的哈希值为 $H(a)$ ，而数列 ${c_{n+m}}$ 由数列 ${a_n}$ 和数列 ${b_m}$ 拼接而成，则 $H(b)&#x3D;(H(c)-H(a)\times p^{m})\operatorname{mod}M$。</li>
+</ol>
+<p>上述两条性质不难理解，就是 $p$ 进制数的位移运算与加减运算。</p>
+<p>详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/string/hash/">OI-WIki</a>中的第一种定义，或参考李煜东所著的《算法竞赛进阶指南》第75页。</p>
+<h4 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h4><p>二维哈希参考了二维前缀和的思想，使得哈希值可以 $O(1)$ 地从角落哈希值求出。</p>
+<p>设 $Sum_{x_1,y_1,x_2,y_2}&#x3D;\sum\limits_{i&#x3D;x_1}^{x_2}\sum\limits_{j&#x3D;y_1}^{y_2}a_{i,j}$，$S_{x,y}&#x3D;Sum_{1,1,x,y}&#x3D;\sum\limits_{i&#x3D;1}^x\sum\limits_{j&#x3D;1}^ya_{i,j}$，则有：<br>$$<br>\begin{gathered}<br>S_{x,y}&#x3D;a_{x,y}+S_{x-1,y}+S_{x,y-1}-S_{x-1,y-1}\\<br>Sum_{x_1,y_1,x_2,y_2}&#x3D;S_{x_2,y_2}-S_{x_1-1,y_2}-S_{x_2,y_1-1}+S_{x_1-1,y_1-1}<br>\end{gathered}<br>$$<br>自己画个图证明下就会了，详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/basic/prefix-sum/#%E4%BA%8C%E7%BB%B4%E5%A4%9A%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C">OI-Wiki</a>。</p>
+<hr>
+<h3 id="二维哈希"><a href="#二维哈希" class="headerlink" title="二维哈希"></a>二维哈希</h3><p>将一个二维矩阵映射到一个值上，即：<br>$$<br>A&#x3D;\begin{bmatrix}<br>a_{1,1}&amp;\cdots&amp;a_{1,m}\\<br>\vdots&amp;\ddots&amp;\vdots\\<br>a_{n,1}&amp;\cdots&amp;a_{n,m}<br>\end{bmatrix}\longrightarrow H(A)\in[0,M)\cap\mathbb Z<br>$$</p>
+<hr>
+<h3 id="整个矩阵哈希值的获取"><a href="#整个矩阵哈希值的获取" class="headerlink" title="整个矩阵哈希值的获取"></a>整个矩阵哈希值的获取</h3><h4 id="步骤一-按行哈希"><a href="#步骤一-按行哈希" class="headerlink" title="步骤一 按行哈希"></a>步骤一 按行哈希</h4><p>将矩阵 $A$ 按行进行哈希得到矩阵 $F$。<br>即，将矩阵 $A$ 视作 $n$ 个长度为 $m$ 的一维数列。<br>$$<br>A&#x3D;\begin{bmatrix}<br>\color{orange}a_{1,1}&amp;\color{orange}\cdots&amp;\color{orange}a_{1,m}\\<br>\vdots&amp;\ddots&amp;\vdots\\<br>a_{n,1}&amp;\cdots&amp;a_{n,m}<br>\end{bmatrix}\longrightarrow<br>F&#x3D;\begin{bmatrix}<br>f_{1,1}&amp;\cdots&amp;\color{orange}f_{1,m}\\<br>\vdots&amp;\ddots&amp;\vdots\\<br>f_{n,1}&amp;\cdots&amp;f_{n,m}<br>\end{bmatrix}<br>$$<br>设底为 $p_1$，模数为 $M$，则转移公式如下：<br>$$<br>f_{x,y}&#x3D;(\sum_{i&#x3D;1}^ya_{x,i}\times p_1^{y-i})\operatorname{mod}M<br>$$<br>根据一维哈希的性质，将公式进行优化：<br>$$<br>f_{x,y}&#x3D;(f_{x,y-1}\times p_1+a_{x,y})\operatorname{mod}M<br>$$</p>
+<h4 id="步骤二-按列哈希"><a href="#步骤二-按列哈希" class="headerlink" title="步骤二 按列哈希"></a>步骤二 按列哈希</h4><p>将矩阵 $F$ 按列进行哈希得到矩阵 $G$。<br>即，将矩阵 $F$ 视作 $m$ 个长度为 $n$ 的一维数列。<br>$$<br>F&#x3D;\begin{bmatrix}<br>\color{orange}f_{1,1}&amp;\cdots&amp;f_{1,m}\\<br>\color{orange}\vdots&amp;\ddots&amp;\vdots\\<br>\color{orange}f_{n,1}&amp;\cdots&amp;f_{n,m}<br>\end{bmatrix}\longrightarrow<br>G&#x3D;\begin{bmatrix}<br>g_{1,1}&amp;\cdots&amp;g_{1,m}\\<br>\vdots&amp;\ddots&amp;\vdots\\<br>\color{orange}g_{n,1}&amp;\cdots&amp;g_{n,m}<br>\end{bmatrix}<br>$$<br>设底为 $p_2$，模数为 $M$，则转移公式如下：<br>$$<br>g_{x,y}&#x3D;(\sum_{i&#x3D;1}^xf_{i,y}\times p_2^{x-i})\operatorname{mod}M<br>$$<br>根据一维哈希的性质，将公式进行优化：<br>$$<br>g_{x,y}&#x3D;(g_{x-1,y}\times p_2+f_{x,y})\operatorname{mod}M<br>$$</p>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>先按行和先按列都是一样的。总而言之，不管你先做什么，最终的式子代进去都是这样的：<br>$$<br>g_{x,y}&#x3D;(\sum_{i&#x3D;1}^x\sum_{j&#x3D;1}^ya_{i,j}\times p_2^{x-i}\times p_1^{y-j})\operatorname{mod}M<br>$$<br>依据总公式，仿照前缀和，你也可以在外面循环行，在里面循环列，同时求：<br>$$<br>g_{x,y}&#x3D;(a_{x,y}+g_{x-1,y}\times p_2+g_{x,y-1}\times p_1-g_{x-1,y-1}\times p_1\times p_2)\operatorname{mod}M<br>$$<br>这个公式就有一部分包含下文子矩阵的思想了。</p>
+<h4 id="步骤三-获取哈希值"><a href="#步骤三-获取哈希值" class="headerlink" title="步骤三 获取哈希值"></a>步骤三 获取哈希值</h4><p>经过上面两个步骤后，矩阵 $G$ 的右下角 $g_{n,m}$ 就是矩阵 $A$ 的哈希值。</p>
+<p>另外，如果对上面的步骤保留矩阵，$G$ 数组的值也是 $A$ 左上角子矩阵的哈希值，如图所示。<br>$$<br>A&#x3D;\begin{bmatrix}<br>\color{orange}a_{1,1}&amp;\color{orange}a_{1,2}&amp;a_{1,3}&amp;\cdots&amp;a_{1,m}\\<br>\color{orange}a_{2,1}&amp;\color{orange}a_{2,2}&amp;a_{2,3}&amp;\cdots&amp;a_{2,m}\\<br>\color{orange}a_{3,1}&amp;\color{orange}a_{3,2}&amp;a_{3,3}&amp;\cdots&amp;a_{3,m}\\<br>a_{4,1}&amp;a_{4,2}&amp;a_{4,3}&amp;\cdots&amp;a_{4,m}\\<br>\vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\<br>a_{n,1}&amp;a_{n,2}&amp;a_{n,3}&amp;\cdots&amp;a_{n,m}<br>\end{bmatrix}\longrightarrow<br>G&#x3D;\begin{bmatrix}<br>g_{1,1}&amp;g_{1,2}&amp;g_{1,3}&amp;\cdots&amp;g_{1,m}\\<br>g_{2,1}&amp;g_{2,2}&amp;g_{2,3}&amp;\cdots&amp;g_{2,m}\\<br>g_{3,1}&amp;\color{orange}g_{3,2}&amp;g_{3,3}&amp;\cdots&amp;g_{3,m}\\<br>g_{4,1}&amp;g_{4,2}&amp;g_{4,3}&amp;\cdots&amp;g_{4,m}\\<br>\vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\<br>g_{n,1}&amp;g_{n,2}&amp;g_{n,3}&amp;\cdots&amp;g_{n,m}<br>\end{bmatrix}<br>$$<br>在不发生冲突的情况下，$g_{n,m}$ 表示唯一的矩阵 $A$。可以依据哈希值判断矩阵是否相同。</p>
+<h4 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h4><p>先对行进行哈希，再对列进行哈希，使得不同位置的元素有不同的权重，确保了较小的冲突概率。</p>
+<h4 id="需要知道的风险"><a href="#需要知道的风险" class="headerlink" title="需要知道的风险"></a>需要知道的风险</h4><p>在将较大的矩阵处理到较小的值域上时，冲突风险会加大。请选取适当的底和模数以减小出现问题的概率。<br>如果不放心，可以使用<a target="_blank" rel="noopener" href="https://oi-wiki.org/string/hash/#%E9%94%99%E8%AF%AF%E7%8E%87">双模数哈希</a>，或不使用二维哈希，考虑其它算法。</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p>开 <code>unsigned long long</code> 存储，使用自然溢出的方式取模。此时模数 $M&#x3D;2^{64}$。具体代码见下方例题。</p>
+<hr>
+<h3 id="子矩阵的哈希值获取"><a href="#子矩阵的哈希值获取" class="headerlink" title="子矩阵的哈希值获取"></a>子矩阵的哈希值获取</h3><p>这一部分比较难以理解，建议自己算一下看看。</p>
+<p>设行数在 $x_1$ 到 $x_2$ 之间、列数在 $y_1$ 到 $y_2$ 之间子矩阵的哈希值为 $H(x_1,y_1,x_2,y_2)$。<br>根据上述步骤，我们已经知道了所有的 $H(1,1,x,y)$，其中 $x\in[1,n]$，$y\in[1,m]$。</p>
+<p>参考一维哈希的方法，视作 $p$ 进制数。不过这里将不同列视为 $p_1$ 进制数（因为按行哈希时列转移乘了 $p_1$），将不同行视为 $p_2$ 进制数。</p>
+<p>这样，在原矩阵的右侧添加一列空列，矩阵的哈希值 $H(A)$ 变为 $(H(A)\times p_1)\operatorname{mod}M$。<br>在原矩阵的下方添加一行空行，矩阵的哈希值 $H(A)$ 变为 $(H(A)\times p_2)\operatorname{mod}M$。<br>感性理解一下，证明我不会。</p>
+<p>虽然矩阵是先对每一行哈希，再对每一列哈希，先以 $p_1$ 为底再以 $p_2$ 为底，但是最后乘上 $p_1$ 依旧是左移。就相当于原本是以第 $x$ 列做哈希，现在以第 $x-1$ 列做哈希，先后顺序不影响。</p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>现在，我们需要 $O(1)$ 求解所有的 $H_(x_1,y_1,x_2,y_2)$。根据上述结论，易推得：<br>$$<br>\begin{aligned}<br>H(x_1&amp;,y_1,x_2,y_2)&#x3D;\\<br>&amp;\hspace{0.4cm}(H(1,1,x_2,y_2)&amp;\small\text{全部}\\<br>&amp;-H(1,1,x_1-1,y_2)\times p_2^{x_2-x_1+1}&amp;\small\text{减上方}\\<br>&amp;-H(1,1,x_2,y_1-1)\times p_1^{y_2-y_1+1}&amp;\small\text{减左侧}\\<br>&amp;+H(1,1,x_1-1,y_1-1)\times p_2^{x_2-x_1+1}\times p_1^{y_2-y_1+1}&amp;\small\text{加左上角}\\<br>&amp;\hspace{0.4cm})\operatorname{mod}M\\<br>\end{aligned}<br>$$<br>画出来是这样的：<br>$$<br>\begin{bmatrix}<br>\color{purple}g_{1,1}&amp;\color{purple}\cdots&amp;\color{purple}g_{1,x_1-1}&amp;\color{red}g_{1,x_1}&amp;\color{red}\cdots&amp;\color{red}g_{1,x_2}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}g_{1,m}\\<br>\color{purple}\vdots&amp;\color{purple}\ddots&amp;\color{purple}\vdots&amp;\color{red}\vdots&amp;\color{red}\ddots&amp;\color{red}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots\\<br>\color{purple}g_{y_1-1,1}&amp;\color{purple}\cdots&amp;\color{purple}g_{y_1-1,x_1-1}&amp;\color{red}g_{y_1-1,x_1}&amp;\color{red}\cdots&amp;\color{red}g_{y_1-1,x_2}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}g_{y_1-1,m}\\<br>\color{blue}g_{y_1,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{y_1,x_1-1}&amp;\color{green}g_{y_1,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{y_1,x_2}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}g_{y_1,m}\\<br>\color{blue}\vdots&amp;\color{blue}\ddots&amp;\color{blue}\vdots&amp;\color{green}\vdots&amp;\color{green}\ddots&amp;\color{green}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots\\<br>\color{blue}g_{y_2,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{y_2,x_1-1}&amp;\color{green}g_{y_2,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{y_2,x_2}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}g_{y_2,m}\\<br>\color{darkgrey}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots&amp;\color{darkgrey}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots\\<br>\color{darkgrey}g_{m,1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}g_{m,x_1-1}&amp;\color{darkgrey}g_{m,x_1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}g_{m,x_2}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}g_{n,m}<br>\end{bmatrix}<br>$$<br>其中，绿色为目标区域，(绿色+红色+蓝色+紫色)为全部区域，(红色+紫色)为上方区域，(蓝色+紫色)为左侧区域，紫色为重复的左上角区域，灰色为无关区域。</p>
+<h4 id="为什么要乘"><a href="#为什么要乘" class="headerlink" title="为什么要乘"></a>为什么要乘</h4><p>此处的颜色标记与上面的不同，请注意区分。<br>下面的矩阵在哈希意义下，不是普通的矩阵，详细规则见上。请将矩阵视作哈希。<br>为方便理解，矩阵中的 $0$ 记作 $0_{x,y}$ 以标识位置。<br>下文证明及其不严谨，仅作理解。</p>
+<p>首先，左侧区域原本是这样的：<br>$$<br>A&#x3D;\begin{bmatrix}<br>\color{blue}g_{1,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{1,x_1-1}\\<br>\color{blue}\vdots&amp;\color{blue}\ddots&amp;\color{blue}\vdots\\<br>\color{blue}g_{y_2,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{y_2,x_1-1}<br>\end{bmatrix}<br>$$<br>整体长这样：<br>$$<br>C&#x3D;\begin{bmatrix}<br>\color{blue}g_{1,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{1,x_1-1}&amp;\color{green}g_{1,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{1,x_2}\\<br>\color{blue}\vdots&amp;\color{blue}\ddots&amp;\color{blue}\vdots&amp;\color{green}\vdots&amp;\color{green}\ddots&amp;\color{green}\vdots\\<br>\color{blue}g_{y_2,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{y_2,x_1-1}&amp;\color{green}g_{y_2,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{y_2,x_2}<br>\end{bmatrix}<br>$$<br>我们想要得到：<br>$$<br>B&#x3D;\begin{bmatrix}<br>\color{green}g_{1,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{1,x_2}\\<br>\color{green}\vdots&amp;\color{green}\ddots&amp;\color{green}\vdots\\<br>\color{green}g_{y_2,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{y_2,x_2}<br>\end{bmatrix}<br>$$<br>注意，在上文所述的哈希（视作 $p_1$、$p_2$ 进制）中，可以向上方和左侧补前导零。所以有：<br>$$<br>B&#x3D;\begin{bmatrix}<br>\color{green}g_{1,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{1,x_2}\\<br>\color{green}\vdots&amp;\color{green}\ddots&amp;\color{green}\vdots\\<br>\color{green}g_{y_2,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{y_2,x_2}<br>\end{bmatrix}&#x3D;\begin{bmatrix}<br>\color{darkgrey}0_{1,1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{1,x_1-1}&amp;\color{green}g_{1,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{1,x_2}\\<br>\color{darkgrey}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots&amp;\color{green}\vdots&amp;\color{green}\ddots&amp;\color{green}\vdots\\<br>\color{darkgrey}0_{y_2,1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{y_2,x_1-1}&amp;\color{green}g_{y_2,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{y_2,x_2}<br>\end{bmatrix}<br>$$<br>但不能在下方或右侧补零，因为这样改变了哈希大小。所以：<br>$$<br>A&#x3D;\begin{bmatrix}<br>\color{blue}g_{1,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{1,x_1-1}\\<br>\color{blue}\vdots&amp;\color{blue}\ddots&amp;\color{blue}\vdots\\<br>\color{blue}g_{y_2,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{y_2,x_1-1}<br>\end{bmatrix}\neq\begin{bmatrix}<br>\color{blue}g_{1,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{1,x_1-1}&amp;\color{darkgrey}0_{1,x_1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{1,x_2}\\<br>\color{blue}\vdots&amp;\color{blue}\ddots&amp;\color{blue}\vdots&amp;\color{darkgrey}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots\\<br>\color{blue}g_{y_2,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{y_2,x_1-1}&amp;\color{darkgrey}0_{y_2,x_1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{y_2,x_2}<br>\end{bmatrix}<br>$$<br>因此，我们不能直接将 $H(C)-H(A)$ 作为目标 $H(B)$ 的答案，因为 $A$ 没有与 $C$ 对齐。<br>要想对齐，就要将 $A$ 左移 $(x_2-x_1+1)$ 列，也就是在 $A$ 的右边插入 $(x_2-x_1+1)$ 个空列。按照上面的证明方式，只需将 $A$ 的哈希值乘 $p_2^{x_2-x_1+1}$ 即可。<br>$$<br>A\times p_2^{x_2-x_1+1}&#x3D;<br>\begin{bmatrix}<br>\color{blue}g_{1,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{1,x_1-1}&amp;\color{darkgrey}0_{1,x_1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{1,x_2}\\<br>\color{blue}\vdots&amp;\color{blue}\ddots&amp;\color{blue}\vdots&amp;\color{darkgrey}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots\\<br>\color{blue}g_{y_2,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{y_2,x_1-1}&amp;\color{darkgrey}0_{y_2,x_1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{y_2,x_2}<br>\end{bmatrix}<br>$$<br>这样，$A$ 与 $C$ 对齐后我们就可以相减得到答案。<br>$$<br>\begin{gathered}\begin{aligned}B&#x3D;&amp;\begin{bmatrix}<br>\color{green}g_{1,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{1,x_2}\\<br>\color{green}\vdots&amp;\color{green}\ddots&amp;\color{green}\vdots\\<br>\color{green}g_{y_2,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{y_2,x_2}<br>\end{bmatrix}&#x3D;\begin{bmatrix}<br>\color{darkgrey}0_{1,1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{1,x_1-1}&amp;\color{green}g_{1,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{1,x_2}\\<br>\color{darkgrey}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots&amp;\color{green}\vdots&amp;\color{green}\ddots&amp;\color{green}\vdots\\<br>\color{darkgrey}0_{y_2,1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{y_2,x_1-1}&amp;\color{green}g_{y_2,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{y_2,x_2}<br>\end{bmatrix}\\&#x3D;&amp;\begin{bmatrix}<br>\color{blue}g_{1,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{1,x_1-1}&amp;\color{green}g_{1,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{1,x_2}\\<br>\color{blue}\vdots&amp;\color{blue}\ddots&amp;\color{blue}\vdots&amp;\color{green}\vdots&amp;\color{green}\ddots&amp;\color{green}\vdots\\<br>\color{blue}g_{y_2,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{y_2,x_1-1}&amp;\color{green}g_{y_2,x_1}&amp;\color{green}\cdots&amp;\color{green}g_{y_2,x_2}<br>\end{bmatrix}-\begin{bmatrix}<br>\color{blue}g_{1,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{1,x_1-1}&amp;\color{darkgrey}0_{1,x_1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{1,x_2}\\<br>\color{blue}\vdots&amp;\color{blue}\ddots&amp;\color{blue}\vdots&amp;\color{darkgrey}\vdots&amp;\color{darkgrey}\ddots&amp;\color{darkgrey}\vdots\\<br>\color{blue}g_{y_2,1}&amp;\color{blue}\cdots&amp;\color{blue}g_{y_2,x_1-1}&amp;\color{darkgrey}0_{y_2,x_1}&amp;\color{darkgrey}\cdots&amp;\color{darkgrey}0_{y_2,x_2}<br>\end{bmatrix}\\&#x3D;&amp;C-A\times p_2^{x_2-x_1+1}\end{aligned}\\<br>H(B)&#x3D;(H(C)-H(A)\times p_2^{x_2-x_1+1})\operatorname{mod}M\end{gathered}<br>$$<br>同样地，通过位移操作，我们可以完成上方和左上角的矩阵操作，只需要对应乘 $p_1$、$p_2$ 的幂即可。</p>
+<p>在程序中，由于会频繁进行 $p_1$、$p_2$ 的幂运算，我们通常会预处理出它们的 $1\sim n$ 次方，并存储到 <code>unsigned long long</code> 数组中。</p>
+<hr>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>$p_1&#x3D;7$，$p_2&#x3D;239$，$M&#x3D;+\infty$。<br>$$<br>\begin{gathered}<br>A&#x3D;\begin{bmatrix}<br>1&amp;2&amp;3\\4&amp;5&amp;6<br>\end{bmatrix},\<br>F&#x3D;\begin{bmatrix}<br>1&amp;9&amp;66\\4&amp;33&amp;237<br>\end{bmatrix},\<br>G&#x3D;\begin{bmatrix}<br>1&amp;9&amp;66\\<br>143&amp;2184&amp;16011<br>\end{bmatrix}\\<br>\text{对于子矩阵：}<br>A’&#x3D;\begin{bmatrix}<br>2&amp;3\\5&amp;6<br>\end{bmatrix},\<br>F’&#x3D;\begin{bmatrix}<br>2&amp;17\\5&amp;41<br>\end{bmatrix},\<br>G’&#x3D;\begin{bmatrix}<br>2&amp;17\\483&amp;4104<br>\end{bmatrix}<br>\end{gathered}<br>$$<br>验证：$16011-0\times57121-243\times49&#x3D;16011-11907&#x3D;4104$，成立。</p>
+<hr>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10474">洛谷P10474</a> [BeiJing2011] Matrix 矩阵哈希<br>注：为方便书写，本文将题目中的 $M$ 和 $N$ 替换为了 $n$ 和 $m$，与原题目有出入。</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给出一个 $n$ 行 $m$ 列的 $01$ 矩阵，以及 $q$ 个 $A$ 行 $B$ 列的 $01$ 矩阵，你需要求出这 $q$ 个矩阵中有哪些矩阵是大矩阵的子矩阵。</p>
+<p>数据范围：$1\le n,m\le1000$，$q&#x3D;1000$。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>先对整体取哈希，把每个大小为 $A\times B$ 的存入 <code>unordered_map</code>；然后对每个子矩阵取哈希，判断是否在 <code>map</code> 中即可。时间复杂度 $O(n^2)$。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/169139975">AC</a> 49.65MB 1.08s</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ull;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 1010</span><br><span class="hljs-type">int</span> n, m, A, B, q;<br>ull a[N][N];<br>unordered_map&lt;ull, <span class="hljs-type">bool</span>&gt; mp;<br><br><span class="hljs-keyword">namespace</span> tdh &#123;<br>	<span class="hljs-meta">#<span class="hljs-keyword">define</span> P1 503ULL</span><br>	<span class="hljs-meta">#<span class="hljs-keyword">define</span> P2 1013ULL</span><br>	<span class="hljs-type">int</span> n, m;<br>	ull f[N][N], g[N][N];<br>	ull p1[N], p2[N];<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ull d[N][N], <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> m)</span> </span>&#123;<br>		p1[<span class="hljs-number">0</span>]=p2[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;N; ++i) p1[i]=p1[i<span class="hljs-number">-1</span>]*P1, p2[i]=p2[i<span class="hljs-number">-1</span>]*P2;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>; j&lt;=m; ++j) &#123;<br>			f[i][j]=f[i][j<span class="hljs-number">-1</span>]*P1+d[i][j];<br>		&#125;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>; j&lt;=m; ++j) <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) &#123;<br>			g[i][j]=g[i<span class="hljs-number">-1</span>][j]*P2+f[i][j];<br>		&#125;<br>	&#125;<br>	<span class="hljs-function">ull <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-type">int</span> x1, <span class="hljs-type">int</span> y1, <span class="hljs-type">int</span> x2, <span class="hljs-type">int</span> y2)</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> g[x2][y2]-g[x1<span class="hljs-number">-1</span>][y2]*p2[x2-x1+<span class="hljs-number">1</span>]-g[x2][y1<span class="hljs-number">-1</span>]*p1[y2-y1+<span class="hljs-number">1</span>]<br>		+g[x1<span class="hljs-number">-1</span>][y1<span class="hljs-number">-1</span>]*p1[y2-y1+<span class="hljs-number">1</span>]*p2[x2-x1+<span class="hljs-number">1</span>];<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;a.in&quot;, &quot;r&quot;, stdin);</span><br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>(), A=<span class="hljs-built_in">read</span>(), B=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>; j&lt;=m; ++j) &#123;<br>		<span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>(); <span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;1&#x27;</span>) ch=<span class="hljs-built_in">getchar</span>(); a[i][j]=ch-<span class="hljs-string">&#x27;0&#x27;</span>;<br>	&#125;<br>	tdh::<span class="hljs-built_in">init</span>(a, n, m);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n-A+<span class="hljs-number">1</span>; ++i) <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>; j&lt;=m-B+<span class="hljs-number">1</span>; ++j) &#123;<br>		mp[(<span class="hljs-type">int</span>)tdh::<span class="hljs-built_in">get</span>(i, j, i+A<span class="hljs-number">-1</span>, j+B<span class="hljs-number">-1</span>)]=<span class="hljs-number">1</span>;<br>	&#125;<br>	q=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">while</span> (q--) &#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=A; ++i) <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>; j&lt;=B; ++j) &#123;<br>			<span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>(); <span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;1&#x27;</span>) ch=<span class="hljs-built_in">getchar</span>(); a[i][j]=ch-<span class="hljs-string">&#x27;0&#x27;</span>;<br>		&#125;<br>		tdh::<span class="hljs-built_in">init</span>(a, A, B), <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, mp[(<span class="hljs-type">int</span>)tdh::<span class="hljs-built_in">get</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,A,B)]);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h3><p>使用 $(x,y)$ 的方式表示行列真的不标准，大家不要学我（<br>$p_1$ 表示行内（不同 $y$ 之间）的底，$p_2$ 表示列内（不同 $x$ 之间）的底，为方便理解可自行替换为 $p_x$、$p_y$。</p>
+<p>这个算法很冷，学了很大概率也用不上，随缘吧。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SDSC-2024/" class="print-no-link">#SDSC 2024</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>二维哈希 - 洛谷P10474 题解</div>
+      <div>https://algo-x.cn/articles/Two-Dimensional-Hash-Solution-of-P10474/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Taoran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月28日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年7月30日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/articles/Minimum-Positive-Number-of-Linear-Combinations-of-Coefficients/" title="整系数线性组合的最小正数">
+                        <span class="hidden-mobile">整系数线性组合的最小正数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <body>×</body> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
