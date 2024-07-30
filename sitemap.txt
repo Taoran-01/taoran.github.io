@@ -1,3 +1,4 @@
+https://algo-x.cn/articles/Deterministic-Finite-Automaton-2/
 https://algo-x.cn/articles/Two-Dimensional-Hash-Solution-of-P10474/
 https://algo-x.cn/articles/Minimum-Positive-Number-of-Linear-Combinations-of-Coefficients/
 https://algo-x.cn/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/

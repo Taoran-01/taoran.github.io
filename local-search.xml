@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>有限状态自动机</title>
+    <link href="/articles/Deterministic-Finite-Automaton-2/"/>
+    <url>/articles/Deterministic-Finite-Automaton-2/</url>
+    
+    <content type="html"><![CDATA[<hr><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>因本文叙述过于简略和不标准，在阅读本文之前，你需要看一眼<a href="https://oi-wiki.org/string/automaton/">OI-Wiki</a>，并阅读<a href="../Deterministic-Finite-Automaton">这篇文章</a>及其它相关文章，以对DFA有一个初步的认识，并掌握DFA的基础理论知识与形式化描述方法。</p><hr><h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="子串与子序列"><a href="#子串与子序列" class="headerlink" title="子串与子序列"></a>子串与子序列</h4><p>子串是连续的，子序列可以不连续。</p><h4 id="集合的对称差"><a href="#集合的对称差" class="headerlink" title="集合的对称差"></a>集合的对称差</h4><p>对称差是集合论的一个概念，描述两个集合之间的关系。<br>两个集合取对称差会得到一个集合，其符号与运算法则如下：<br>$$<br>A\oplus B&#x3D;(A\cup B)-(A\cap B)<br>$$<br>对称差记录了两个集合中不同的元素。</p><hr><h3 id="什么是有限状态自动机"><a href="#什么是有限状态自动机" class="headerlink" title="什么是有限状态自动机"></a>什么是有限状态自动机</h3><p>一种能在集合内识别特定语言的结构，确定有限状态自动机。</p><p>可以视作一个路线，根据信息沿着边在DFA上走。</p><h4 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h4><p>DFA有两种状态：拒绝状态和接受状态。在拒绝状态下，答案不可取。<br>需要注意，拒绝状态和接受状态是可以转化的，并不是走到拒绝状态就说明不成立。</p><p>在本文的图片中，接受状态使用绿色节点表示，拒绝状态使用红色节点表示。</p><h4 id="转移"><a href="#转移" class="headerlink" title="转移"></a>转移</h4><p>DFA的不同状态间是可以转移的。只要新传入的数据满足转移条件，就可以从一个节点转移到另一个节点。<br>特别地，当传入的数据对当前节点的所有转移状态都不满足时，它满足通配符<code>*</code>，可以从这里转移。有时省略，表示转移到自身，不改变状态。</p><hr><h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>下面这个自动机可以用于判断字串是否含有奇数个字符“$1$”。<br><img src="../../img/47-01.jpg" alt="47-01" style="zoom:50%;" /><br>如图所示，一共两种状态，且仅能通过“$1$”转移。每读入一个“$1$”就转移一次状态，奇数次在状态 $\text{end}$，偶数次在状态 $\text{st}$。<br>读入其它字符时不转移，表示其它字符不影响字符“$1$”的奇偶性。</p><p>下面这个自动机可以用于判断字串中是否含有子序列“$114514$”。<br><img src="../../img/47-02.jpg" alt="47-02" style="zoom:50%;" /><br>仿照上面的例子也不难理解，这里不做解释。</p><p>这个东西叫子序列自动机，可以 $O(n)$ 判断一个长度为 $n$ 的数列是否含有子序列“$114514$”。</p><hr><h3 id="DFA间的运算"><a href="#DFA间的运算" class="headerlink" title="DFA间的运算"></a>DFA间的运算</h3><p>使用笛卡尔积实现。</p><h4 id="DFA的交"><a href="#DFA的交" class="headerlink" title="DFA的交"></a>DFA的交</h4><p>假设我们需要实现判断一个字串是否同时满足：</p><ol><li>包含奇数个字符“$1$”；</li><li>有子序列“$14$”。</li></ol><p>一种朴素的想法是，先跑一遍判断奇数个“$1$”的自动机(上面有)，再跑一边子序列自动机。</p><p>能否将两个DFA整合到一个DFA中，跑一次同时判断两个条件？<br><img src="../../img/47-03.jpg" alt="47-03" style="zoom:75%;" /><br>观察上面这个自动机，如果能从 $\text{st}$ 走到 $\text{ed}$，就表明同时满足以上两种条件。</p><p>程序化地求这个综合DFA的步骤如下：</p><ol><li>写出两个DFA；</li><li>对于每一对转移进行合并：若在第一个DFA中有 $x_1\xrightarrow cy_1$，在第二个中有 $x_2\xrightarrow cy_2$，则在新的自动机上有 $(x_1,x_2)\xrightarrow c(y_1,y_2)$。</li><li>$(y_1,y_2)\leftarrow(y_1,y_2)\land y_1\land y_2$，即 $y_1$ 与 $y_2$ 必须同时为可接受状态，新DFA中的点才为可接受状态，否则为拒绝状态。（显然 $x$ 的状态我们不用管。）</li></ol><p>我们称第 $2$ 个操作为求两个DFA的笛卡尔积。</p><p>再举一个例子，要判断一个字串既不包含“$2$”，又不包含“$3$”，只需构造下面的自动机：<br><img src="../../img/47-04.jpg" alt="47-04" style="zoom:75%;" /><br>注意到有两个状态是没用的，可合并掉，因此可以将新DFA写成右边的形式。</p><h4 id="DFA的并"><a href="#DFA的并" class="headerlink" title="DFA的并"></a>DFA的并</h4><p>与上文相似。若有 $x_1\xrightarrow cy_1$、$x_2\xrightarrow cy_2$，则可连边 $(x_1,y_1)\xrightarrow c(y_1,y_2)$，其中$(y_1,y_2)\leftarrow(y_1,y_2)\lor y_1\lor y_2$。</p><h4 id="DFA的对称差"><a href="#DFA的对称差" class="headerlink" title="DFA的对称差"></a>DFA的对称差</h4><p>与上文相似。若有 $x_1\xrightarrow cy_1$、$x_2\xrightarrow cy_2$，则可连边 $(x_1,y_1)\xrightarrow c(y_1,y_2)$，其中$(y_1,y_2)\leftarrow(y_1,y_2)\lor(\lnot y_1\land y_2)\lor(y_1\land\lnot y_2)$。</p><hr><h3 id="DFA的存储"><a href="#DFA的存储" class="headerlink" title="DFA的存储"></a>DFA的存储</h3><p>DFA中的一条转移边 $u\xrightarrow cv$ 可以记在二维数组 $f$ 中，$f_{u,c}&#x3D;v$。</p><hr><h3 id="DFA最小化"><a href="#DFA最小化" class="headerlink" title="DFA最小化"></a>DFA最小化</h3><p>本蒟蒻还没学会，等学会了再来补吧。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>SDSC 2024</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>二维哈希 - 洛谷P10474 题解</title>
     <link href="/articles/Two-Dimensional-Hash-Solution-of-P10474/"/>
     <url>/articles/Two-Dimensional-Hash-Solution-of-P10474/</url>
