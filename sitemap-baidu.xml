@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://algo-x.cn/articles/Bitset/</loc>
+    <lastmod>2024-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://algo-x.cn/articles/CSP-S1-2024-Caution/</loc>
+    <lastmod>2024-07-31</lastmod>
+  </url>
+  <url>
+    <loc>https://algo-x.cn/articles/Anecdotes-from-Class-6/</loc>
+    <lastmod>2024-07-31</lastmod>
+  </url>
+  <url>
     <loc>https://algo-x.cn/articles/Deterministic-Finite-Automaton-2/</loc>
     <lastmod>2024-07-30</lastmod>
   </url>
@@ -41,10 +53,6 @@
     <lastmod>2024-07-16</lastmod>
   </url>
   <url>
-    <loc>https://algo-x.cn/articles/CSP-S1-2024-Caution/</loc>
-    <lastmod>2024-07-15</lastmod>
-  </url>
-  <url>
     <loc>https://algo-x.cn/articles/Solution-of-CF191A/</loc>
     <lastmod>2024-07-11</lastmod>
   </url>
@@ -61,18 +69,6 @@
     <lastmod>2024-07-09</lastmod>
   </url>
   <url>
-    <loc>https://algo-x.cn/articles/Anecdotes-from-Class-6/</loc>
-    <lastmod>2024-07-01</lastmod>
-  </url>
-  <url>
-    <loc>https://algo-x.cn/articles/About-This-Website/</loc>
-    <lastmod>2024-06-30</lastmod>
-  </url>
-  <url>
-    <loc>https://algo-x.cn/articles/About-Me/</loc>
-    <lastmod>2024-06-27</lastmod>
-  </url>
-  <url>
     <loc>https://algo-x.cn/articles/Solution-of-P4178/</loc>
     <lastmod>2024-06-27</lastmod>
   </url>
@@ -82,10 +78,6 @@
   </url>
   <url>
     <loc>https://algo-x.cn/articles/Salt-Production-from-Seawater/</loc>
-    <lastmod>2024-06-27</lastmod>
-  </url>
-  <url>
-    <loc>https://algo-x.cn/articles/Periodic-Table/</loc>
     <lastmod>2024-06-27</lastmod>
   </url>
   <url>
@@ -110,10 +102,6 @@
   </url>
   <url>
     <loc>https://algo-x.cn/articles/0-1-Backpack/</loc>
-    <lastmod>2024-06-27</lastmod>
-  </url>
-  <url>
-    <loc>https://algo-x.cn/articles/You-Have-Been-Cheated/</loc>
     <lastmod>2024-06-27</lastmod>
   </url>
   <url>
@@ -154,10 +142,6 @@
   </url>
   <url>
     <loc>https://algo-x.cn/articles/Network-Flow-Algorithm/</loc>
-    <lastmod>2024-06-27</lastmod>
-  </url>
-  <url>
-    <loc>https://algo-x.cn/articles/Mr-Zhuang-s-Laws-of-Mathematics/</loc>
     <lastmod>2024-06-27</lastmod>
   </url>
   <url>
