@@ -1,3 +1,4 @@
+https://algo-x.cn/articles/Logarithmic/
 https://algo-x.cn/articles/Bitset/
 https://algo-x.cn/articles/CSP-S1-2024-Caution/
 https://algo-x.cn/articles/Anecdotes-from-Class-6/

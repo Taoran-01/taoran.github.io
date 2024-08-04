@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>对数运算</title>
+    <link href="/articles/Logarithmic/"/>
+    <url>/articles/Logarithmic/</url>
+    
+    <content type="html"><![CDATA[<hr><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>本文适用范围为高中数学，内容较浅，仅作总结回顾使用。<br>无特殊说明，下面式子的前提条件均为真数大于 $0$、底数大于 $0$ 且不等于 $1$。</p><p>与 $\text{OI}$ 不同，在数学和生活中，$\log x$ 表示 $\log_{10}x$，即以 $10$ 为底的对数。而在 $\text{OI}$ 中默认表示以 $2$ 为底的对数，请注意区分。</p><hr><h3 id="对数的定义"><a href="#对数的定义" class="headerlink" title="对数的定义"></a>对数的定义</h3><p>$a^n&#x3D;m\Leftrightarrow\log_am&#x3D;n\ (m&gt;0,\ a&gt;0\land a\neq 1)$。其中，$a$ 称作<strong>底数</strong>，$m$ 称作<strong>真数</strong>，$n$ 称作<strong>对数</strong>。</p><p>$$<br>\log_\text{底数}\text{真数}&#x3D;\text{对数},\ \text{底数}^\text{对数}&#x3D;\text{真数}<br>$$</p><p>由此可见，对数运算是指数运算的逆运算。</p><hr><h3 id="指数与对数的关系"><a href="#指数与对数的关系" class="headerlink" title="指数与对数的关系"></a>指数与对数的关系</h3><p>$$<br>\begin{array}{c|ccc}<br>&amp;m&#x3D;a^n&amp;n&#x3D;log_am&amp;\text{范围}\\<br>\hline<br>a&amp;\text{底数}&amp;\text{底数}&amp;a&gt;0,a\neq1\\<br>m&amp;\text{幂}&amp;\text{真数}&amp;m&gt;0\\<br>n&amp;\text{指数}&amp;\text{对数}&amp;n\in\mathbb R<br>\end{array}<br>$$</p><hr><h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>$2^3&#x3D;8\Leftrightarrow\log_28&#x3D;3$<br>$3^{\frac12}&#x3D;\sqrt3\Leftrightarrow\log_3\sqrt3&#x3D;\frac12$</p><hr><h3 id="特殊值"><a href="#特殊值" class="headerlink" title="特殊值"></a>特殊值</h3><p>$a^1&#x3D;a\Leftrightarrow\log_aa&#x3D;1\ (a&gt;0\land a\neq1)$，即 $1$ 的对数为 $0$。<br>$a^0&#x3D;1\Leftrightarrow\log_a1&#x3D;0\ (a&gt;0\land a\neq1)$，即底数的对数为 $1$。</p><hr><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><h4 id="对数恒等式"><a href="#对数恒等式" class="headerlink" title="对数恒等式"></a>对数恒等式</h4><p>$$<br>a^{\log_am}&#x3D;m<br>$$<br>基于底数的定义推导而来，揭示了任何一个数($a$)都可作为另一个数($m$)的底数。</p><h4 id="废话恒等式"><a href="#废话恒等式" class="headerlink" title="废话恒等式"></a>废话恒等式</h4><p>$$<br>\log_aa^m&#x3D;m<br>$$<br>等价于 $a^m&#x3D;a^m$。</p><h4 id="同时取对数"><a href="#同时取对数" class="headerlink" title="同时取对数"></a>同时取对数</h4><p>$$<br>A&#x3D;B\Leftrightarrow \log_aA&#x3D;\log_aB<br>$$<br>不难理解，两个相等的数对同一个数取对数，结果依然相等。</p><hr><h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><h4 id="一、积的对数等于对数的积"><a href="#一、积的对数等于对数的积" class="headerlink" title="一、积的对数等于对数的积"></a>一、积的对数等于对数的积</h4><p>$$<br>\log_amn&#x3D;\log_am+\log_an<br>$$<br>证明如下：<br>令 $M&#x3D;\log_am$，$N&#x3D;\log_an$，<br>则 $a^M&#x3D;m$，$a^N&#x3D;n$，<br>所以 $mn&#x3D;a^M\cdot a^N&#x3D;a^{M+N}$；<br>同时取对数，得 $\log_amn&#x3D;\log_aa^{M+N}$；<br>又因为 $\log_aa^{M+N}&#x3D;M+N&#x3D;\log_am+\log_an$，<br>所以 $\log_amn&#x3D;\log_am+\log_an$，得证。</p><h4 id="二、商的对数等于对数的差"><a href="#二、商的对数等于对数的差" class="headerlink" title="二、商的对数等于对数的差"></a>二、商的对数等于对数的差</h4><p>$$<br>\log_a\frac mn&#x3D;\log_am-\log_an<br>$$<br>证明如下：<br>令 $M&#x3D;\log_am$，$N&#x3D;\log_an$，<br>则 $a^M&#x3D;m$，$a^N&#x3D;n$，<br>所以 $\frac mn&#x3D;\frac {a^M}{a^N}&#x3D;a^{M-N}$；<br>同时取对数，得 $\log_a\frac mn&#x3D;\log_aa^{M-N}$；<br>又因为 $\log_aa^{M-N}&#x3D;M-N&#x3D;\log_am-\log_an$，<br>所以 $\log_a\frac mn&#x3D;\log_am-\log_an$，得证。</p><h4 id="三、幂的对数等于对数的积"><a href="#三、幂的对数等于对数的积" class="headerlink" title="三、幂的对数等于对数的积"></a>三、幂的对数等于对数的积</h4><p>$$<br>\log_am^n&#x3D;n\log_am<br>$$<br>证明如下：<br>令 $M&#x3D;\log_am$，则 $a^M&#x3D;m$，<br>所以 $m^n&#x3D;(a^M)^n&#x3D;a^{Mn}$；<br>同时取对数，得 $\log_am^n&#x3D;\log_aa^{Mn}$；<br>又因为 $\log_aa^{Mn}&#x3D;Mn&#x3D;n\log_am$，<br>所以 $\log_am^n&#x3D;n\log_am$，得证。</p><hr><h3 id="特殊底的对数"><a href="#特殊底的对数" class="headerlink" title="特殊底的对数"></a>特殊底的对数</h3><p>对于 $a^n&#x3D;m\Leftrightarrow\log_am&#x3D;n$：</p><ol><li>当 $a&#x3D;10$ 时，$\log_{10}m$ 称为常用对数，记作 $\lg m$；</li><li>当 $a&#x3D;e$ 时，$\log_em$ 称为自然对数，记作 $\ln m$。</li></ol><hr><h3 id="换底公式及其推论"><a href="#换底公式及其推论" class="headerlink" title="换底公式及其推论"></a>换底公式及其推论</h3><h4 id="换底公式"><a href="#换底公式" class="headerlink" title="换底公式"></a>换底公式</h4><p>$$<br>\log_ab&#x3D;\frac{\log_cb}{\log_ca}<br>$$</p><p>证明如下：<br>令 $m&#x3D;\log_ab$，则 $a^m&#x3D;b$，<br>同时取对数，得 $\log_ca^m&#x3D;\log_cb$；<br>幂指数提前，得 $m\log_ca&#x3D;\log_cb$，$m&#x3D;\frac{\log_cb}{\log_ca}$；<br>回代，得 $\log_ab&#x3D;\frac{\log_cb}{\log_ca}$。</p><h4 id="底的幂"><a href="#底的幂" class="headerlink" title="底的幂"></a>底的幂</h4><p>$$<br>\log_{a^n}m&#x3D;\frac1n\log_am<br>$$<br>证明如下：<br>$$<br>\log_{a^n}m&#x3D;\frac{\ln m}{\ln a^n}&#x3D;\frac{\ln m}{n\ln a}&#x3D;\frac1n\log_am<br>$$<br>另外，将该式与幂的对数综合可得：<br>$$<br>\log_{a^n}b^m&#x3D;\frac mn\log_ab<br>$$<br>底数的指数变为分母，在下面；真数的指数变为分子，在上面。</p><h4 id="倒数运算"><a href="#倒数运算" class="headerlink" title="倒数运算"></a>倒数运算</h4><p>$$<br>\log_ab\cdot\log_ba&#x3D;1,\ \text{i.e.}\ \frac1{\log_ab}&#x3D;\log_ba<br>$$<br>证明如下：<br>$$<br>\log_ab\cdot\log_ba&#x3D;\frac{\ln b}{\ln a}\cdot\frac{\ln a}{\ln b}&#x3D;1<br>$$</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+      <category>数学</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>std::bitset及时间复杂度常数优化</title>
     <link href="/articles/Bitset/"/>
     <url>/articles/Bitset/</url>
