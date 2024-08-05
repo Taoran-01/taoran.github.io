@@ -19,8 +19,8 @@
     <meta name="description" content="树的重心删除树上一点，所形成的最大子树最小的那个点是树的重心。 12345678910dfs(u,fa)&#123; &#x2F;&#x2F;若删除u，求最大子树大小	siz[u]&#x3D;1;	mx&#x3D;0;	for v:son &#123;		dfs(v);		diz[u]+&#x3D;siz[v];		siz[v]&#x3D;max(mx,siz[v]);	&#125;	mx&#x3D;max(mx,n-siz[u]);&#125; 时间复杂度$O(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图论笔记 24-02-18">
-<meta property="og:url" content="https://algo-x.cn/articles/Note-24-02-18/index.html">
-<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:url" content="https://algo-x.github.io/articles/Note-24-02-18/index.html">
+<meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="树的重心删除树上一点，所形成的最大子树最小的那个点是树的重心。 12345678910dfs(u,fa)&#123; &#x2F;&#x2F;若删除u，求最大子树大小	siz[u]&#x3D;1;	mx&#x3D;0;	for v:son &#123;		dfs(v);		diz[u]+&#x3D;siz[v];		siz[v]&#x3D;max(mx,siz[v]);	&#125;	mx&#x3D;max(mx,n-siz[u]);&#125; 时间复杂度$O(">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-18T08:54:55.000Z">
@@ -30,7 +30,7 @@
   
   
   
-  <title>图论笔记 24-02-18 - Algo-X.cn</title>
+  <title>图论笔记 24-02-18 - Algo-X.cn (Temporary)</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -68,7 +68,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"algo-x.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -94,7 +94,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Algo-X.cn</strong>
+      <strong>Algo-X.cn (Temporary)</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -374,7 +374,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>图论笔记 24-02-18</div>
-      <div>https://algo-x.cn/articles/Note-24-02-18/</div>
+      <div>https://algo-x.github.io/articles/Note-24-02-18/</div>
     </div>
     <div class="license-meta">
       

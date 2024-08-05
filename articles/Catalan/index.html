@@ -19,21 +19,21 @@
     <meta name="description" content="知识前置排列组合详见OI-Wiki，后面会出一篇文章专门讲。 栈先进先出的数据结构，详见OI-WIki。 二叉搜索树左子树点权均小于根节点，右子树点权都大于根节点的二叉树。它有很多好的性质，详见OI-Wiki。  解决问题以下问题的答案都可以用 $\text{Catalan}$ 数 $H_n$ 表示。 一、进出栈问题一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="卡特兰数">
-<meta property="og:url" content="https://algo-x.cn/articles/Catalan/index.html">
-<meta property="og:site_name" content="Algo-X.cn">
+<meta property="og:url" content="https://algo-x.github.io/articles/Catalan/index.html">
+<meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="知识前置排列组合详见OI-Wiki，后面会出一篇文章专门讲。 栈先进先出的数据结构，详见OI-WIki。 二叉搜索树左子树点权均小于根节点，右子树点权都大于根节点的二叉树。它有很多好的性质，详见OI-Wiki。  解决问题以下问题的答案都可以用 $\text{Catalan}$ 数 $H_n$ 表示。 一、进出栈问题一个容量无穷大的栈，若进栈序列为 $1,2,3,\dots,n$，求共有多少种不">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://algo-x.cn/img/41-01.png">
-<meta property="og:image" content="https://algo-x.cn/img/41-02.jpg">
+<meta property="og:image" content="https://algo-x.github.io/img/41-01.png">
+<meta property="og:image" content="https://algo-x.github.io/img/41-02.jpg">
 <meta property="article:published_time" content="2024-07-15T03:42:52.000Z">
 <meta property="article:modified_time" content="2024-07-16T12:47:17.016Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://algo-x.cn/img/41-01.png">
+<meta name="twitter:image" content="https://algo-x.github.io/img/41-01.png">
   
   
   
-  <title>卡特兰数 - Algo-X.cn</title>
+  <title>卡特兰数 - Algo-X.cn (Temporary)</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -71,7 +71,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"algo-x.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -97,7 +97,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Algo-X.cn</strong>
+      <strong>Algo-X.cn (Temporary)</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -380,7 +380,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>卡特兰数</div>
-      <div>https://algo-x.cn/articles/Catalan/</div>
+      <div>https://algo-x.github.io/articles/Catalan/</div>
     </div>
     <div class="license-meta">
       
