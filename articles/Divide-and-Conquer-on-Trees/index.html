@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
-  <link rel="icon" href="/img/avatar_round.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Personal-Blog/img/avatar_round.png">
+  <link rel="icon" href="/Personal-Blog/img/avatar_round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,18 +19,18 @@
     <meta name="description" content="知识前置树无环联通图，有唯一一个前驱。详见OI-Wiki。 树的重心一个节点，使得删去它后所形成的最大子树最小。详见OI-Wiki。 线段树一个支持维护区间信息的数据结构。详见OI-Wiki。  写在前面本文讲述得较为详细。如果只是想快速了解算法内容，请前往OI-Wiki。本篇文章就无根树进行说明。  算法适用条件解决带权树上路径统计相关问题。时间复杂度$O(n\log n)$，空间复杂度$O(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="点分治">
-<meta property="og:url" content="https://taoran-01.github.io/articles/Divide-and-Conquer-on-Trees/index.html">
+<meta property="og:url" content="https://taoran-01.github.io/Personal-Blog/articles/Divide-and-Conquer-on-Trees/index.html">
 <meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="知识前置树无环联通图，有唯一一个前驱。详见OI-Wiki。 树的重心一个节点，使得删去它后所形成的最大子树最小。详见OI-Wiki。 线段树一个支持维护区间信息的数据结构。详见OI-Wiki。  写在前面本文讲述得较为详细。如果只是想快速了解算法内容，请前往OI-Wiki。本篇文章就无根树进行说明。  算法适用条件解决带权树上路径统计相关问题。时间复杂度$O(n\log n)$，空间复杂度$O(">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://taoran-01.github.io/img/20-01.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/20-02.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/20-03.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/20-01.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/20-02.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/20-03.jpg">
 <meta property="article:published_time" content="2024-03-24T14:45:34.000Z">
 <meta property="article:modified_time" content="2024-06-27T13:52:22.535Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://taoran-01.github.io/img/20-01.jpg">
+<meta name="twitter:image" content="https://taoran-01.github.io/Personal-Blog/img/20-01.jpg">
   
   
   
@@ -58,12 +58,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link  rel="stylesheet" href="/Personal-Blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/Personal-Blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/Personal-Blog/css/highlight-dark.css" />
   
 
 
@@ -72,15 +72,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taoran-01.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taoran-01.github.io","root":"/Personal-Blog/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Personal-Blog/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script  src="/Personal-Blog/js/utils.js" ></script>
+  <script  src="/Personal-Blog/js/color-schema.js" ></script>
   
 
 
@@ -97,7 +97,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/Personal-Blog/">
       <strong>Algo-X.cn (Temporary)</strong>
     </a>
 
@@ -116,7 +116,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -128,7 +128,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/articles/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/articles/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>文章</span>
               </a>
@@ -140,7 +140,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -152,7 +152,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -164,7 +164,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/chemistry/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/chemistry/" target="_self">
                 <i class="iconfont icon-exp-fill"></i>
                 <span>化学工具站</span>
               </a>
@@ -176,7 +176,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -188,7 +188,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -218,7 +218,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/Personal-Blog/img/background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -317,14 +317,14 @@
 <hr>
 <h3 id="算法适用条件"><a href="#算法适用条件" class="headerlink" title="算法适用条件"></a>算法适用条件</h3><p>解决带权树上路径统计相关问题。<br>时间复杂度$O(n\log n)$，空间复杂度$O(n)$。</p>
 <hr>
-<h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><p>以这样一棵树为例：<br><img src="../../img/20-01.jpg" srcset="/img/loading.gif" lazyload alt="20-01" style="zoom:50%;" /><br>先随便指定一个根节点。<br>显然，对于每条树上的路径，我们可以分为两种。一种时经过根节点的，另一种是不经过根节点的。</p>
+<h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><p>以这样一棵树为例：<br><img src="../../img/20-01.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="20-01" style="zoom:50%;" /><br>先随便指定一个根节点。<br>显然，对于每条树上的路径，我们可以分为两种。一种时经过根节点的，另一种是不经过根节点的。</p>
 <p>对于每条经过根节点的路径$u\rightarrow v$，我们将其拆为两段，分别为$u\rightarrow root$和$root\rightarrow v$，计算后再合并，即可得到答案。<br>由此，可以处理根节点到每个节点的路径信息，再计算经过根节点的路径信息。</p>
 <p>不经过根节点的路径一定全部在子树中。完成上述操作后，可将根节点删除，对每个子树内的问题进行求解。这样不经过根节点的路径一定会在后续操作中转化为经过子树根节点的路径，再通过上述过程可计算答案。</p>
 <p>所有子树求解完后向上递归合并答案，结合经过根节点路径的答案和所有子树内路径的答案，即可得到所有路径的答案。</p>
 <p>考虑最坏情况，树是一条链，根节点每次都选到链的一端，时间复杂度$O(n^2)$。</p>
 <hr>
 <h3 id="算法优化"><a href="#算法优化" class="headerlink" title="算法优化"></a>算法优化</h3><p>不难发现，算法的时间瓶颈在于子树大小。子树越大，所能继续分的次数越多，树的总计算次数也越多。所以，被分开的每个子树应尽可能小。<br>每次都取当前树的重心作为根节点，这样把树分开后所形成的最大子树会最小，从而减少总递归层数。</p>
-<p>算法分为三步：<br>1.找到当前树的根节点，计算根节点到各节点的答案，处理经过根节点的路径个数。<br><img src="../../img/20-02.jpg" srcset="/img/loading.gif" lazyload alt="20-02" style="zoom:50%;" /><br>2.统计完，将根节点删除，对子树进行求解。<br><img src="../../img/20-03.jpg" srcset="/img/loading.gif" lazyload alt="20-03" style="zoom:50%;" /></p>
+<p>算法分为三步：<br>1.找到当前树的根节点，计算根节点到各节点的答案，处理经过根节点的路径个数。<br><img src="../../img/20-02.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="20-02" style="zoom:50%;" /><br>2.统计完，将根节点删除，对子树进行求解。<br><img src="../../img/20-03.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="20-03" style="zoom:50%;" /></p>
 <p>这样总的递归层数不会超过$\log n$，时间复杂度$O(n\log n)$。</p>
 <hr>
 <h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p>几点注意事项：<br>1.递归时需要删除根节点，用<code>vis</code>数组存储；<br>2.数组删除时需要用队列存储后精准删除，使用<code>memset</code>或<code>for</code>循环会爆掉。</p>
@@ -351,12 +351,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -379,7 +379,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>点分治</div>
-      <div>https://taoran-01.github.io/articles/Divide-and-Conquer-on-Trees/</div>
+      <div>https://taoran-01.github.io/Personal-Blog/articles/Divide-and-Conquer-on-Trees/</div>
     </div>
     <div class="license-meta">
       
@@ -434,7 +434,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Slope-Optimization/" title="斜率优化">
+                      <a href="/Personal-Blog/articles/Slope-Optimization/" title="斜率优化">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">斜率优化</span>
                         <span class="visible-mobile">上一篇</span>
@@ -444,7 +444,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Detailed-Explanation-of-EPS/" title="eps详解">
+                      <a href="/Personal-Blog/articles/Detailed-Explanation-of-EPS/" title="eps详解">
                         <span class="hidden-mobile">eps详解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -580,8 +580,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script  src="/Personal-Blog/js/events.js" ></script>
+<script  src="/Personal-Blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -603,7 +603,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script  src="/Personal-Blog/js/img-lazyload.js" ></script>
   
 
 
@@ -745,7 +745,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script  src="/Personal-Blog/js/local-search.js" ></script>
 
 
 
@@ -753,7 +753,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script  src="/Personal-Blog/js/boot.js" ></script>
 
 
   

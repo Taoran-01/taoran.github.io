@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
-  <link rel="icon" href="/img/avatar_round.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Personal-Blog/img/avatar_round.png">
+  <link rel="icon" href="/Personal-Blog/img/avatar_round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,21 +19,21 @@
     <meta name="description" content="知识前置树无环联通图，有唯一一个前驱。详见OI-Wiki。 点分治一个树上暴力优化算法，时间复杂度$O(n\log n)$。详见OI-Wiki，或前往另一篇文章。  题目描述更详细的描述，请前往洛谷查看。 给定一棵$n$个节点的树，每条边有边权$w$，求出树上两点距离小于等于$k$的点对数量。样例如图所示： 数据范围：$1\le n\le4\times10^4$，$0\le w\le1\time">
 <meta property="og:type" content="article">
 <meta property="og:title" content="洛谷P4178 题解">
-<meta property="og:url" content="https://taoran-01.github.io/articles/Solution-of-P4178/index.html">
+<meta property="og:url" content="https://taoran-01.github.io/Personal-Blog/articles/Solution-of-P4178/index.html">
 <meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="知识前置树无环联通图，有唯一一个前驱。详见OI-Wiki。 点分治一个树上暴力优化算法，时间复杂度$O(n\log n)$。详见OI-Wiki，或前往另一篇文章。  题目描述更详细的描述，请前往洛谷查看。 给定一棵$n$个节点的树，每条边有边权$w$，求出树上两点距离小于等于$k$的点对数量。样例如图所示： 数据范围：$1\le n\le4\times10^4$，$0\le w\le1\time">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://taoran-01.github.io/img/22-01.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/22-02.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/22-03.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/22-04.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/22-05.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/22-06.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/22-01.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/22-02.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/22-03.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/22-04.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/22-05.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/22-06.jpg">
 <meta property="article:published_time" content="2024-03-28T13:44:45.000Z">
 <meta property="article:modified_time" content="2024-06-27T14:04:55.846Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://taoran-01.github.io/img/22-01.jpg">
+<meta name="twitter:image" content="https://taoran-01.github.io/Personal-Blog/img/22-01.jpg">
   
   
   
@@ -61,12 +61,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link  rel="stylesheet" href="/Personal-Blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/Personal-Blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/Personal-Blog/css/highlight-dark.css" />
   
 
 
@@ -75,15 +75,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taoran-01.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taoran-01.github.io","root":"/Personal-Blog/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Personal-Blog/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script  src="/Personal-Blog/js/utils.js" ></script>
+  <script  src="/Personal-Blog/js/color-schema.js" ></script>
   
 
 
@@ -100,7 +100,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/Personal-Blog/">
       <strong>Algo-X.cn (Temporary)</strong>
     </a>
 
@@ -119,7 +119,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -131,7 +131,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/articles/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/articles/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>文章</span>
               </a>
@@ -143,7 +143,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -155,7 +155,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -167,7 +167,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/chemistry/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/chemistry/" target="_self">
                 <i class="iconfont icon-exp-fill"></i>
                 <span>化学工具站</span>
               </a>
@@ -179,7 +179,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -191,7 +191,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -221,7 +221,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/Personal-Blog/img/background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -316,12 +316,12 @@
 <h4 id="点分治"><a href="#点分治" class="headerlink" title="点分治"></a>点分治</h4><p>一个树上暴力优化算法，时间复杂度$O(n\log n)$。<br>详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/tree-divide/#%E7%82%B9%E5%88%86%E6%B2%BB">OI-Wiki</a>，或前往<a href="/2024/03/24/Divide-and-Conquer-on-Trees/">另一篇文章</a>。</p>
 <hr>
 <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>更详细的描述，请前往<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4178">洛谷</a>查看。</p>
-<p>给定一棵$n$个节点的树，每条边有边权$w$，求出树上两点距离小于等于$k$的点对数量。<br>样例如图所示：<br><img src="../../img/22-01.jpg" srcset="/img/loading.gif" lazyload alt="22-01" style="zoom:75%;" /></p>
+<p>给定一棵$n$个节点的树，每条边有边权$w$，求出树上两点距离小于等于$k$的点对数量。<br>样例如图所示：<br><img src="../../img/22-01.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="22-01" style="zoom:75%;" /></p>
 <p>数据范围：$1\le n\le4\times10^4$，$0\le w\le1\times10^3$，$0\le k\le1\times10^4$。</p>
 <hr>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><h4 id="暴力算法"><a href="#暴力算法" class="headerlink" title="暴力算法"></a>暴力算法</h4><p>对于每两个点都求一遍距离，预处理后统一比较。<br>时间复杂度和空间复杂度都是$O(n^2)$，然后爆了。</p>
 <h4 id="点分治优化"><a href="#点分治优化" class="headerlink" title="点分治优化"></a>点分治优化</h4><p>我们知道，点分治解将树上路径统计相关问题，时间复杂度在$O(n\log n)$以内。</p>
-<p>操作步骤：<br>一、找到当前子树的重心；<br>二、预处理深度和大小信息；<br><img src="../../img/22-02.jpg" srcset="/img/loading.gif" lazyload alt="22-02" style="zoom:75%;" /><br>三、匹配深度，判断是否大于$k$，若大于则统计进答案；<br><img src="../../img/22-03.jpg" srcset="/img/loading.gif" lazyload alt="22-03" style="zoom:75%;" /><br><img src="../../img/22-04.jpg" srcset="/img/loading.gif" lazyload alt="22-04" style="zoom:75%;" /><br>四、删去同一子树内的答案；<br>因为匹配时答案包含同一子树内的路径，但同一子树内的不是简单路径，不合题意，需减去。<br><img src="../../img/22-05.jpg" srcset="/img/loading.gif" lazyload alt="22-05" style="zoom:75%;" /><br>五、将树拆分，查找新的重心递归求解。<br><img src="../../img/22-06.jpg" srcset="/img/loading.gif" lazyload alt="22-06" style="zoom:75%;" /></p>
+<p>操作步骤：<br>一、找到当前子树的重心；<br>二、预处理深度和大小信息；<br><img src="../../img/22-02.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="22-02" style="zoom:75%;" /><br>三、匹配深度，判断是否大于$k$，若大于则统计进答案；<br><img src="../../img/22-03.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="22-03" style="zoom:75%;" /><br><img src="../../img/22-04.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="22-04" style="zoom:75%;" /><br>四、删去同一子树内的答案；<br>因为匹配时答案包含同一子树内的路径，但同一子树内的不是简单路径，不合题意，需减去。<br><img src="../../img/22-05.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="22-05" style="zoom:75%;" /><br>五、将树拆分，查找新的重心递归求解。<br><img src="../../img/22-06.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="22-06" style="zoom:75%;" /></p>
 <h4 id="双指针优化"><a href="#双指针优化" class="headerlink" title="双指针优化"></a>双指针优化</h4><p>注意到匹路径时需要遍历树内所有节点，时间复杂度$O(n^2)$。<br>可以使用双指针优化，先对深度排序，再删去不合适的，最终取加和即为答案。<br>对照代码自己理解一下。  </p>
 <hr>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctime&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>;<br>	<span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) &#123;x=(x&lt;&lt;<span class="hljs-number">3</span>)+(x&lt;&lt;<span class="hljs-number">1</span>)+(ch^<span class="hljs-number">48</span>); ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 40010</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> v e[i].to</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> w e[i].val</span><br><span class="hljs-type">int</span> n, k, t1, t2, t3, ans;<br><span class="hljs-type">int</span> head[N], tot;<br><span class="hljs-type">int</span> siz[N], Fa[N], son[N], rt[N], cnt, h[N];<br><span class="hljs-type">bool</span> vis[N];<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">edge</span> &#123;<br>	<span class="hljs-type">int</span> to, nxt, val;<br>&#125; e[N&lt;&lt;<span class="hljs-number">1</span>];<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add_edge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> </span>&#123;<br>	e[++tot].nxt=head[x], e[tot].to=y, e[tot].val=z, head[x]=tot;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getroot</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> fa)</span> </span>&#123;<br>	siz[u]=<span class="hljs-number">1</span>, Fa[u]=fa, son[u]=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=head[u]; i; i=e[i].nxt) &#123;<br>		<span class="hljs-keyword">if</span> (v==fa||vis[v]) <span class="hljs-keyword">continue</span>;<br>		<span class="hljs-built_in">getroot</span>(v, u);<br>		siz[u]+=siz[v];<br>		<span class="hljs-keyword">if</span> (siz[son[u]]&lt;siz[v]) son[u]=v;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (son[u]==<span class="hljs-number">0</span>) &#123;rt[u]=u; <span class="hljs-keyword">return</span>;&#125;<br>	rt[u]=rt[son[u]];<br>	<span class="hljs-keyword">while</span> (<span class="hljs-built_in">max</span>(siz[son[rt[u]]], siz[u]-siz[rt[u]])&gt;siz[u]&gt;&gt;<span class="hljs-number">1</span>) rt[u]=Fa[rt[u]];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs1</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> fa, <span class="hljs-type">int</span> de)</span> </span>&#123;<br>	h[++cnt]=h[<span class="hljs-number">0</span>]+de;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=head[u]; i; i=e[i].nxt) &#123;<br>		<span class="hljs-keyword">if</span> (v==fa||vis[v]) <span class="hljs-keyword">continue</span>;<br>		<span class="hljs-built_in">dfs1</span>(v, u, de+w);<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> wi)</span> </span>&#123;<br>	cnt=<span class="hljs-number">0</span>, h[<span class="hljs-number">0</span>]=wi;<br>	<span class="hljs-built_in">dfs1</span>(u, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>	<span class="hljs-built_in">sort</span>(h+<span class="hljs-number">1</span>, h+cnt+<span class="hljs-number">1</span>);<br>	<span class="hljs-type">int</span> l=<span class="hljs-number">1</span>, r=cnt, res=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (r&gt;=l) &#123;<br>		<span class="hljs-keyword">if</span> (h[r]+h[l]&lt;=k) res+=(r-l), ++l;<br>		<span class="hljs-keyword">else</span> --r;<br>	&#125;<br>	<span class="hljs-keyword">return</span> res;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs2</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> </span>&#123;<br>	<span class="hljs-built_in">getroot</span>(u, <span class="hljs-number">0</span>);<br>	u=rt[u], vis[u]=<span class="hljs-number">1</span>;<br>	ans+=<span class="hljs-built_in">calc</span>(u, <span class="hljs-number">0</span>);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=head[u]; i; i=e[i].nxt) &#123;<br>		<span class="hljs-keyword">if</span> (vis[v]) <span class="hljs-keyword">continue</span>;<br>		ans-=<span class="hljs-built_in">calc</span>(v, w);<br>		<span class="hljs-built_in">dfs2</span>(v);<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	n=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;n; ++i) &#123;<br>		t1=<span class="hljs-built_in">read</span>(), t2=<span class="hljs-built_in">read</span>(), t3=<span class="hljs-built_in">read</span>();<br>		<span class="hljs-built_in">add_edge</span>(t1, t2, t3), <span class="hljs-built_in">add_edge</span>(t2, t1, t3); <br>	&#125;<br>	k=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-built_in">dfs2</span>(<span class="hljs-number">1</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, ans);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
@@ -346,12 +346,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -374,7 +374,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>洛谷P4178 题解</div>
-      <div>https://taoran-01.github.io/articles/Solution-of-P4178/</div>
+      <div>https://taoran-01.github.io/Personal-Blog/articles/Solution-of-P4178/</div>
     </div>
     <div class="license-meta">
       
@@ -429,7 +429,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Mr-Zhuang-s-Laws-of-Mathematics/" title="老庄定律">
+                      <a href="/Personal-Blog/articles/Mr-Zhuang-s-Laws-of-Mathematics/" title="老庄定律">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">老庄定律</span>
                         <span class="visible-mobile">上一篇</span>
@@ -439,7 +439,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Slope-Optimization/" title="斜率优化">
+                      <a href="/Personal-Blog/articles/Slope-Optimization/" title="斜率优化">
                         <span class="hidden-mobile">斜率优化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -575,8 +575,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script  src="/Personal-Blog/js/events.js" ></script>
+<script  src="/Personal-Blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -598,7 +598,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script  src="/Personal-Blog/js/img-lazyload.js" ></script>
   
 
 
@@ -740,7 +740,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script  src="/Personal-Blog/js/local-search.js" ></script>
 
 
 
@@ -748,7 +748,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script  src="/Personal-Blog/js/boot.js" ></script>
 
 
   

@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
-  <link rel="icon" href="/img/avatar_round.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Personal-Blog/img/avatar_round.png">
+  <link rel="icon" href="/Personal-Blog/img/avatar_round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,16 +19,16 @@
     <meta name="description" content="知识前置AC自动机一种字符串算法，详见OI-Wiki。  算法定义字典树，又称前缀树，常用于一组字符串中查找指定的字符串。常解决字符串前缀问题，查询一个字符串是否是另一个字符串的前缀。 字符串由结点在树中的位置决定，一个结点的所有子孙拥有相同的前缀，即该结点对应的字符串。特别地，根节点表示空字符串。 时间复杂度，$O(N_{sum})$建树，$O(1)$查询；空间复杂度$O(N_{max}\ti">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Trie">
-<meta property="og:url" content="https://taoran-01.github.io/articles/Trie/index.html">
+<meta property="og:url" content="https://taoran-01.github.io/Personal-Blog/articles/Trie/index.html">
 <meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="知识前置AC自动机一种字符串算法，详见OI-Wiki。  算法定义字典树，又称前缀树，常用于一组字符串中查找指定的字符串。常解决字符串前缀问题，查询一个字符串是否是另一个字符串的前缀。 字符串由结点在树中的位置决定，一个结点的所有子孙拥有相同的前缀，即该结点对应的字符串。特别地，根节点表示空字符串。 时间复杂度，$O(N_{sum})$建树，$O(1)$查询；空间复杂度$O(N_{max}\ti">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://taoran-01.github.io/img/24-01.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/24-01.jpg">
 <meta property="article:published_time" content="2024-04-08T13:46:40.000Z">
 <meta property="article:modified_time" content="2024-06-27T14:02:13.462Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://taoran-01.github.io/img/24-01.jpg">
+<meta name="twitter:image" content="https://taoran-01.github.io/Personal-Blog/img/24-01.jpg">
   
   
   
@@ -56,12 +56,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link  rel="stylesheet" href="/Personal-Blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/Personal-Blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/Personal-Blog/css/highlight-dark.css" />
   
 
 
@@ -70,15 +70,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taoran-01.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taoran-01.github.io","root":"/Personal-Blog/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Personal-Blog/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script  src="/Personal-Blog/js/utils.js" ></script>
+  <script  src="/Personal-Blog/js/color-schema.js" ></script>
   
 
 
@@ -95,7 +95,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/Personal-Blog/">
       <strong>Algo-X.cn (Temporary)</strong>
     </a>
 
@@ -114,7 +114,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -126,7 +126,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/articles/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/articles/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>文章</span>
               </a>
@@ -138,7 +138,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -150,7 +150,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -162,7 +162,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/chemistry/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/chemistry/" target="_self">
                 <i class="iconfont icon-exp-fill"></i>
                 <span>化学工具站</span>
               </a>
@@ -174,7 +174,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -186,7 +186,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -216,7 +216,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/Personal-Blog/img/background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -316,7 +316,7 @@
 <h3 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h3><p>对空间要求宽，字符种类较少。</p>
 <hr>
 <h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><p>一棵树，从根节点到每一个被标记节点的路径上的所有点都代表一个字符串。</p>
-<p>举个例子，这四个字符串<code>ab</code> <code>abcd</code> <code>acc</code> <code>tmc</code>在Trie树上可以表示为：<br><img src="../../img/24-01.jpg" srcset="/img/loading.gif" lazyload alt="24-01" style="zoom:75%;" />  </p>
+<p>举个例子，这四个字符串<code>ab</code> <code>abcd</code> <code>acc</code> <code>tmc</code>在Trie树上可以表示为：<br><img src="../../img/24-01.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="24-01" style="zoom:75%;" />  </p>
 <hr>
 <h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p>插入一个新的字符串，分为三部分：<br>1.顺着树往下找存在的；<br>2.直到不存在，新开点，新建边；<br>3.加到字符串末尾，打标记。</p>
 <p>两个数组，<code>trie[][]</code>和<code>exist[]</code>。<br><code>t=trie[i][j]</code>表示字典树上的边$i\rightarrow t$，权值为$j$，即第$i$个结点连接$k$字符的下一个结点为$t$。<br><code>exist[i]</code>表示以<code>i</code>结点为末尾的字符串个数，统计存在性、不计数时可用<code>bool</code>类型。 </p>
@@ -344,12 +344,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -372,7 +372,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Trie</div>
-      <div>https://taoran-01.github.io/articles/Trie/</div>
+      <div>https://taoran-01.github.io/Personal-Blog/articles/Trie/</div>
     </div>
     <div class="license-meta">
       
@@ -427,7 +427,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Deterministic-Finite-Automaton/" title="有限状态自动机">
+                      <a href="/Personal-Blog/articles/Deterministic-Finite-Automaton/" title="有限状态自动机">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">有限状态自动机</span>
                         <span class="visible-mobile">上一篇</span>
@@ -437,7 +437,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Mr-Zhuang-s-Laws-of-Mathematics/" title="老庄定律">
+                      <a href="/Personal-Blog/articles/Mr-Zhuang-s-Laws-of-Mathematics/" title="老庄定律">
                         <span class="hidden-mobile">老庄定律</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -573,8 +573,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script  src="/Personal-Blog/js/events.js" ></script>
+<script  src="/Personal-Blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -596,7 +596,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script  src="/Personal-Blog/js/img-lazyload.js" ></script>
   
 
 
@@ -738,7 +738,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script  src="/Personal-Blog/js/local-search.js" ></script>
 
 
 
@@ -746,7 +746,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script  src="/Personal-Blog/js/boot.js" ></script>
 
 
   

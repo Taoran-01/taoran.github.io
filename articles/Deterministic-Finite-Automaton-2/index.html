@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
-  <link rel="icon" href="/img/avatar_round.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Personal-Blog/img/avatar_round.png">
+  <link rel="icon" href="/Personal-Blog/img/avatar_round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,20 +19,20 @@
     <meta name="description" content="写在前面因本文叙述过于简略和不标准，在阅读本文之前，你需要看一眼OI-Wiki，并阅读这篇文章及其它相关文章，以对DFA有一个初步的认识，并掌握DFA的基础理论知识与形式化描述方法。  知识前置子串与子序列子串是连续的，子序列可以不连续。 集合的对称差对称差是集合论的一个概念，描述两个集合之间的关系。两个集合取对称差会得到一个集合，其符号与运算法则如下：$$A\oplus B&#x3D;(A\c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有限状态自动机">
-<meta property="og:url" content="https://taoran-01.github.io/articles/Deterministic-Finite-Automaton-2/index.html">
+<meta property="og:url" content="https://taoran-01.github.io/Personal-Blog/articles/Deterministic-Finite-Automaton-2/index.html">
 <meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="写在前面因本文叙述过于简略和不标准，在阅读本文之前，你需要看一眼OI-Wiki，并阅读这篇文章及其它相关文章，以对DFA有一个初步的认识，并掌握DFA的基础理论知识与形式化描述方法。  知识前置子串与子序列子串是连续的，子序列可以不连续。 集合的对称差对称差是集合论的一个概念，描述两个集合之间的关系。两个集合取对称差会得到一个集合，其符号与运算法则如下：$$A\oplus B&#x3D;(A\c">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://taoran-01.github.io/img/47-01.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/47-02.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/47-03.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/47-04.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/47-01.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/47-02.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/47-03.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/47-04.jpg">
 <meta property="article:published_time" content="2024-07-30T11:26:21.000Z">
 <meta property="article:modified_time" content="2024-07-30T13:09:39.532Z">
 <meta property="article:author" content="Taoran">
 <meta property="article:tag" content="SDSC 2024">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://taoran-01.github.io/img/47-01.jpg">
+<meta name="twitter:image" content="https://taoran-01.github.io/Personal-Blog/img/47-01.jpg">
   
   
   
@@ -60,12 +60,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link  rel="stylesheet" href="/Personal-Blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/Personal-Blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/Personal-Blog/css/highlight-dark.css" />
   
 
 
@@ -74,15 +74,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taoran-01.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taoran-01.github.io","root":"/Personal-Blog/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Personal-Blog/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script  src="/Personal-Blog/js/utils.js" ></script>
+  <script  src="/Personal-Blog/js/color-schema.js" ></script>
   
 
 
@@ -99,7 +99,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/Personal-Blog/">
       <strong>Algo-X.cn (Temporary)</strong>
     </a>
 
@@ -118,7 +118,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -130,7 +130,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/articles/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/articles/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>文章</span>
               </a>
@@ -142,7 +142,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -154,7 +154,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -166,7 +166,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/chemistry/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/chemistry/" target="_self">
                 <i class="iconfont icon-exp-fill"></i>
                 <span>化学工具站</span>
               </a>
@@ -178,7 +178,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -190,7 +190,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -220,7 +220,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/Personal-Blog/img/background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -322,8 +322,8 @@
 <p>在本文的图片中，接受状态使用绿色节点表示，拒绝状态使用红色节点表示。</p>
 <h4 id="转移"><a href="#转移" class="headerlink" title="转移"></a>转移</h4><p>DFA的不同状态间是可以转移的。只要新传入的数据满足转移条件，就可以从一个节点转移到另一个节点。<br>特别地，当传入的数据对当前节点的所有转移状态都不满足时，它满足通配符<code>*</code>，可以从这里转移。有时省略，表示转移到自身，不改变状态。</p>
 <hr>
-<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>下面这个自动机可以用于判断字串是否含有奇数个字符“$1$”。<br><img src="../../img/47-01.jpg" srcset="/img/loading.gif" lazyload alt="47-01" style="zoom:50%;" /><br>如图所示，一共两种状态，且仅能通过“$1$”转移。每读入一个“$1$”就转移一次状态，奇数次在状态 $\text{end}$，偶数次在状态 $\text{st}$。<br>读入其它字符时不转移，表示其它字符不影响字符“$1$”的奇偶性。</p>
-<p>下面这个自动机可以用于判断字串中是否含有子序列“$114514$”。<br><img src="../../img/47-02.jpg" srcset="/img/loading.gif" lazyload alt="47-02" style="zoom:50%;" /><br>仿照上面的例子也不难理解，这里不做解释。</p>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>下面这个自动机可以用于判断字串是否含有奇数个字符“$1$”。<br><img src="../../img/47-01.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="47-01" style="zoom:50%;" /><br>如图所示，一共两种状态，且仅能通过“$1$”转移。每读入一个“$1$”就转移一次状态，奇数次在状态 $\text{end}$，偶数次在状态 $\text{st}$。<br>读入其它字符时不转移，表示其它字符不影响字符“$1$”的奇偶性。</p>
+<p>下面这个自动机可以用于判断字串中是否含有子序列“$114514$”。<br><img src="../../img/47-02.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="47-02" style="zoom:50%;" /><br>仿照上面的例子也不难理解，这里不做解释。</p>
 <p>这个东西叫子序列自动机，可以 $O(n)$ 判断一个长度为 $n$ 的数列是否含有子序列“$114514$”。</p>
 <hr>
 <h3 id="DFA间的运算"><a href="#DFA间的运算" class="headerlink" title="DFA间的运算"></a>DFA间的运算</h3><p>使用笛卡尔积实现。</p>
@@ -333,7 +333,7 @@
 <li>有子序列“$14$”。</li>
 </ol>
 <p>一种朴素的想法是，先跑一遍判断奇数个“$1$”的自动机(上面有)，再跑一边子序列自动机。</p>
-<p>能否将两个DFA整合到一个DFA中，跑一次同时判断两个条件？<br><img src="../../img/47-03.jpg" srcset="/img/loading.gif" lazyload alt="47-03" style="zoom:75%;" /><br>观察上面这个自动机，如果能从 $\text{st}$ 走到 $\text{ed}$，就表明同时满足以上两种条件。</p>
+<p>能否将两个DFA整合到一个DFA中，跑一次同时判断两个条件？<br><img src="../../img/47-03.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="47-03" style="zoom:75%;" /><br>观察上面这个自动机，如果能从 $\text{st}$ 走到 $\text{ed}$，就表明同时满足以上两种条件。</p>
 <p>程序化地求这个综合DFA的步骤如下：</p>
 <ol>
 <li>写出两个DFA；</li>
@@ -341,7 +341,7 @@
 <li>$(y_1,y_2)\leftarrow(y_1,y_2)\land y_1\land y_2$，即 $y_1$ 与 $y_2$ 必须同时为可接受状态，新DFA中的点才为可接受状态，否则为拒绝状态。（显然 $x$ 的状态我们不用管。）</li>
 </ol>
 <p>我们称第 $2$ 个操作为求两个DFA的笛卡尔积。</p>
-<p>再举一个例子，要判断一个字串既不包含“$2$”，又不包含“$3$”，只需构造下面的自动机：<br><img src="../../img/47-04.jpg" srcset="/img/loading.gif" lazyload alt="47-04" style="zoom:75%;" /><br>注意到有两个状态是没用的，可合并掉，因此可以将新DFA写成右边的形式。</p>
+<p>再举一个例子，要判断一个字串既不包含“$2$”，又不包含“$3$”，只需构造下面的自动机：<br><img src="../../img/47-04.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="47-04" style="zoom:75%;" /><br>注意到有两个状态是没用的，可合并掉，因此可以将新DFA写成右边的形式。</p>
 <h4 id="DFA的并"><a href="#DFA的并" class="headerlink" title="DFA的并"></a>DFA的并</h4><p>与上文相似。若有 $x_1\xrightarrow cy_1$、$x_2\xrightarrow cy_2$，则可连边 $(x_1,y_1)\xrightarrow c(y_1,y_2)$，其中$(y_1,y_2)\leftarrow(y_1,y_2)\lor y_1\lor y_2$。</p>
 <h4 id="DFA的对称差"><a href="#DFA的对称差" class="headerlink" title="DFA的对称差"></a>DFA的对称差</h4><p>与上文相似。若有 $x_1\xrightarrow cy_1$、$x_2\xrightarrow cy_2$，则可连边 $(x_1,y_1)\xrightarrow c(y_1,y_2)$，其中$(y_1,y_2)\leftarrow(y_1,y_2)\lor(\lnot y_1\land y_2)\lor(y_1\land\lnot y_2)$。</p>
 <hr>
@@ -366,12 +366,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -388,7 +388,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/SDSC-2024/" class="print-no-link">#SDSC 2024</a>
+        <a href="/Personal-Blog/tags/SDSC-2024/" class="print-no-link">#SDSC 2024</a>
       
     </div>
   
@@ -401,7 +401,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>有限状态自动机</div>
-      <div>https://taoran-01.github.io/articles/Deterministic-Finite-Automaton-2/</div>
+      <div>https://taoran-01.github.io/Personal-Blog/articles/Deterministic-Finite-Automaton-2/</div>
     </div>
     <div class="license-meta">
       
@@ -456,7 +456,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Bitset/" title="std::bitset及时间复杂度常数优化">
+                      <a href="/Personal-Blog/articles/Bitset/" title="std::bitset及时间复杂度常数优化">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">std::bitset及时间复杂度常数优化</span>
                         <span class="visible-mobile">上一篇</span>
@@ -466,7 +466,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Two-Dimensional-Hash-Solution-of-P10474/" title="二维哈希 - 洛谷P10474 题解">
+                      <a href="/Personal-Blog/articles/Two-Dimensional-Hash-Solution-of-P10474/" title="二维哈希 - 洛谷P10474 题解">
                         <span class="hidden-mobile">二维哈希 - 洛谷P10474 题解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -602,8 +602,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script  src="/Personal-Blog/js/events.js" ></script>
+<script  src="/Personal-Blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -625,7 +625,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script  src="/Personal-Blog/js/img-lazyload.js" ></script>
   
 
 
@@ -767,7 +767,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script  src="/Personal-Blog/js/local-search.js" ></script>
 
 
 
@@ -775,7 +775,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script  src="/Personal-Blog/js/boot.js" ></script>
 
 
   

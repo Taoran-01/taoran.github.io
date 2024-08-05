@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
-  <link rel="icon" href="/img/avatar_round.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Personal-Blog/img/avatar_round.png">
+  <link rel="icon" href="/Personal-Blog/img/avatar_round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,17 +19,17 @@
     <meta name="description" content="知识前置并查集一个维护元素所属集合的数据结构，基本操作如下： 12345int fa[N];void init() &#123;for (int i&#x3D;1; i&lt;&#x3D;n; ++i) fa[i]&#x3D;i;&#125;int find(int x) &#123;return fa[x]&#x3D;&#x3D;x?x:fa[x]&#x3D;find(fa[x]);&#125;void merge(int x, int y) &amp;#12">
 <meta property="og:type" content="article">
 <meta property="og:title" content="带权并查集">
-<meta property="og:url" content="https://taoran-01.github.io/articles/Union-Find-with-Weights/index.html">
+<meta property="og:url" content="https://taoran-01.github.io/Personal-Blog/articles/Union-Find-with-Weights/index.html">
 <meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="知识前置并查集一个维护元素所属集合的数据结构，基本操作如下： 12345int fa[N];void init() &#123;for (int i&#x3D;1; i&lt;&#x3D;n; ++i) fa[i]&#x3D;i;&#125;int find(int x) &#123;return fa[x]&#x3D;&#x3D;x?x:fa[x]&#x3D;find(fa[x]);&#125;void merge(int x, int y) &amp;#12">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://taoran-01.github.io/img/34-01.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/img/34-02.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/34-01.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/34-02.jpg">
 <meta property="article:published_time" content="2024-06-23T12:13:22.000Z">
 <meta property="article:modified_time" content="2024-06-27T14:02:22.291Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://taoran-01.github.io/img/34-01.jpg">
+<meta name="twitter:image" content="https://taoran-01.github.io/Personal-Blog/img/34-01.jpg">
   
   
   
@@ -57,12 +57,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link  rel="stylesheet" href="/Personal-Blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/Personal-Blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/Personal-Blog/css/highlight-dark.css" />
   
 
 
@@ -71,15 +71,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taoran-01.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taoran-01.github.io","root":"/Personal-Blog/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Personal-Blog/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script  src="/Personal-Blog/js/utils.js" ></script>
+  <script  src="/Personal-Blog/js/color-schema.js" ></script>
   
 
 
@@ -96,7 +96,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/Personal-Blog/">
       <strong>Algo-X.cn (Temporary)</strong>
     </a>
 
@@ -115,7 +115,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -127,7 +127,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/articles/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/articles/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>文章</span>
               </a>
@@ -139,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -151,7 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -163,7 +163,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/chemistry/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/chemistry/" target="_self">
                 <i class="iconfont icon-exp-fill"></i>
                 <span>化学工具站</span>
               </a>
@@ -175,7 +175,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -187,7 +187,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -217,7 +217,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/Personal-Blog/img/background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -319,10 +319,10 @@
 <h3 id="算法定义"><a href="#算法定义" class="headerlink" title="算法定义"></a>算法定义</h3><p>在对并查集进行路径压缩和合并操作时，这些权值具有一定属性，即可将他们与父节点的关系，变化为与所在树的根结点关系。<br>在并查集的边上定义某种权值、以及这种权值在路径压缩时产生的运算，从而解决更多的问题，这种算法叫带权并查集。</p>
 <hr>
 <h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p>以最普遍的维护到父节点距离为例。<br>合并操作一般不以函数形式独立呈现，而是在主函数内。这里为了展示方便，独立写成了<code>merge()</code>函数。</p>
-<h4 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h4><p>原理如图，<code>x</code>断开与<code>t</code>的联系，直接连到祖先根节点。<br><img src="../../img/34-01.jpg" srcset="/img/loading.gif" lazyload alt="34-01" style="zoom:75%;" />  </p>
+<h4 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h4><p>原理如图，<code>x</code>断开与<code>t</code>的联系，直接连到祖先根节点。<br><img src="../../img/34-01.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="34-01" style="zoom:75%;" />  </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (fa[x]!=x) &#123;<span class="hljs-type">int</span> t=fa[x]; fa[x]=<span class="hljs-built_in">find</span>(fa[x]), d[x]+=d[t];&#125;<br>	<span class="hljs-keyword">return</span> fa[x];<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>这段代码在原先路径压缩的基础上，添加了对$d$数组的维护操作。即在路径压缩时，将到父节点的距离额外加上父节点到父父节点的距离，递归后即可直接得到当前节点到根节点的距离。<br>注意：一定要先记录<code>t</code>，完成对父节点的路径压缩后，再处理<code>x</code>，三个顺序不可颠倒。</p>
-<h4 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h4><p>原理如图，合并后<code>fx</code>断开与<code>fa[fx]</code>的连接，直接连接<code>fy</code>。路径压缩可由处理前的<code>find()</code>完成。<br><img src="../../img/34-02.jpg" srcset="/img/loading.gif" lazyload alt="34-02" style="zoom:75%;" />  </p>
+<h4 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h4><p>原理如图，合并后<code>fx</code>断开与<code>fa[fx]</code>的连接，直接连接<code>fy</code>。路径压缩可由处理前的<code>find()</code>完成。<br><img src="../../img/34-02.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="34-02" style="zoom:75%;" />  </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> </span>&#123;<br>	<span class="hljs-type">int</span> fx=<span class="hljs-built_in">find</span>(x), fy=<span class="hljs-built_in">find</span>(y);<br>	d[fx]=d[y]+z-d[x], fa[fx]=fy;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>这段代码在原先合并的基础上，添加了对$d$数组的维护操作。即在合并时，将$X$父节点的距离替换为到$Y$父节点的距离。</p>
 <h4 id="判断合法性"><a href="#判断合法性" class="headerlink" title="判断合法性"></a>判断合法性</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">x=<span class="hljs-built_in">read</span>(), y=<span class="hljs-built_in">read</span>(), c=<span class="hljs-built_in">read</span>(), fx=<span class="hljs-built_in">find</span>(x), fy=<span class="hljs-built_in">find</span>(y);<br><span class="hljs-keyword">if</span> (fx==fy) &#123;<br>	<span class="hljs-keyword">if</span>(d[x]-d[y]!=c) &#123;++cnt; <span class="hljs-keyword">continue</span>;&#125;<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-built_in">merge</span>(x, y, c);<br></code></pre></td></tr></table></figure>
@@ -372,12 +372,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -400,7 +400,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>带权并查集</div>
-      <div>https://taoran-01.github.io/articles/Union-Find-with-Weights/</div>
+      <div>https://taoran-01.github.io/Personal-Blog/articles/Union-Find-with-Weights/</div>
     </div>
     <div class="license-meta">
       
@@ -455,7 +455,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Mobius-Inversion/" title="莫比乌斯反演">
+                      <a href="/Personal-Blog/articles/Mobius-Inversion/" title="莫比乌斯反演">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">莫比乌斯反演</span>
                         <span class="visible-mobile">上一篇</span>
@@ -465,7 +465,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Solution-of-CF191A/" title="CF191A 题解">
+                      <a href="/Personal-Blog/articles/Solution-of-CF191A/" title="CF191A 题解">
                         <span class="hidden-mobile">CF191A 题解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -601,8 +601,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script  src="/Personal-Blog/js/events.js" ></script>
+<script  src="/Personal-Blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -624,7 +624,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script  src="/Personal-Blog/js/img-lazyload.js" ></script>
   
 
 
@@ -766,7 +766,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script  src="/Personal-Blog/js/local-search.js" ></script>
 
 
 
@@ -774,7 +774,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script  src="/Personal-Blog/js/boot.js" ></script>
 
 
   

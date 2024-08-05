@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
-  <link rel="icon" href="/img/avatar_round.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/Personal-Blog/img/avatar_round.png">
+  <link rel="icon" href="/Personal-Blog/img/avatar_round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="知识前置DFA请看上一篇文章有限状态自动机，或前往OI-Wiki。 Trie请看上上篇文章Trie，或前往OI-Wiki。 KMP算法一个在字符串中查找子串的算法，只能有单一模式串。可以尝试理解破碎的笔记，或前往OI-Wiki。  写在前面OI-Wiki上的AC自动机讲解得十分全面，还有动图，建议去看一下。  算法定义AC自动机，全称Aho-Corasick Automaton，可用于统计和排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AC自动机">
-<meta property="og:url" content="https://taoran-01.github.io/articles/Aho-Corasick-Automaton/index.html">
+<meta property="og:url" content="https://taoran-01.github.io/Personal-Blog/articles/Aho-Corasick-Automaton/index.html">
 <meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="知识前置DFA请看上一篇文章有限状态自动机，或前往OI-Wiki。 Trie请看上上篇文章Trie，或前往OI-Wiki。 KMP算法一个在字符串中查找子串的算法，只能有单一模式串。可以尝试理解破碎的笔记，或前往OI-Wiki。  写在前面OI-Wiki上的AC自动机讲解得十分全面，还有动图，建议去看一下。  算法定义AC自动机，全称Aho-Corasick Automaton，可用于统计和排序">
 <meta property="og:locale" content="zh_CN">
@@ -57,12 +57,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link  rel="stylesheet" href="/Personal-Blog/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/Personal-Blog/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/Personal-Blog/css/highlight-dark.css" />
   
 
 
@@ -71,15 +71,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taoran-01.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taoran-01.github.io","root":"/Personal-Blog/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Personal-Blog/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script  src="/Personal-Blog/js/utils.js" ></script>
+  <script  src="/Personal-Blog/js/color-schema.js" ></script>
   
 
 
@@ -96,7 +96,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/Personal-Blog/">
       <strong>Algo-X.cn (Temporary)</strong>
     </a>
 
@@ -115,7 +115,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -127,7 +127,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/articles/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/articles/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>文章</span>
               </a>
@@ -139,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -151,7 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -163,7 +163,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/chemistry/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/chemistry/" target="_self">
                 <i class="iconfont icon-exp-fill"></i>
                 <span>化学工具站</span>
               </a>
@@ -175,7 +175,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -187,7 +187,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
+              <a class="nav-link" href="/Personal-Blog/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -217,7 +217,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/Personal-Blog/img/background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -323,7 +323,7 @@
 <h3 id="最朴素的算法实现"><a href="#最朴素的算法实现" class="headerlink" title="最朴素的算法实现"></a>最朴素的算法实现</h3><p>算法分为构造Trie、构造失配指针和模式匹配三步。</p>
 <h4 id="构造Trie"><a href="#构造Trie" class="headerlink" title="构造Trie"></a>构造Trie</h4><p>这个不必多说，正常的Trie树构造。<br>从根节点向下找，没有就构造新节点。</p>
 <h4 id="构造失配指针"><a href="#构造失配指针" class="headerlink" title="构造失配指针"></a>构造失配指针</h4><p>失配指针是在失配的时候用于跳转的指针，存储当前状态的最长后缀。这样在一个模式串失配时，自动机能立刻跳转到下一个可能匹配上的模式串。</p>
-<h5 id="最长后缀"><a href="#最长后缀" class="headerlink" title="最长后缀"></a>最长后缀</h5><p>举个OI-Wiki上的例子，对于模式串<code>i</code>，<code>he</code>，<code>his</code>，<code>she</code>，<code>hers</code>的$fail$指针构造：<br><img src="https://oi-wiki.org/string/images/ac-automaton4.png" srcset="/img/loading.gif" lazyload alt="26-01" style="zoom:75%;" /><br>以节点$6$为例：<br><img src="https://oi-wiki.org/string/images/ac-automaton1.png" srcset="/img/loading.gif" lazyload alt="26-02" style="zoom:75%;" /><br>假设文本串为<code>hishe</code>，在自动机上跑到节点$6$后，下一个字符是<code>h</code>，但字典树上没有连接节点，此时发生失配。<br><code>his</code>有两个非空后缀，按长度排序分别为<code>is</code>和<code>s</code>。从根节点开始，字典树上没有字符串<code>is</code>，但有<code>s</code>，所以自动机沿<code>fail[6]</code>跳转到节点$7$，这里有<code>his</code>的最长后缀<code>s</code>。<br>读入下一个字符<code>h</code>，节点$7$有<code>h</code>的边，继续运行。</p>
+<h5 id="最长后缀"><a href="#最长后缀" class="headerlink" title="最长后缀"></a>最长后缀</h5><p>举个OI-Wiki上的例子，对于模式串<code>i</code>，<code>he</code>，<code>his</code>，<code>she</code>，<code>hers</code>的$fail$指针构造：<br><img src="https://oi-wiki.org/string/images/ac-automaton4.png" srcset="/Personal-Blog/img/loading.gif" lazyload alt="26-01" style="zoom:75%;" /><br>以节点$6$为例：<br><img src="https://oi-wiki.org/string/images/ac-automaton1.png" srcset="/Personal-Blog/img/loading.gif" lazyload alt="26-02" style="zoom:75%;" /><br>假设文本串为<code>hishe</code>，在自动机上跑到节点$6$后，下一个字符是<code>h</code>，但字典树上没有连接节点，此时发生失配。<br><code>his</code>有两个非空后缀，按长度排序分别为<code>is</code>和<code>s</code>。从根节点开始，字典树上没有字符串<code>is</code>，但有<code>s</code>，所以自动机沿<code>fail[6]</code>跳转到节点$7$，这里有<code>his</code>的最长后缀<code>s</code>。<br>读入下一个字符<code>h</code>，节点$7$有<code>h</code>的边，继续运行。</p>
 <p>与KMP中的$next$指针类似，$fail$指针也是一个不断跳的过程。<br>跳最长后缀是因为可能匹配上，如果匹配不上还可以再跳最长后缀，避免模式串的遗漏。<br>如果字典树上没有后缀，<code>fail[i]</code>指向根节点$0$，代表这个字符没有再能匹配得上的。</p>
 <h5 id="构建方式"><a href="#构建方式" class="headerlink" title="构建方式"></a>构建方式</h5><p>对于字典树上的节点$u$构建<code>fail[u]</code>，父节点$p$，边$p\xrightarrow{c}u$，即<code>trie[fail[p]][c]</code>。假设小于$u$的深度的边都已求得。<br>失配指针的构建分为以下几种情况：<br>1.若<code>trie[fail[p]][c]</code>存在，则令<code>fail[u]=trie[fail[p]][c]</code>。表示当字典树有$fail_p\xrightarrow{c}fail_u$结构时，$u$的最长后缀就是父节点$p$的最长后缀加上字符$c$。<br>2.若<code>trie[fail[p]][c]</code>不存在，则按照“1”的方法继续判断<code>trie[fail[fail[p]]]</code>的存在性。<br>3.如果跳到根节点都没有，说明$trie$上的字符串$u$没有树上后缀，失配就得重新开始匹配，<code>fail[u]=根节点</code>。<br>特别地，<code>fail[p]</code>指向根节点与存在<code>trie[fail[p]][c]</code>不矛盾，表示$p$没有最长后缀，而$u$的最长后缀是最后一个字符。</p>
 <p>实际情况中，小于当前节点深度的节点的$fail$并未全部求得，此时需要BFS依次将子节点加入队列求$fail$指针。<br>另外建字典图，避免跳$fail$，直接指向失配节点。<br>这地方我也讲不明白，请前往<a target="_blank" rel="noopener" href="https://oi-wiki.org/string/ac-automaton/#%E5%AD%97%E5%85%B8%E6%A0%91%E4%B8%8E%E5%AD%97%E5%85%B8%E5%9B%BE">OI-Wiki</a>自行学习。</p>
@@ -351,12 +351,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -379,7 +379,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>AC自动机</div>
-      <div>https://taoran-01.github.io/articles/Aho-Corasick-Automaton/</div>
+      <div>https://taoran-01.github.io/Personal-Blog/articles/Aho-Corasick-Automaton/</div>
     </div>
     <div class="license-meta">
       
@@ -434,7 +434,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Suffix-Array/" title="后缀数组">
+                      <a href="/Personal-Blog/articles/Suffix-Array/" title="后缀数组">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">后缀数组</span>
                         <span class="visible-mobile">上一篇</span>
@@ -444,7 +444,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Deterministic-Finite-Automaton/" title="有限状态自动机">
+                      <a href="/Personal-Blog/articles/Deterministic-Finite-Automaton/" title="有限状态自动机">
                         <span class="hidden-mobile">有限状态自动机</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -580,8 +580,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script  src="/Personal-Blog/js/events.js" ></script>
+<script  src="/Personal-Blog/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -603,7 +603,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script  src="/Personal-Blog/js/img-lazyload.js" ></script>
   
 
 
@@ -745,7 +745,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/js/local-search.js" ></script>
+  <script  src="/Personal-Blog/js/local-search.js" ></script>
 
 
 
@@ -753,7 +753,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+<script  src="/Personal-Blog/js/boot.js" ></script>
 
 
   
