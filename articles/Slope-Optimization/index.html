@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/Personal-Blog/img/avatar_round.png">
-  <link rel="icon" href="/Personal-Blog/img/avatar_round.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,26 +19,26 @@
     <meta name="description" content="知识前置线段树一个支持维护区间信息的数据结构。详见OI-Wiki。  算法定义斜率优化是一种常用于动态规划问题的优化技巧，特别是在处理形如$dp[i] &#x3D; \min&#x2F;\max{a[j]\times b[i] + c[j] + d[i]}$的状态转移方程时，通过维护一个凸包或凹包来快速找到最优的$j$。斜率优化算法通过减少不必要的计算，能够显著提高动态规划的效率。  使用条件1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="斜率优化">
-<meta property="og:url" content="https://taoran-01.github.io/Personal-Blog/articles/Slope-Optimization/index.html">
-<meta property="og:site_name" content="Algo-X.cn (Temporary)">
+<meta property="og:url" content="https://algo-x.cn/articles/Slope-Optimization/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
 <meta property="og:description" content="知识前置线段树一个支持维护区间信息的数据结构。详见OI-Wiki。  算法定义斜率优化是一种常用于动态规划问题的优化技巧，特别是在处理形如$dp[i] &#x3D; \min&#x2F;\max{a[j]\times b[i] + c[j] + d[i]}$的状态转移方程时，通过维护一个凸包或凹包来快速找到最优的$j$。斜率优化算法通过减少不必要的计算，能够显著提高动态规划的效率。  使用条件1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/21-01.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/21-02.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/21-03.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/21-04.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/21-05.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/21-06.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/21-07.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/21-01.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/21-02.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/21-03.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/21-04.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/21-05.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/21-06.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/21-07.jpg">
 <meta property="article:published_time" content="2024-03-24T15:12:35.000Z">
 <meta property="article:modified_time" content="2024-06-27T13:58:02.717Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://taoran-01.github.io/Personal-Blog/img/21-01.jpg">
+<meta name="twitter:image" content="https://algo-x.cn/img/21-01.jpg">
   
   
   
-  <title>斜率优化 - Algo-X.cn (Temporary)</title>
+  <title>斜率优化 - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -62,12 +62,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/Personal-Blog/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/Personal-Blog/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/Personal-Blog/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -76,15 +76,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taoran-01.github.io","root":"/Personal-Blog/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Personal-Blog/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/Personal-Blog/js/utils.js" ></script>
-  <script  src="/Personal-Blog/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -101,8 +101,8 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/Personal-Blog/">
-      <strong>Algo-X.cn (Temporary)</strong>
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -120,7 +120,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -132,7 +132,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/articles/" target="_self">
+              <a class="nav-link" href="/articles/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>文章</span>
               </a>
@@ -144,7 +144,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -156,7 +156,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -168,7 +168,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/chemistry/" target="_self">
+              <a class="nav-link" href="/chemistry/" target="_self">
                 <i class="iconfont icon-exp-fill"></i>
                 <span>化学工具站</span>
               </a>
@@ -180,7 +180,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/links/" target="_self">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -192,7 +192,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -222,7 +222,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/Personal-Blog/img/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -319,8 +319,8 @@
 <hr>
 <h3 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h3><p>1.动态规划状态转移方程能转化为$a[j] * b[i] + c[j] + d[i]$形式，且需要维护$d[i]$最值。<br>2.外层$i$循环，内层$j$循环。<br>3.$x[j]$要求严格单调递增。<br>4.决策点位置在上凸壳或下凸壳上。</p>
 <hr>
-<h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><p>首先，我们将转移方程去掉$\min$和$\max$运算符，只保留内部式子。<br>转化为$y[j]&#x3D;k[i]\times x[j]+b[i]$形式，将每一个$j$所表示的数画在图像上，如图所示。<br><img src="../../img/21-01.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="21-01" style="zoom:50%;" /><br>由于$i$循环在外层，所以$k[i]$确定，需要求最大或最小的$b[i]$。</p>
-<p>当需要取的$b[i]$为最大值时，<br><img src="../../img/21-02.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="21-02" style="zoom:50%;" /><br><img src="../../img/21-03.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="21-03" style="zoom:50%;" /><br>不难发现，不论如何改变斜率，决策点永远是在上面两个点上。<br><img src="../../img/21-04.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="21-04" style="zoom:50%;" /><br>最小值也是一样，不论如何改变斜率，决策点永远是在下面两个点上。<br><img src="../../img/21-05.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="21-05" style="zoom:50%;" /><br>多举几个例子看一下，可以发现，最大决策点永远在上凸包上，最小决策点永远在下凸包上。<br><img src="../../img/21-06.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="21-06" style="zoom:50%;" /><br>所以，对于这类问题，只需要根据操作运算符存储上凸包和下凸包上的点即可。可以使用单调队列维护，保证斜率递增&#x2F;递减。<br>以维护下凸包(即最小值)为例，插入一个点后，如果连接上上个点的斜率比上一个点斜率小，就删去上一个点。<br><img src="../../img/21-07.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="21-07" style="zoom:50%;" />  </p>
+<h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><p>首先，我们将转移方程去掉$\min$和$\max$运算符，只保留内部式子。<br>转化为$y[j]&#x3D;k[i]\times x[j]+b[i]$形式，将每一个$j$所表示的数画在图像上，如图所示。<br><img src="../../img/21-01.jpg" srcset="/img/loading.gif" lazyload alt="21-01" style="zoom:50%;" /><br>由于$i$循环在外层，所以$k[i]$确定，需要求最大或最小的$b[i]$。</p>
+<p>当需要取的$b[i]$为最大值时，<br><img src="../../img/21-02.jpg" srcset="/img/loading.gif" lazyload alt="21-02" style="zoom:50%;" /><br><img src="../../img/21-03.jpg" srcset="/img/loading.gif" lazyload alt="21-03" style="zoom:50%;" /><br>不难发现，不论如何改变斜率，决策点永远是在上面两个点上。<br><img src="../../img/21-04.jpg" srcset="/img/loading.gif" lazyload alt="21-04" style="zoom:50%;" /><br>最小值也是一样，不论如何改变斜率，决策点永远是在下面两个点上。<br><img src="../../img/21-05.jpg" srcset="/img/loading.gif" lazyload alt="21-05" style="zoom:50%;" /><br>多举几个例子看一下，可以发现，最大决策点永远在上凸包上，最小决策点永远在下凸包上。<br><img src="../../img/21-06.jpg" srcset="/img/loading.gif" lazyload alt="21-06" style="zoom:50%;" /><br>所以，对于这类问题，只需要根据操作运算符存储上凸包和下凸包上的点即可。可以使用单调队列维护，保证斜率递增&#x2F;递减。<br>以维护下凸包(即最小值)为例，插入一个点后，如果连接上上个点的斜率比上一个点斜率小，就删去上一个点。<br><img src="../../img/21-07.jpg" srcset="/img/loading.gif" lazyload alt="21-07" style="zoom:50%;" />  </p>
 <hr>
 <h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p>以<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3195">P3195 玩具装箱</a>为例，题目要求维护$f[i]$最小值。<br>前缀和$s$，$L$提前减一，化式子：<br>$f[i]&#x3D;s[i]^2−2s[i]L+dp[j]+(S[j]+L)^2−2s[i]s[j]$<br>按斜率优化思路，$x[j]&#x3D;s[j],\ y[j]&#x3D;(f[j]+(s[j]+L)^2$。<br>接着单调队列维护即可。</p>
 <p>代码：</p>
@@ -345,12 +345,12 @@
     
       <span class="category-chain">
         
-  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
     <span>></span>
     
-  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -373,7 +373,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>斜率优化</div>
-      <div>https://taoran-01.github.io/Personal-Blog/articles/Slope-Optimization/</div>
+      <div>https://algo-x.cn/articles/Slope-Optimization/</div>
     </div>
     <div class="license-meta">
       
@@ -428,7 +428,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Personal-Blog/articles/Solution-of-P4178/" title="洛谷P4178 题解">
+                      <a href="/articles/Solution-of-P4178/" title="洛谷P4178 题解">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">洛谷P4178 题解</span>
                         <span class="visible-mobile">上一篇</span>
@@ -438,7 +438,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Personal-Blog/articles/Divide-and-Conquer-on-Trees/" title="点分治">
+                      <a href="/articles/Divide-and-Conquer-on-Trees/" title="点分治">
                         <span class="hidden-mobile">点分治</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -574,8 +574,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/Personal-Blog/js/events.js" ></script>
-<script  src="/Personal-Blog/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -597,7 +597,7 @@
 
 
   
-    <script  src="/Personal-Blog/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -739,7 +739,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/Personal-Blog/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -747,7 +747,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/Personal-Blog/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

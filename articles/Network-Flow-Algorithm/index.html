@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/Personal-Blog/img/avatar_round.png">
-  <link rel="icon" href="/Personal-Blog/img/avatar_round.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,24 +19,24 @@
     <meta name="description" content="知识前置深度优先搜索(DFS)基于深度的搜索，一搜到底，有回溯。详见OI-Wiki。 广度优先搜索(BFS)基于广度的搜索，逐层加深搜索。详见OI-Wiki。  写在前面这部分讲的是增广路算法，预流推进算法还没写。  算法定义在有向图中，给定源点$s$和汇点$t$，图上$s\rightarrow t$能流过的最大流量成为网络的最大流。其中，$u\rightarrow v$的流量$f(u,\ v)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络最大流 - 增广路算法">
-<meta property="og:url" content="https://taoran-01.github.io/Personal-Blog/articles/Network-Flow-Algorithm/index.html">
-<meta property="og:site_name" content="Algo-X.cn (Temporary)">
+<meta property="og:url" content="https://algo-x.cn/articles/Network-Flow-Algorithm/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
 <meta property="og:description" content="知识前置深度优先搜索(DFS)基于深度的搜索，一搜到底，有回溯。详见OI-Wiki。 广度优先搜索(BFS)基于广度的搜索，逐层加深搜索。详见OI-Wiki。  写在前面这部分讲的是增广路算法，预流推进算法还没写。  算法定义在有向图中，给定源点$s$和汇点$t$，图上$s\rightarrow t$能流过的最大流量成为网络的最大流。其中，$u\rightarrow v$的流量$f(u,\ v)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/29-01.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/29-02.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/29-03.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/29-04.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/29-05.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/29-01.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/29-02.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/29-03.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/29-04.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/29-05.jpg">
 <meta property="article:published_time" content="2024-05-19T09:27:26.000Z">
 <meta property="article:modified_time" content="2024-06-27T13:55:01.161Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://taoran-01.github.io/Personal-Blog/img/29-01.jpg">
+<meta name="twitter:image" content="https://algo-x.cn/img/29-01.jpg">
   
   
   
-  <title>网络最大流 - 增广路算法 - Algo-X.cn (Temporary)</title>
+  <title>网络最大流 - 增广路算法 - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -60,12 +60,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/Personal-Blog/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/Personal-Blog/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/Personal-Blog/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -74,15 +74,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taoran-01.github.io","root":"/Personal-Blog/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Personal-Blog/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/Personal-Blog/js/utils.js" ></script>
-  <script  src="/Personal-Blog/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -99,8 +99,8 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/Personal-Blog/">
-      <strong>Algo-X.cn (Temporary)</strong>
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -118,7 +118,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -130,7 +130,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/articles/" target="_self">
+              <a class="nav-link" href="/articles/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>文章</span>
               </a>
@@ -142,7 +142,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -154,7 +154,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -166,7 +166,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/chemistry/" target="_self">
+              <a class="nav-link" href="/chemistry/" target="_self">
                 <i class="iconfont icon-exp-fill"></i>
                 <span>化学工具站</span>
               </a>
@@ -178,7 +178,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/links/" target="_self">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -190,7 +190,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -220,7 +220,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/Personal-Blog/img/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -322,7 +322,7 @@
 <h3 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h3><p>问题可以通过建模转化为最大流问题。<br>时间复杂度$O(n^2\times m)$，空间复杂度$O(n)$。</p>
 <hr>
 <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="反向边"><a href="#反向边" class="headerlink" title="反向边"></a>反向边</h4><p>记录已使用流量和剩余流量，完成退流操作。</p>
-<p>以下面这张图为例：<br><img src="../../img/29-01.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="29-01" style="zoom:100%;" /><br>在最大流下，我们在每条边上作$x&#x2F;y$形式的标记，表示这条边最大流量为$y$，当前流量为$x$：<br><img src="../../img/29-02.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="29-02" style="zoom:100%;" /><br>建立反向边，流过去的加在反向边(红色)中，剩余流量在正向边(绿色)中：<br><img src="../../img/29-03.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="29-03" style="zoom:100%;" /><br>这样建反向边，既能保留剩下的流量，便于寻找增广路，又能记录流过的方便退流。</p>
+<p>以下面这张图为例：<br><img src="../../img/29-01.jpg" srcset="/img/loading.gif" lazyload alt="29-01" style="zoom:100%;" /><br>在最大流下，我们在每条边上作$x&#x2F;y$形式的标记，表示这条边最大流量为$y$，当前流量为$x$：<br><img src="../../img/29-02.jpg" srcset="/img/loading.gif" lazyload alt="29-02" style="zoom:100%;" /><br>建立反向边，流过去的加在反向边(红色)中，剩余流量在正向边(绿色)中：<br><img src="../../img/29-03.jpg" srcset="/img/loading.gif" lazyload alt="29-03" style="zoom:100%;" /><br>这样建反向边，既能保留剩下的流量，便于寻找增广路，又能记录流过的方便退流。</p>
 <p>查询反向边是有一个小技巧：从编号$0$开始建边，建完边有立刻建反向边，这样<code>编号^1</code>就是对应的反向边了。注意这样的话<code>head[]</code>数组需要全部设为$-1$，不能是$0$，同时反向边权值为$0$。</p>
 <h4 id="增广路"><a href="#增广路" class="headerlink" title="增广路"></a>增广路</h4><p>一条路径，起点为$s$，终点为$t$，并且经过的各条边上的剩余容量均大于$0$。<br>查询到增广路，意味着$s\rightarrow t$的流还可以更大。</p>
 <hr>
@@ -344,12 +344,12 @@
 <h3 id="连续最短增广路算法"><a href="#连续最短增广路算法" class="headerlink" title="连续最短增广路算法"></a>连续最短增广路算法</h3><p>又称Dinic算法，是比较优秀也比较常用的最短路算法。</p>
 <h4 id="算法原理-2"><a href="#算法原理-2" class="headerlink" title="算法原理"></a>算法原理</h4><p>注意到EK算法还是一次只能找出一条增广路进行迭代。</p>
 <h4 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h4><p>不断重复以下步骤，直到不存在增广路：<br>1.在残存网络中BFS求出节点层次，构造分层图；<br>2.在分层图上DFS寻找增广路，回溯更新容量。</p>
-<p>有一个剪枝，就是对于当前节点，上一次搜索和这一次搜索都是遍历所有出边，但是有一些是空的，很浪费时间。<br><img src="../../img/29-04.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="29-04" style="zoom:100%;" /><br>于是我们用<code>cur[]</code>替换<code>head[]</code>数组，这样上次从哪里结束的就可以被记录，不需要访问之前迭代空的边了。</p>
+<p>有一个剪枝，就是对于当前节点，上一次搜索和这一次搜索都是遍历所有出边，但是有一些是空的，很浪费时间。<br><img src="../../img/29-04.jpg" srcset="/img/loading.gif" lazyload alt="29-04" style="zoom:100%;" /><br>于是我们用<code>cur[]</code>替换<code>head[]</code>数组，这样上次从哪里结束的就可以被记录，不需要访问之前迭代空的边了。</p>
 <h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><p>例题 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3376">洛谷P3376</a> 网络最大流模板</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>;<br>	<span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>;ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) &#123;x=(x&lt;&lt;<span class="hljs-number">3</span>)+(x&lt;&lt;<span class="hljs-number">1</span>)+(ch^<span class="hljs-number">48</span>);ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 210</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> M 5010</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INF 0x3f3f3f3f</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> v e[i].to</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> w e[i].val</span><br><span class="hljs-type">int</span> n, m, s, t;<br><span class="hljs-type">int</span> t1, t2, t3;<br>ll max_flow;<br><span class="hljs-type">int</span> head[N], cur[N], tot;<br><span class="hljs-type">int</span> d[N], vis[N];<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">edge</span> &#123;<br>	<span class="hljs-type">int</span> to, nxt, val;<br>&#125; e[M&lt;&lt;<span class="hljs-number">1</span>];<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add_edge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> z)</span> </span>&#123;<br>	e[tot]=&#123;y, head[x], z&#125;, head[x]=tot++;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">bfs</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-built_in">memset</span>(d, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(d));<br>	queue&lt;<span class="hljs-type">int</span>&gt; q; q.<span class="hljs-built_in">push</span>(s), d[s]=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>		<span class="hljs-type">int</span> u=q.<span class="hljs-built_in">front</span>(); q.<span class="hljs-built_in">pop</span>();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=head[u]; i!=<span class="hljs-number">-1</span>; i=e[i].nxt) &#123;<br>			<span class="hljs-keyword">if</span> (w==<span class="hljs-number">0</span>||d[v]!=<span class="hljs-number">-1</span>) <span class="hljs-keyword">continue</span>;<br>			d[v]=d[u]+<span class="hljs-number">1</span>, q.<span class="hljs-built_in">push</span>(v);<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> d[t]!=<span class="hljs-number">-1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> minf)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (u==t||minf==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> minf;<br>	<span class="hljs-type">int</span> f, flow=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=cur[u]; i!=<span class="hljs-number">-1</span>; i=e[i].nxt) &#123;<br>		cur[u]=i;<br>		<span class="hljs-keyword">if</span> (d[v]!=d[u]+<span class="hljs-number">1</span>||!(f=<span class="hljs-built_in">dfs</span>(v, <span class="hljs-built_in">min</span>(minf, w)))) <span class="hljs-keyword">continue</span>;<br>		minf-=f, flow+=f;<br>		e[i].val-=f, e[i^<span class="hljs-number">1</span>].val+=f;<br>		<span class="hljs-keyword">if</span> (minf==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> flow;<br>	&#125;<br>	<span class="hljs-keyword">return</span> flow;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Dinic</span><span class="hljs-params">()</span> </span>&#123;<br>	max_flow=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span> (<span class="hljs-built_in">bfs</span>()) &#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) cur[i]=head[i];<br>		max_flow+=<span class="hljs-built_in">dfs</span>(s, INF);<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>(), s=<span class="hljs-built_in">read</span>(), t=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-built_in">memset</span>(head, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(head));<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) &#123;<br>		t1=<span class="hljs-built_in">read</span>(), t2=<span class="hljs-built_in">read</span>(), t3=<span class="hljs-built_in">read</span>();<br>		<span class="hljs-built_in">add_edge</span>(t1, t2, t3), <span class="hljs-built_in">add_edge</span>(t2, t1, <span class="hljs-number">0</span>);<br>	&#125;<br>	<span class="hljs-built_in">Dinic</span>(), <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, max_flow);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="常用技巧"><a href="#常用技巧" class="headerlink" title="常用技巧"></a>常用技巧</h3><p>1.拆点$\rightarrow$控制点流量。例如：<br><img src="../../img/29-05.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="29-05" style="zoom:100%;" /><br>2.建立超级源点和超级汇点$\rightarrow$多个源点&#x2F;汇点。</p>
+<h3 id="常用技巧"><a href="#常用技巧" class="headerlink" title="常用技巧"></a>常用技巧</h3><p>1.拆点$\rightarrow$控制点流量。例如：<br><img src="../../img/29-05.jpg" srcset="/img/loading.gif" lazyload alt="29-05" style="zoom:100%;" /><br>2.建立超级源点和超级汇点$\rightarrow$多个源点&#x2F;汇点。</p>
 <hr>
 <h3 id="最小费用最大流"><a href="#最小费用最大流" class="headerlink" title="最小费用最大流"></a>最小费用最大流</h3><p>贪心算法<br>Dinic中的DFS改成SPFA<br>优先选择一条增广路，费用最小</p>
 <p>费用为距离，跑一遍SPFA，求起点到每一点的<br>总费用&#x3D;费用*流量，可以比较路径距离和</p>
@@ -401,12 +401,12 @@
     
       <span class="category-chain">
         
-  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
     <span>></span>
     
-  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -429,7 +429,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>网络最大流 - 增广路算法</div>
-      <div>https://taoran-01.github.io/Personal-Blog/articles/Network-Flow-Algorithm/</div>
+      <div>https://algo-x.cn/articles/Network-Flow-Algorithm/</div>
     </div>
     <div class="license-meta">
       
@@ -484,7 +484,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Personal-Blog/articles/Maintaining-XOR-Extrema/" title="维护异或极值">
+                      <a href="/articles/Maintaining-XOR-Extrema/" title="维护异或极值">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">维护异或极值</span>
                         <span class="visible-mobile">上一篇</span>
@@ -494,7 +494,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Personal-Blog/articles/Solution-of-P1084/" title="洛谷P1084 题解">
+                      <a href="/articles/Solution-of-P1084/" title="洛谷P1084 题解">
                         <span class="hidden-mobile">洛谷P1084 题解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -630,8 +630,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/Personal-Blog/js/events.js" ></script>
-<script  src="/Personal-Blog/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -653,7 +653,7 @@
 
 
   
-    <script  src="/Personal-Blog/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -795,7 +795,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/Personal-Blog/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -803,7 +803,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/Personal-Blog/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

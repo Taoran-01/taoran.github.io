@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/Personal-Blog/img/avatar_round.png">
-  <link rel="icon" href="/Personal-Blog/img/avatar_round.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar_round.png">
+  <link rel="icon" href="/img/avatar_round.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,23 +19,23 @@
     <meta name="description" content="知识前置树无环联通图，有唯一一个前驱。涉及换根DP问题的一般是无根树。详见OI-Wiki。  定义树形DP中的换根DP问题又被称为二次扫描，通常不会指定根结点，并且根结点的变化会对例如子结点深度和、点权和等一些值产生影响。通常需要两次DFS，第一次DFS预处理诸如深度，点权和之类的信息，第二次DFS开始运行换根动态规划。  题目特征一般基于树上的问题或能转化成树上问题的，离线的且解法确定的，且需">
 <meta property="og:type" content="article">
 <meta property="og:title" content="换根DP">
-<meta property="og:url" content="https://taoran-01.github.io/Personal-Blog/articles/Dynamic-Programming-with-Root-Replacement/index.html">
-<meta property="og:site_name" content="Algo-X.cn (Temporary)">
+<meta property="og:url" content="https://algo-x.cn/articles/Dynamic-Programming-with-Root-Replacement/index.html">
+<meta property="og:site_name" content="Algo-X.cn">
 <meta property="og:description" content="知识前置树无环联通图，有唯一一个前驱。涉及换根DP问题的一般是无根树。详见OI-Wiki。  定义树形DP中的换根DP问题又被称为二次扫描，通常不会指定根结点，并且根结点的变化会对例如子结点深度和、点权和等一些值产生影响。通常需要两次DFS，第一次DFS预处理诸如深度，点权和之类的信息，第二次DFS开始运行换根动态规划。  题目特征一般基于树上的问题或能转化成树上问题的，离线的且解法确定的，且需">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/17-01.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/17-02.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/17-03.jpg">
-<meta property="og:image" content="https://taoran-01.github.io/Personal-Blog/img/17-04.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/17-01.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/17-02.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/17-03.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/17-04.jpg">
 <meta property="article:published_time" content="2024-03-15T13:26:16.000Z">
 <meta property="article:modified_time" content="2024-06-27T13:52:58.951Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://taoran-01.github.io/Personal-Blog/img/17-01.jpg">
+<meta name="twitter:image" content="https://algo-x.cn/img/17-01.jpg">
   
   
   
-  <title>换根DP - Algo-X.cn (Temporary)</title>
+  <title>换根DP - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -59,12 +59,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/Personal-Blog/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/Personal-Blog/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/Personal-Blog/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -73,15 +73,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taoran-01.github.io","root":"/Personal-Blog/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/Personal-Blog/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"algo-x.cn","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/Personal-Blog/js/utils.js" ></script>
-  <script  src="/Personal-Blog/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -98,8 +98,8 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/Personal-Blog/">
-      <strong>Algo-X.cn (Temporary)</strong>
+    <a class="navbar-brand" href="/">
+      <strong>Algo-X.cn</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -117,7 +117,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -129,7 +129,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/articles/" target="_self">
+              <a class="nav-link" href="/articles/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>文章</span>
               </a>
@@ -141,7 +141,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -153,7 +153,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -165,7 +165,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/chemistry/" target="_self">
+              <a class="nav-link" href="/chemistry/" target="_self">
                 <i class="iconfont icon-exp-fill"></i>
                 <span>化学工具站</span>
               </a>
@@ -177,7 +177,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/links/" target="_self">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -189,7 +189,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/Personal-Blog/about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -219,7 +219,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/Personal-Blog/img/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -316,7 +316,7 @@
 <hr>
 <h3 id="题目特征"><a href="#题目特征" class="headerlink" title="题目特征"></a>题目特征</h3><p>一般基于树上的问题或能转化成树上问题的，离线的且解法确定的，且需对每一个点作为根节点求解，时空复杂度在$1\times10^7$以内的可以考虑使用换根DP求解。<br>同时，允许一个节点的状态从相邻节点转移。</p>
 <hr>
-<h3 id="一般思路"><a href="#一般思路" class="headerlink" title="一般思路"></a>一般思路</h3><p>以这样一棵树为例。<br><img src="../../img/17-01.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="17-01" style="zoom:100%;" /><br>首先，任选一个节点作为根节点，使用DFS遍历整棵树并处理出下一步换根所需要的相关数据，同时对根节点求解。这里以常见的深度和子树大小为例。<br><img src="../../img/17-02.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="17-02" style="zoom:100%;" /><br>接下来，从根节点开始顺序遍历，用父节点更新子节点的答案。<br><img src="../../img/17-03.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="17-03" style="zoom:100%;" /><br>一般地，从父节点转移到字结点后，答案的更改可在子树内和子树外分别讨论。通常子树内一套、子树外一套，如图所示。例如计算$dep$和，子树内全部减$1$，而子树外全部加$1$。<br><img src="../../img/17-04.jpg" srcset="/Personal-Blog/img/loading.gif" lazyload alt="17-04" style="zoom:100%;" /><br>换根DP的一般思路：<br>首先跑一遍DFS，由叶子结点向上，更新状态转移所需信息。再跑一边DFS，由根节点向下，计算每个节点作为根节点的答案。</p>
+<h3 id="一般思路"><a href="#一般思路" class="headerlink" title="一般思路"></a>一般思路</h3><p>以这样一棵树为例。<br><img src="../../img/17-01.jpg" srcset="/img/loading.gif" lazyload alt="17-01" style="zoom:100%;" /><br>首先，任选一个节点作为根节点，使用DFS遍历整棵树并处理出下一步换根所需要的相关数据，同时对根节点求解。这里以常见的深度和子树大小为例。<br><img src="../../img/17-02.jpg" srcset="/img/loading.gif" lazyload alt="17-02" style="zoom:100%;" /><br>接下来，从根节点开始顺序遍历，用父节点更新子节点的答案。<br><img src="../../img/17-03.jpg" srcset="/img/loading.gif" lazyload alt="17-03" style="zoom:100%;" /><br>一般地，从父节点转移到字结点后，答案的更改可在子树内和子树外分别讨论。通常子树内一套、子树外一套，如图所示。例如计算$dep$和，子树内全部减$1$，而子树外全部加$1$。<br><img src="../../img/17-04.jpg" srcset="/img/loading.gif" lazyload alt="17-04" style="zoom:100%;" /><br>换根DP的一般思路：<br>首先跑一遍DFS，由叶子结点向上，更新状态转移所需信息。再跑一边DFS，由根节点向下，计算每个节点作为根节点的答案。</p>
 <hr>
 <h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// u -&gt; current node</span><br><span class="hljs-comment">// v -&gt; child node</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs1</span><span class="hljs-params">(u, fa)</span> </span>&#123;<br>	<span class="hljs-comment">// Initialize the required information.</span><br>	<span class="hljs-keyword">for</span> (connected_nodes) &#123;<br>		<span class="hljs-keyword">if</span> (v==fa) <span class="hljs-keyword">continue</span>;<br>		<span class="hljs-built_in">dfs1</span>(v, u);<br>		<span class="hljs-comment">// Update the required information.</span><br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs2</span><span class="hljs-params">(u, fa)</span> </span>&#123;<br>	<span class="hljs-comment">// Initialize the answer.</span><br>	<span class="hljs-keyword">for</span> (connected_nodes) &#123;<br>		<span class="hljs-keyword">if</span> (v==fa) <span class="hljs-keyword">continue</span>;<br>		<span class="hljs-comment">// Update the answer.</span><br>		<span class="hljs-built_in">dfs1</span>(v, u);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -337,12 +337,12 @@
     
       <span class="category-chain">
         
-  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
     <span>></span>
     
-  <a href="/Personal-Blog/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -365,7 +365,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>换根DP</div>
-      <div>https://taoran-01.github.io/Personal-Blog/articles/Dynamic-Programming-with-Root-Replacement/</div>
+      <div>https://algo-x.cn/articles/Dynamic-Programming-with-Root-Replacement/</div>
     </div>
     <div class="license-meta">
       
@@ -420,7 +420,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Personal-Blog/articles/Solution-of-P3478/" title="洛谷P3478 题解">
+                      <a href="/articles/Solution-of-P3478/" title="洛谷P3478 题解">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">洛谷P3478 题解</span>
                         <span class="visible-mobile">上一篇</span>
@@ -430,7 +430,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Personal-Blog/articles/0-1-Backpack/" title="0-1背包问题">
+                      <a href="/articles/0-1-Backpack/" title="0-1背包问题">
                         <span class="hidden-mobile">0-1背包问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -566,8 +566,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/Personal-Blog/js/events.js" ></script>
-<script  src="/Personal-Blog/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -589,7 +589,7 @@
 
 
   
-    <script  src="/Personal-Blog/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -731,7 +731,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="/Personal-Blog/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -739,7 +739,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/Personal-Blog/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   
