@@ -19,20 +19,20 @@
     <meta name="description" content="写在前面因本文叙述过于简略和不标准，在阅读本文之前，你需要看一眼OI-Wiki，并阅读这篇文章及其它相关文章，以对DFA有一个初步的认识，并掌握DFA的基础理论知识与形式化描述方法。  知识前置子串与子序列子串是连续的，子序列可以不连续。 集合的对称差对称差是集合论的一个概念，描述两个集合之间的关系。两个集合取对称差会得到一个集合，其符号与运算法则如下：$$A\oplus B&#x3D;(A\c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有限状态自动机">
-<meta property="og:url" content="https://algo-x.github.io/articles/Deterministic-Finite-Automaton-2/index.html">
+<meta property="og:url" content="https://taoran-01.github.io/articles/Deterministic-Finite-Automaton-2/index.html">
 <meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="写在前面因本文叙述过于简略和不标准，在阅读本文之前，你需要看一眼OI-Wiki，并阅读这篇文章及其它相关文章，以对DFA有一个初步的认识，并掌握DFA的基础理论知识与形式化描述方法。  知识前置子串与子序列子串是连续的，子序列可以不连续。 集合的对称差对称差是集合论的一个概念，描述两个集合之间的关系。两个集合取对称差会得到一个集合，其符号与运算法则如下：$$A\oplus B&#x3D;(A\c">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://algo-x.github.io/img/47-01.jpg">
-<meta property="og:image" content="https://algo-x.github.io/img/47-02.jpg">
-<meta property="og:image" content="https://algo-x.github.io/img/47-03.jpg">
-<meta property="og:image" content="https://algo-x.github.io/img/47-04.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/img/47-01.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/img/47-02.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/img/47-03.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/img/47-04.jpg">
 <meta property="article:published_time" content="2024-07-30T11:26:21.000Z">
 <meta property="article:modified_time" content="2024-07-30T13:09:39.532Z">
 <meta property="article:author" content="Taoran">
 <meta property="article:tag" content="SDSC 2024">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://algo-x.github.io/img/47-01.jpg">
+<meta name="twitter:image" content="https://taoran-01.github.io/img/47-01.jpg">
   
   
   
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"algo-x.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taoran-01.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -401,7 +401,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>有限状态自动机</div>
-      <div>https://algo-x.github.io/articles/Deterministic-Finite-Automaton-2/</div>
+      <div>https://taoran-01.github.io/articles/Deterministic-Finite-Automaton-2/</div>
     </div>
     <div class="license-meta">
       

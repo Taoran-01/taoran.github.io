@@ -19,16 +19,16 @@
     <meta name="description" content="知识前置字符串你需要知道字符串是什么东西。 基数排序将待排序元素拆分成$k$个关键字，对关键字排序后即可完成对元素的排序。详见OI-Wiki  算法定义后缀排序是指一个字符串的所有后缀按照字典序排序的结果。这个过程涉及到两个数组，$sa$和$rk$，其中$sa[i]$表示字符串的所有后缀按照字典序升序排序后的编号，$rk[i]$表示第$i$个后缀的字典序排名。其中，$sa$称为后缀数组。显然，$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="后缀数组">
-<meta property="og:url" content="https://algo-x.github.io/articles/Suffix-Array/index.html">
+<meta property="og:url" content="https://taoran-01.github.io/articles/Suffix-Array/index.html">
 <meta property="og:site_name" content="Algo-X.cn (Temporary)">
 <meta property="og:description" content="知识前置字符串你需要知道字符串是什么东西。 基数排序将待排序元素拆分成$k$个关键字，对关键字排序后即可完成对元素的排序。详见OI-Wiki  算法定义后缀排序是指一个字符串的所有后缀按照字典序排序的结果。这个过程涉及到两个数组，$sa$和$rk$，其中$sa[i]$表示字符串的所有后缀按照字典序升序排序后的编号，$rk[i]$表示第$i$个后缀的字典序排名。其中，$sa$称为后缀数组。显然，$">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://algo-x.github.io/img/27-01.jpg">
+<meta property="og:image" content="https://taoran-01.github.io/img/27-01.jpg">
 <meta property="article:published_time" content="2024-04-19T14:20:10.000Z">
 <meta property="article:modified_time" content="2024-06-27T14:02:07.250Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://algo-x.github.io/img/27-01.jpg">
+<meta name="twitter:image" content="https://taoran-01.github.io/img/27-01.jpg">
   
   
   
@@ -70,7 +70,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"algo-x.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taoran-01.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"#"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -473,7 +473,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>后缀数组</div>
-      <div>https://algo-x.github.io/articles/Suffix-Array/</div>
+      <div>https://taoran-01.github.io/articles/Suffix-Array/</div>
     </div>
     <div class="license-meta">
       
