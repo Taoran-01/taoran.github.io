@@ -16,26 +16,25 @@
   <meta name="author" content="Taoran">
   <meta name="keywords" content="">
   
-    <meta name="description" content="知识前置单调栈从栈底到栈顶递增&#x2F;递减的栈，可以用于维护比当前数大&#x2F;小的前一个&#x2F;后一个值。详见OI-Wiki。  题目描述SPOJ | 洛谷SP1805 HISTOGRA - Largest Rectangle in a Histogram如图所示，在一条水平线上有 $n$ 个宽为 $1$ 的矩形，其高度分别为 $a_1,\ a_2,\ \dots,\ a_n$。求包">
+    <meta name="description" content="解决问题适用于预处理后离线查询一类问题。 给定 $n$ 个数 $a_i$ 和 $m$ 个区间 $[l_i,r_i]$，询问每个区间内 $\operatorname{opt}$ 的值。$O(n\log n)$ 预处理，$O(1)$ 查询。  应用条件 满足结合律，即 $\operatorname{opt}(x,y,z)&#x3D;\operatorname{opt}(\operatorname{o">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SPOJ HISTOGRA 题解">
-<meta property="og:url" content="https://algo-x.cn/articles/Solution-of-SP1805/index.html">
+<meta property="og:title" content="ST表">
+<meta property="og:url" content="https://algo-x.cn/articles/Sparse-Table/index.html">
 <meta property="og:site_name" content="Algo-X.cn">
-<meta property="og:description" content="知识前置单调栈从栈底到栈顶递增&#x2F;递减的栈，可以用于维护比当前数大&#x2F;小的前一个&#x2F;后一个值。详见OI-Wiki。  题目描述SPOJ | 洛谷SP1805 HISTOGRA - Largest Rectangle in a Histogram如图所示，在一条水平线上有 $n$ 个宽为 $1$ 的矩形，其高度分别为 $a_1,\ a_2,\ \dots,\ a_n$。求包">
+<meta property="og:description" content="解决问题适用于预处理后离线查询一类问题。 给定 $n$ 个数 $a_i$ 和 $m$ 个区间 $[l_i,r_i]$，询问每个区间内 $\operatorname{opt}$ 的值。$O(n\log n)$ 预处理，$O(1)$ 查询。  应用条件 满足结合律，即 $\operatorname{opt}(x,y,z)&#x3D;\operatorname{opt}(\operatorname{o">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://algo-x.cn/img/50-01.gif">
-<meta property="og:image" content="https://algo-x.cn/img/50-02.jpg">
-<meta property="og:image" content="https://algo-x.cn/img/50-03.jpg">
-<meta property="og:image" content="https://algo-x.cn/img/50-04.jpg">
-<meta property="article:published_time" content="2024-08-05T11:59:14.000Z">
-<meta property="article:modified_time" content="2024-08-05T14:39:52.018Z">
+<meta property="og:image" content="https://algo-x.cn/img/51-01.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/51-02.jpg">
+<meta property="og:image" content="https://algo-x.cn/img/51-03.jpg">
+<meta property="article:published_time" content="2024-08-06T10:29:41.000Z">
+<meta property="article:modified_time" content="2024-08-06T13:05:29.576Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://algo-x.cn/img/50-01.gif">
+<meta name="twitter:image" content="https://algo-x.cn/img/51-01.jpg">
   
   
   
-  <title>SPOJ HISTOGRA 题解 - Algo-X.cn</title>
+  <title>ST表 - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +224,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SPOJ HISTOGRA 题解"></span>
+            <span id="subtitle" data-typed-text="ST表"></span>
           
         </div>
 
@@ -236,8 +235,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-05 19:59" pubdate>
-          2024年8月5日 晚上
+        <time datetime="2024-08-06 18:29" pubdate>
+          2024年8月6日 晚上
         </time>
       </span>
     
@@ -248,7 +247,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          1.1k 字
         
       </span>
     
@@ -296,12 +295,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">SPOJ HISTOGRA 题解</h1>
+            <h1 id="seo-header">ST表</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年8月5日 晚上
+                    本文最后更新于 2024年8月6日 晚上
                   
                 
               </p>
@@ -310,26 +309,32 @@
               <div class="markdown-body">
                 
                 <hr>
-<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h4><p>从栈底到栈顶递增&#x2F;递减的栈，可以用于维护比当前数大&#x2F;小的前一个&#x2F;后一个值。详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/monotonous-stack/">OI-Wiki</a>。</p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>适用于预处理后离线查询一类问题。</p>
+<p>给定 $n$ 个数 $a_i$ 和 $m$ 个区间 $[l_i,r_i]$，询问每个区间内 $\operatorname{opt}$ 的值。<br>$O(n\log n)$ 预处理，$O(1)$ 查询。</p>
 <hr>
-<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p><a target="_blank" rel="noopener" href="https://www.spoj.com/problems/HISTOGRA/">SPOJ</a> | <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/SP1805">洛谷SP1805</a> HISTOGRA - Largest Rectangle in a Histogram<br><img src="../../img/50-01.gif" srcset="/img/loading.gif" lazyload alt="50-01" style="zoom:75%;" /><br>如图所示，在一条水平线上有 $n$ 个宽为 $1$ 的矩形，其高度分别为 $a_1,\ a_2,\ \dots,\ a_n$。求包含于这些矩形的最大子矩形面积。</p>
-<p>数据范围：$n\le1\times10^5$。</p>
-<p>没错，这是一道绿题(普及+&#x2F;提高)，本蒟蒻这个阶段了还会被绿题卡住QWQ。</p>
+<h3 id="应用条件"><a href="#应用条件" class="headerlink" title="应用条件"></a>应用条件</h3><ol>
+<li>满足结合律，即 $\operatorname{opt}(x,y,z)&#x3D;\operatorname{opt}(\operatorname{opt}(x,y),z)&#x3D;\operatorname{opt}(x,\operatorname{opt}(y,z))$。</li>
+<li>满足“可重复贡献”，即 $\operatorname{opt}(x,x)&#x3D;x$。</li>
+</ol>
 <hr>
-<h3 id="解法一-单调栈"><a href="#解法一-单调栈" class="headerlink" title="解法一 - 单调栈"></a>解法一 - 单调栈</h3><h4 id="考虑递增序列"><a href="#考虑递增序列" class="headerlink" title="考虑递增序列"></a>考虑递增序列</h4><p>如图所示，最后的决策点只可能位于角落位置。<br><img src="../../img/50-02.jpg" srcset="/img/loading.gif" lazyload alt="50-02" style="zoom:75%;" /><br>如果矩形按递增顺序排列，只需要对每个矩形向右合并即可。<br>具体地，对于第 $i$ 个矩形，它的右边还有 $n-i$ 个高度大于等于它的矩形。加上自己，可合并的矩形数为 $n-i+1$。<br>最大从自身高度开始合并，因此 $\text{ans}\leftarrow\min(\text{ans},a_i\times(n-i+1))$，可以 $O(1)$ 求解。</p>
-<h4 id="维护递增序列"><a href="#维护递增序列" class="headerlink" title="维护递增序列"></a>维护递增序列</h4><p>注意看，在加入一个不满足单调递增的矩形后，按照单调栈的规则，我们需要将前方不满足单调性的矩形(即高度大于等于当前高度的矩形)弹出，使得新加入的矩形满足单调性。<br><img src="../../img/50-03.jpg" srcset="/img/loading.gif" lazyload alt="50-03" style="zoom:75%;" /><br>但是，弹出的矩形可能会影响答案统计。如图所示，本应该被统计的三格宽度被剪成了一个。所以我们需要保留为等高度的，图上虚线表示。</p>
-<h4 id="答案统计"><a href="#答案统计" class="headerlink" title="答案统计"></a>答案统计</h4><p>回顾向右合并的过程。显然我们无法在全部操作后再向右合并，那样会造成答案丢失。</p>
-<p>考虑什么时候一个矩形对答案没有贡献。正是它被弹出，左边和右边的都比他矮，他下一秒就被压成和右边一样高的时候。<br>此时，答案需要被这一块更新，然后这一块会加入下一个更低的块进行更新。</p>
-<p>具体是这样的：<br><img src="../../img/50-04.jpg" srcset="/img/loading.gif" lazyload alt="50-03" style="zoom:100%;" /><br>弹出时需要统计答案，同时向上一个块合并。</p>
-<h4 id="最终做法"><a href="#最终做法" class="headerlink" title="最终做法"></a>最终做法</h4><p>维护一个从栈底到栈顶单调递增的栈，将矩阵高度从左向右压入。<br>相邻相同高度的使用<code>wid[N]</code>数组存储宽度，表示一块，统计时答案为 $h_i\times wid_i$。<br>弹栈，把栈顶丢掉的同时将栈顶这一块合并到新栈顶的一块上。<br>时间复杂度 $O(n)$。</p>
-<p>代码实现略有不同，但整体思路一致。<code>width</code>变量存储当前栈顶那一块的宽度。</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/170785663">AC</a> 5.20MB 20ms</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 100010</span><br><span class="hljs-type">int</span> n; ll ans;<br><span class="hljs-type">int</span> a[N], wid[N];<br><span class="hljs-type">int</span> stk[N], top;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;a.in&quot;, &quot;r&quot;, stdin);</span><br>	<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>		n=<span class="hljs-built_in">read</span>(), top=ans=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">if</span> (!n) <span class="hljs-keyword">break</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) a[i]=<span class="hljs-built_in">read</span>();<br>		a[++n]=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) &#123;<br>			<span class="hljs-type">int</span> width=<span class="hljs-number">0</span>;<br>			<span class="hljs-keyword">while</span> (top&amp;&amp;a[stk[top]]&gt;=a[i]) &#123;<br>				width+=wid[top];<br>				ans=<span class="hljs-built_in">max</span>(ans, <span class="hljs-number">1LL</span>*width*a[stk[top]]);<br>				--top;<br>			&#125;<br>			stk[++top]=i;<br>			wid[top]=width+<span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, ans);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>会 $O(n^2)$ 暴力、发现可以使用单调栈统一处理可行答案，是解决本题的关键。</p>
-<p>借助单调性处理问题的思想在于<strong>及时排除不可能的选项，保持策略集合的高度有效性和秩序性</strong>，从而为我们做出决策提供更多的条件和可能的方法。（摘自李煜东《算法竞赛进阶指南》）</p>
+<h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><h4 id="倍增预处理"><a href="#倍增预处理" class="headerlink" title="倍增预处理"></a>倍增预处理</h4><p>设 $f_{i,j}$ 表示从 $i$ 开始、长度为 $2^j$ 的区间 $[i,i+2^i-1]$ 的 $\operatorname{opt}$ 值，即：<br>$$<br>f_{i,j}&#x3D;\mathop{\operatorname{opt}}_{x&#x3D;i}^{i+2^j-1}a_x<br>$$</p>
+<p>有递推式：<br>$$<br>f_{i,j}&#x3D;\operatorname{opt}(f_{i,j-1},f_{i+2^{j-1},j-1})<br>$$</p>
+<p>证明如下：<br>$$<br>\begin{aligned}<br>f_{i,j}&#x3D;&amp;\mathop{\operatorname{opt}}_{x&#x3D;i}^{i+2^j-1}a_x\\<br>&#x3D;&amp;\operatorname{opt}(\ \mathop{\operatorname{opt}}_{x&#x3D;i}^{i+2^{j-1}-1}a_x,\ \mathop{\operatorname{opt}}_{x&#x3D;i+2^{j-1}}^{i+2^j-1}a_x\ )\\<br>&#x3D;&amp;\operatorname{opt}(\ \mathop{\operatorname{opt}}_{x&#x3D;i}^{i+2^{j-1}-1}a_x,\ \mathop{\operatorname{opt}}_{x&#x3D;i+2^{j-1}-1+1}^{i+2^{j-1}-1+1+2^{j-1}-1}a_x\ )\\<br>&#x3D;&amp;\operatorname{opt}(\ f_{i,\ j-1},\ f_{i+2^{j-1},\ j-1}\ )<br>\end{aligned}<br>$$</p>
+<!--这里我也不知道咋回事，得用“\_”代替“_”，可能是编译出了点小问题。-->
+<p>如图：<br><img src="../../img/51-01.jpg" srcset="/img/loading.gif" lazyload alt="51-01" style="zoom:100%;" /><br>这样，每一个长度为 $2^j$ 的区间都能由两个长度为 $2^{j-1}$ 的区间拼起来。</p>
+<p>$i\in[1,n]$，$j\in[1,\log n]$，时间复杂度 $O(n\log n)$。</p>
+<h4 id="一般查询"><a href="#一般查询" class="headerlink" title="一般查询"></a>一般查询</h4><p>考虑如何将区间 $[l,r]$ 拆分为若干长度为 $2^k$ 的区间。<br>$$<br>\mathop{\operatorname{opt}}_{x&#x3D;l}^ra_x&#x3D;\begin{cases}<br>a_l&amp;l&#x3D;r\\<br>\operatorname{opt}(\ f_{l,\ \lfloor\log_2(r-l+1)\rfloor},\ \mathop{\operatorname{opt}}\limits_{x&#x3D;l+2^{\lfloor\log_2(r-l+1)\rfloor}}^r\ )&amp;\text{otherwise.}<br>\end{cases}<br>$$<br>式子很复杂，但意思就是，从区间内找出一个极大的、长度为 $2^k$ 的子区间，使其左端点为 $l$。这样区间就被分为了两部分。子区间使用 $f_{i,j}$ 求解，剩余部分继续拆分，递归求解。</p>
+<p>如图所示：<br><img src="../../img/51-02.jpg" srcset="/img/loading.gif" lazyload alt="51-02" style="zoom:100%;" /><br>由于每一次都会拆分成 $2^x$ 和 $\text{len}-2^x$ 两个区间，且 $2^x&gt;\frac{\text{len}}2$，所以最多会拆成 $\log n$ 个长度为 $2^x$ 的块。时间复杂度 $O(\log n)$。</p>
+<h4 id="考虑重复贡献"><a href="#考虑重复贡献" class="headerlink" title="考虑重复贡献"></a>考虑重复贡献</h4><p>注意到剩下的部分也可以被 $2^k$ 子区间覆盖。<br>考虑 $\operatorname{opt}$ 运算可以重复贡献，这就意味着中间重复覆盖的部分无需考虑。<br>$$<br>\mathop{\operatorname{opt}}_{x&#x3D;l}^r&#x3D;\operatorname{opt}(\ f_{l,\ \lfloor\log_2(r-l+1)\rfloor},\ f_{r-\lfloor\log_2(r-l+1)\rfloor+1,\ r}\ )<br>$$<br>如图所示：<br><img src="../../img/51-03.jpg" srcset="/img/loading.gif" lazyload alt="51-03" style="zoom:100%;" /><br>只需要一次计算、使用两个 $f_{i,j}$ 即可。时间复杂度 $O(1)$。</p>
 <hr>
-<h3 id="解法二-悬线法"><a href="#解法二-悬线法" class="headerlink" title="解法二 - 悬线法"></a>解法二 - 悬线法</h3><p>这个算法真的很有意思，建议<a target="_blank" rel="noopener" href="https://oi-wiki.org/misc/hoverline/#%E4%BE%8B%E9%A2%98">一览</a>。</p>
-<p>由于适用范围较小且有单调栈的通解，暂且不讲。</p>
+<h3 id="log-2x-倍增预处理"><a href="#log-2x-倍增预处理" class="headerlink" title="$\log_2x$ 倍增预处理"></a>$\log_2x$ 倍增预处理</h3><p><code>std::log()</code>及<code>std::log2()</code>能用，但是大量重复使用会导致运行时间过长。<br>在只需要求 $\lfloor\log_2x\rfloor$ 的情况，忽略小数部分的情况下，可以提前预处理出 $[1,N]$ 之间的值。</p>
+<p>令 $\operatorname{Log}x$ 表示 $\lfloor\log_2x\rfloor$，则有：<br>$$<br>\operatorname{Log}x&#x3D;\begin{cases}<br>0&amp;x&#x3D;1\\<br>\operatorname{Log}\lfloor\frac x2\rfloor&amp;\text{otherwise.}<br>\end{cases}<br>$$<br>具体实现见下方代码<code>main()</code>函数第二行。</p>
+<hr>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3865">洛谷P3865</a> RMQ 问题</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给出 $n$ 个数 $a_i$ 及 $m$ 个区间 $[l_i,r_i]$，求这些区间内数字的最大值。</p>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>由于 $\max(a,b)$ 满足结合律 $\max(a,b,c)&#x3D;\max(a,\max(b,c))$ 和“可重复贡献” $max(a,a)&#x3D;a$，考虑使用ST表求解。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/165746467">AC</a> 9.48MB 1.32s</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 100010</span><br><span class="hljs-type">int</span> n, m, l, r, x;<br><span class="hljs-type">int</span> a[N], f[N][<span class="hljs-number">20</span>]; <span class="hljs-comment">// 17</span><br><span class="hljs-type">int</span> Log[N];<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;a.in&quot;, &quot;r&quot;, stdin);</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>; i&lt;N; ++i) Log[i]=Log[i&gt;&gt;<span class="hljs-number">1</span>]+<span class="hljs-number">1</span>;<br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) f[i][<span class="hljs-number">0</span>]=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>; j&lt;=Log[n]; ++j) <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n-(<span class="hljs-number">1</span>&lt;&lt;j)+<span class="hljs-number">1</span>; ++i) &#123;<br>		f[i][j]=<span class="hljs-built_in">max</span>(f[i][j<span class="hljs-number">-1</span>], f[i+(<span class="hljs-number">1</span>&lt;&lt;(j<span class="hljs-number">-1</span>))][j<span class="hljs-number">-1</span>]);<br>	&#125;<br>	<span class="hljs-keyword">while</span> (m--) &#123;<br>		l=<span class="hljs-built_in">read</span>(), r=<span class="hljs-built_in">read</span>(), x=Log[r-l+<span class="hljs-number">1</span>];<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, <span class="hljs-built_in">max</span>(f[l][x], f[r-(<span class="hljs-number">1</span>&lt;&lt;x)+<span class="hljs-number">1</span>][x]));<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -375,8 +380,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SPOJ HISTOGRA 题解</div>
-      <div>https://algo-x.cn/articles/Solution-of-SP1805/</div>
+      <div>ST表</div>
+      <div>https://algo-x.cn/articles/Sparse-Table/</div>
     </div>
     <div class="license-meta">
       
@@ -388,13 +393,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月5日</div>
+          <div>2024年8月6日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年8月5日</div>
+          <div>2024年8月6日</div>
         </div>
       
       
@@ -431,18 +436,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Sparse-Table/" title="ST表">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ST表</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Logarithmic/" title="对数运算">
-                        <span class="hidden-mobile">对数运算</span>
+                      <a href="/articles/Solution-of-SP1805/" title="SPOJ HISTOGRA 题解">
+                        <span class="hidden-mobile">SPOJ HISTOGRA 题解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

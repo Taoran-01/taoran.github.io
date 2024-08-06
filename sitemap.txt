@@ -1,3 +1,4 @@
+https://algo-x.cn/articles/Sparse-Table/
 https://algo-x.cn/articles/Solution-of-SP1805/
 https://algo-x.cn/articles/Logarithmic/
 https://algo-x.cn/articles/Bitset/
