@@ -16,25 +16,24 @@
   <meta name="author" content="Taoran">
   <meta name="keywords" content="">
   
-    <meta name="description" content="解决问题适用于预处理后离线查询一类问题。 给定 $n$ 个数 $a_i$ 和 $m$ 个区间 $[l_i,r_i]$，询问每个区间内 $\operatorname{opt}$ 的值。$O(n\log n)$ 预处理，$O(1)$ 查询。  应用条件 满足结合律，即 $\operatorname{opt}(x,y,z)&#x3D;\operatorname{opt}(\operatorname{o">
+    <meta name="description" content="模拟赛排名如下。是的，一次都没进前 $10\%$，几乎次次都在 $50\%$ 以后。   $$\begin{array}{c|cc}\text{日期}&amp;\text{我的排名}&amp;\text{总评测人数}\\\hline\text{Day 1}&amp;56&amp;89\\\text{Day 2}&amp;11&amp;84\\\text{Day 3}&amp;66&amp;83\">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ST表">
-<meta property="og:url" content="https://algo-x.cn/articles/Sparse-Table/index.html">
+<meta property="og:title" content="山东2024信息集训夏令营 个人总结">
+<meta property="og:url" content="https://algo-x.cn/articles/SDSC2024-Summary/index.html">
 <meta property="og:site_name" content="Algo-X.cn">
-<meta property="og:description" content="解决问题适用于预处理后离线查询一类问题。 给定 $n$ 个数 $a_i$ 和 $m$ 个区间 $[l_i,r_i]$，询问每个区间内 $\operatorname{opt}$ 的值。$O(n\log n)$ 预处理，$O(1)$ 查询。  应用条件 满足结合律，即 $\operatorname{opt}(x,y,z)&#x3D;\operatorname{opt}(\operatorname{o">
+<meta property="og:description" content="模拟赛排名如下。是的，一次都没进前 $10\%$，几乎次次都在 $50\%$ 以后。   $$\begin{array}{c|cc}\text{日期}&amp;\text{我的排名}&amp;\text{总评测人数}\\\hline\text{Day 1}&amp;56&amp;89\\\text{Day 2}&amp;11&amp;84\\\text{Day 3}&amp;66&amp;83\">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://algo-x.cn/img/51-01.jpg">
-<meta property="og:image" content="https://algo-x.cn/img/51-02.jpg">
-<meta property="og:image" content="https://algo-x.cn/img/51-03.jpg">
-<meta property="article:published_time" content="2024-08-06T10:29:41.000Z">
-<meta property="article:modified_time" content="2024-08-06T13:05:29.576Z">
+<meta property="og:image" content="https://algo-x.cn/img/52-01.jpg">
+<meta property="article:published_time" content="2024-08-07T11:54:53.000Z">
+<meta property="article:modified_time" content="2024-08-07T14:30:09.566Z">
 <meta property="article:author" content="Taoran">
+<meta property="article:tag" content="SDSC 2024">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://algo-x.cn/img/51-01.jpg">
+<meta name="twitter:image" content="https://algo-x.cn/img/52-01.jpg">
   
   
   
-  <title>ST表 - Algo-X.cn</title>
+  <title>山东2024信息集训夏令营 个人总结 - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +223,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ST表"></span>
+            <span id="subtitle" data-typed-text="山东2024信息集训夏令营 个人总结"></span>
           
         </div>
 
@@ -235,8 +234,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-06 18:29" pubdate>
-          2024年8月6日 晚上
+        <time datetime="2024-08-07 19:54" pubdate>
+          2024年8月7日 晚上
         </time>
       </span>
     
@@ -247,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.3k 字
         
       </span>
     
@@ -258,7 +257,7 @@
         
         
         
-          9 分钟
+          11 分钟
         
       </span>
     
@@ -295,12 +294,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">ST表</h1>
+            <h1 id="seo-header">山东2024信息集训夏令营 个人总结</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年8月6日 晚上
+                    本文最后更新于 2024年8月7日 晚上
                   
                 
               </p>
@@ -309,32 +308,36 @@
               <div class="markdown-body">
                 
                 <hr>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>适用于预处理后离线查询一类问题。</p>
-<p>给定 $n$ 个数 $a_i$ 和 $m$ 个区间 $[l_i,r_i]$，询问每个区间内 $\operatorname{opt}$ 的值。<br>$O(n\log n)$ 预处理，$O(1)$ 查询。</p>
+<h3 id="模拟赛"><a href="#模拟赛" class="headerlink" title="模拟赛"></a>模拟赛</h3><p>排名如下。是的，一次都没进前 $10\%$，几乎次次都在 $50\%$ 以后。</p>
+<img src="../../img/52-01.jpg" srcset="/img/loading.gif" lazyload alt="52-01" align="right" style="zoom:20%;" />
+
+<p>$$<br>\begin{array}{c|cc}<br>\text{日期}&amp;\text{我的排名}&amp;\text{总评测人数}\\<br>\hline\text{Day 1}&amp;56&amp;89\\<br>\text{Day 2}&amp;11&amp;84\\<br>\text{Day 3}&amp;66&amp;83\\<br>\text{Day 4}&amp;70&amp;88\\<br>\text{Day 5}&amp;70&amp;89\\<br>\text{Day 6}&amp;62&amp;83\\<br>\text{Day 7}&amp;9&amp;81<br>\end{array}<br>$$</p>
+<p>昨天脑残数组开小，今天没想到要判零判重；前天一道题做了三小时连暴力都没写，后天想出了正解却又调不出来。</p>
+<p>总结：寄，天天都在破大防。</p>
 <hr>
-<h3 id="应用条件"><a href="#应用条件" class="headerlink" title="应用条件"></a>应用条件</h3><ol>
-<li>满足结合律，即 $\operatorname{opt}(x,y,z)&#x3D;\operatorname{opt}(\operatorname{opt}(x,y),z)&#x3D;\operatorname{opt}(x,\operatorname{opt}(y,z))$。</li>
-<li>满足“可重复贡献”，即 $\operatorname{opt}(x,x)&#x3D;x$。</li>
-</ol>
+<h3 id="听课"><a href="#听课" class="headerlink" title="听课"></a>听课</h3><h4 id="Day-1-数论"><a href="#Day-1-数论" class="headerlink" title="Day 1 - 数论"></a>Day 1 - 数论</h4><p>上课感觉听得差不多，但是晚上回到宿舍发现都忘了，题也不会做。</p>
+<h4 id="Day-2-可持久化数据结构"><a href="#Day-2-可持久化数据结构" class="headerlink" title="Day 2 - 可持久化数据结构"></a>Day 2 - 可持久化数据结构</h4><p>本来就一点都不会的东西，听了个半斤八两。思路听懂了，但是实现一点也不会。</p>
+<h4 id="Day-3-数位DP与状压DP"><a href="#Day-3-数位DP与状压DP" class="headerlink" title="Day 3 - 数位DP与状压DP"></a>Day 3 - 数位DP与状压DP</h4><p>换根DP之前讲过，听得比较顺利。<br>但是树形背包例题之前讲过现在一点印象都没有，再听一边还是不会QWQ。<br>状压之前没见太多，现在听了感觉很难很神奇。</p>
+<h4 id="Day-4-DP优化"><a href="#Day-4-DP优化" class="headerlink" title="Day 4 - DP优化"></a>Day 4 - DP优化</h4><p>抽象。</p>
+<p>单调队列和斜率优化会写代码，但是不会推式子。遇到题卡在第一步：连这是DP都看不出来，更别说第二步能凑出基本构型了。<br>李超线段树，确实会，但是对我来说相当不好调，<del>我也不期望我能在考场上写出来这种东西</del>。</p>
+<p>CDQ分治会不了一点。决策单调性知道了要打表，但是不知道怎么打表。<br>让我最破防的一点是，别人一猜就能猜出来的单调性，我愣是推半天也推不出来。</p>
+<h4 id="Day-5-Tarjan与图的连通性问题"><a href="#Day-5-Tarjan与图的连通性问题" class="headerlink" title="Day 5 - Tarjan与图的连通性问题"></a>Day 5 - Tarjan与图的连通性问题</h4><p>终于听懂了。之前在学校里学得比较扎实，在这里对算法原理和各种概念有了更进一步的理解。</p>
+<h4 id="Day-6-字符串"><a href="#Day-6-字符串" class="headerlink" title="Day 6 - 字符串"></a>Day 6 - 字符串</h4><p>今天是QYC讲，所以你已经完全理解了。</p>
+<p>Manacher是一点也听不懂，看上去不简单，打算回头再学。<br>dfa前面都听懂了，听到dfa最小化就不会了，后面掉线了。<br>kmp由于之前会，所以听得很顺利。这次终于把“跳border”这一块听懂了。</p>
+<h4 id="Day-7-线段树"><a href="#Day-7-线段树" class="headerlink" title="Day 7 - 线段树"></a>Day 7 - 线段树</h4><p>听上去很简单，实际一点也不难。大抵是听明白了。</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>模拟赛讲题讲了一些Trick，我听懂了七八分。算是理解了，也记下来了，但是我也不确定以后做题的时候能不能想起来。<br>笔记记了若干张纸，现在回看一点也记不起来。</p>
 <hr>
-<h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><h4 id="倍增预处理"><a href="#倍增预处理" class="headerlink" title="倍增预处理"></a>倍增预处理</h4><p>设 $f_{i,j}$ 表示从 $i$ 开始、长度为 $2^j$ 的区间 $[i,i+2^i-1]$ 的 $\operatorname{opt}$ 值，即：<br>$$<br>f_{i,j}&#x3D;\mathop{\operatorname{opt}}_{x&#x3D;i}^{i+2^j-1}a_x<br>$$</p>
-<p>有递推式：<br>$$<br>f_{i,j}&#x3D;\operatorname{opt}(f_{i,j-1},f_{i+2^{j-1},j-1})<br>$$</p>
-<p>证明如下：<br>$$<br>\begin{aligned}<br>f_{i,j}&#x3D;&amp;\mathop{\operatorname{opt}}_{x&#x3D;i}^{i+2^j-1}a_x\\<br>&#x3D;&amp;\operatorname{opt}(\ \mathop{\operatorname{opt}}_{x&#x3D;i}^{i+2^{j-1}-1}a_x,\ \mathop{\operatorname{opt}}_{x&#x3D;i+2^{j-1}}^{i+2^j-1}a_x\ )\\<br>&#x3D;&amp;\operatorname{opt}(\ \mathop{\operatorname{opt}}_{x&#x3D;i}^{i+2^{j-1}-1}a_x,\ \mathop{\operatorname{opt}}_{x&#x3D;i+2^{j-1}-1+1}^{i+2^{j-1}-1+1+2^{j-1}-1}a_x\ )\\<br>&#x3D;&amp;\operatorname{opt}(\ f_{i,\ j-1},\ f_{i+2^{j-1},\ j-1}\ )<br>\end{aligned}<br>$$</p>
-<!--这里我也不知道咋回事，得用“\_”代替“_”，可能是编译出了点小问题。-->
-<p>如图：<br><img src="../../img/51-01.jpg" srcset="/img/loading.gif" lazyload alt="51-01" style="zoom:100%;" /><br>这样，每一个长度为 $2^j$ 的区间都能由两个长度为 $2^{j-1}$ 的区间拼起来。</p>
-<p>$i\in[1,n]$，$j\in[1,\log n]$，时间复杂度 $O(n\log n)$。</p>
-<h4 id="一般查询"><a href="#一般查询" class="headerlink" title="一般查询"></a>一般查询</h4><p>考虑如何将区间 $[l,r]$ 拆分为若干长度为 $2^k$ 的区间。<br>$$<br>\mathop{\operatorname{opt}}_{x&#x3D;l}^ra_x&#x3D;\begin{cases}<br>a_l&amp;l&#x3D;r\\<br>\operatorname{opt}(\ f_{l,\ \lfloor\log_2(r-l+1)\rfloor},\ \mathop{\operatorname{opt}}\limits_{x&#x3D;l+2^{\lfloor\log_2(r-l+1)\rfloor}}^r\ )&amp;\text{otherwise.}<br>\end{cases}<br>$$<br>式子很复杂，但意思就是，从区间内找出一个极大的、长度为 $2^k$ 的子区间，使其左端点为 $l$。这样区间就被分为了两部分。子区间使用 $f_{i,j}$ 求解，剩余部分继续拆分，递归求解。</p>
-<p>如图所示：<br><img src="../../img/51-02.jpg" srcset="/img/loading.gif" lazyload alt="51-02" style="zoom:100%;" /><br>由于每一次都会拆分成 $2^x$ 和 $\text{len}-2^x$ 两个区间，且 $2^x&gt;\frac{\text{len}}2$，所以最多会拆成 $\log n$ 个长度为 $2^x$ 的块。时间复杂度 $O(\log n)$。</p>
-<h4 id="考虑重复贡献"><a href="#考虑重复贡献" class="headerlink" title="考虑重复贡献"></a>考虑重复贡献</h4><p>注意到剩下的部分也可以被 $2^k$ 子区间覆盖。<br>考虑 $\operatorname{opt}$ 运算可以重复贡献，这就意味着中间重复覆盖的部分无需考虑。<br>$$<br>\mathop{\operatorname{opt}}_{x&#x3D;l}^r&#x3D;\operatorname{opt}(\ f_{l,\ \lfloor\log_2(r-l+1)\rfloor},\ f_{r-\lfloor\log_2(r-l+1)\rfloor+1,\ r}\ )<br>$$<br>如图所示：<br><img src="../../img/51-03.jpg" srcset="/img/loading.gif" lazyload alt="51-03" style="zoom:100%;" /><br>只需要一次计算、使用两个 $f_{i,j}$ 即可。时间复杂度 $O(1)$。</p>
+<h3 id="小插曲"><a href="#小插曲" class="headerlink" title="小插曲"></a>小插曲</h3><p>Day 4，我哭了一晚上。我想起了去年的集训，想起了一年来我学的算法做的题，想起了走散的好朋友，想起了这学期同学们对我的嘲笑与不认可。我底子确实不扎实，技不如人，模拟赛挂分也说不上啥。我第一次感到了深深的无助和绝望。</p>
+<p>Day 5，模拟赛又垫底了。我中午就想着要退役，站在老师面前把营员证摔给他，再买票坐车会济南。剩下一个月抓紧赶文化课，回到普通班继续普通下去。<br>晚上我去找硕硕玩。他和我聊了很多，聊了怎么学算法、怎么积累Trick、怎么平衡文化课和竞赛。<br>“你什么时候开始做计划都不晚。只要你想做，你随时都可以做。这个计划可以帮助你清楚地规划你该学什么，但最主要意义是，当你完成这一阶段的目标后，你会有一种成就感，而这种成就感会推着你向前走。”</p>
+<p>LTR说，我们这一届只会留下一两个，剩下的拿了省一就赶走了。</p>
+<p>既然你知道自己进不了省队，马上就会退役，也要继续打，至少拿到省一再退役。不然，这么多年的心血，谁又会甘心呢。</p>
 <hr>
-<h3 id="log-2x-倍增预处理"><a href="#log-2x-倍增预处理" class="headerlink" title="$\log_2x$ 倍增预处理"></a>$\log_2x$ 倍增预处理</h3><p><code>std::log()</code>及<code>std::log2()</code>能用，但是大量重复使用会导致运行时间过长。<br>在只需要求 $\lfloor\log_2x\rfloor$ 的情况，忽略小数部分的情况下，可以提前预处理出 $[1,N]$ 之间的值。</p>
-<p>令 $\operatorname{Log}x$ 表示 $\lfloor\log_2x\rfloor$，则有：<br>$$<br>\operatorname{Log}x&#x3D;\begin{cases}<br>0&amp;x&#x3D;1\\<br>\operatorname{Log}\lfloor\frac x2\rfloor&amp;\text{otherwise.}<br>\end{cases}<br>$$<br>具体实现见下方代码<code>main()</code>函数第二行。</p>
+<h3 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h3><p>我最大的收获就是彻底了解了我的实力和位置。我确定以后进不了省队，也看清了自己和退役之间的距离。<br>没去听讲座感觉有些遗憾。这么好的机会居然在宿舍里补题，我也不知道当时怎么想的。</p>
 <hr>
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3865">洛谷P3865</a> RMQ 问题</p>
-<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给出 $n$ 个数 $a_i$ 及 $m$ 个区间 $[l_i,r_i]$，求这些区间内数字的最大值。</p>
-<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>由于 $\max(a,b)$ 满足结合律 $\max(a,b,c)&#x3D;\max(a,\max(b,c))$ 和“可重复贡献” $max(a,a)&#x3D;a$，考虑使用ST表求解。</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/165746467">AC</a> 9.48MB 1.32s</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 100010</span><br><span class="hljs-type">int</span> n, m, l, r, x;<br><span class="hljs-type">int</span> a[N], f[N][<span class="hljs-number">20</span>]; <span class="hljs-comment">// 17</span><br><span class="hljs-type">int</span> Log[N];<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;a.in&quot;, &quot;r&quot;, stdin);</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>; i&lt;N; ++i) Log[i]=Log[i&gt;&gt;<span class="hljs-number">1</span>]+<span class="hljs-number">1</span>;<br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) f[i][<span class="hljs-number">0</span>]=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>; j&lt;=Log[n]; ++j) <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n-(<span class="hljs-number">1</span>&lt;&lt;j)+<span class="hljs-number">1</span>; ++i) &#123;<br>		f[i][j]=<span class="hljs-built_in">max</span>(f[i][j<span class="hljs-number">-1</span>], f[i+(<span class="hljs-number">1</span>&lt;&lt;(j<span class="hljs-number">-1</span>))][j<span class="hljs-number">-1</span>]);<br>	&#125;<br>	<span class="hljs-keyword">while</span> (m--) &#123;<br>		l=<span class="hljs-built_in">read</span>(), r=<span class="hljs-built_in">read</span>(), x=Log[r-l+<span class="hljs-number">1</span>];<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, <span class="hljs-built_in">max</span>(f[l][x], f[r-(<span class="hljs-number">1</span>&lt;&lt;x)+<span class="hljs-number">1</span>][x]));<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="后面的路"><a href="#后面的路" class="headerlink" title="后面的路"></a>后面的路</h3><p>学校讲的东西对我来说非常难，我学会了也得不到多少额外的分，这也是我这一年成绩没怎么提升的一部分原因。但是，这些知识确实很有用，至少在我达到更高阶段之后。</p>
+<p>CSP-S之前，复习基础算法，<strong>特别是DP</strong>。这是我最薄弱的地方，也是最常考的。然后多做往年真题，Visual Practice。</p>
+<p>NOIP之前，打模拟赛，背模板。</p>
+<p>至于我底子薄这个问题，暂时还没想好是继续跟学校学高级算法还是自己复习基础内容。这个等开了学和教练讨论。<br>课余时间多学竞赛，文化课先放一放。不过期中考试着实让人头疼，等开学后再说吧。</p>
 
                 
               </div>
@@ -358,7 +361,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E6%B8%B8%E8%AE%B0%E4%B8%8E%E6%80%BB%E7%BB%93/" class="category-chain-item">游记与总结</a>
   
   
 
@@ -372,6 +375,13 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SDSC-2024/" class="print-no-link">#SDSC 2024</a>
+      
+    </div>
+  
 </div>
 
 
@@ -380,8 +390,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ST表</div>
-      <div>https://algo-x.cn/articles/Sparse-Table/</div>
+      <div>山东2024信息集训夏令营 个人总结</div>
+      <div>https://algo-x.cn/articles/SDSC2024-Summary/</div>
     </div>
     <div class="license-meta">
       
@@ -393,13 +403,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月6日</div>
+          <div>2024年8月7日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年8月6日</div>
+          <div>2024年8月7日</div>
         </div>
       
       
@@ -436,18 +446,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/SDSC2024-Summary/" title="山东2024信息集训夏令营 个人总结">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">山东2024信息集训夏令营 个人总结</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Solution-of-SP1805/" title="SPOJ HISTOGRA 题解">
-                        <span class="hidden-mobile">SPOJ HISTOGRA 题解</span>
+                      <a href="/articles/Sparse-Table/" title="ST表">
+                        <span class="hidden-mobile">ST表</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
