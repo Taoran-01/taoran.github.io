@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://algo-x.cn/articles/Maintaining-XOR-Extrema/</loc>
+    <lastmod>2024-08-08</lastmod>
+  </url>
+  <url>
     <loc>https://algo-x.cn/articles/Bitset/</loc>
     <lastmod>2024-08-07</lastmod>
   </url>
@@ -154,10 +158,6 @@
   </url>
   <url>
     <loc>https://algo-x.cn/articles/Network-Flow-Algorithm/</loc>
-    <lastmod>2024-06-27</lastmod>
-  </url>
-  <url>
-    <loc>https://algo-x.cn/articles/Maintaining-XOR-Extrema/</loc>
     <lastmod>2024-06-27</lastmod>
   </url>
   <url>
