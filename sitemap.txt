@@ -1,6 +1,7 @@
+https://algo-x.cn/articles/SDCPC2024-Personal-Summary-and-Solution-Approach-Organization/
+https://algo-x.cn/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/
 https://algo-x.cn/articles/Maintaining-XOR-Extrema/
 https://algo-x.cn/articles/Bitset/
-https://algo-x.cn/articles/SDCPC-Personal-Summary-and-Solution-Approach-Organization/
 https://algo-x.cn/articles/FHQ-Treap/
 https://algo-x.cn/articles/Sparse-Table/
 https://algo-x.cn/articles/Solution-of-SP1805/
@@ -11,8 +12,6 @@ https://algo-x.cn/articles/Deterministic-Finite-Automaton-2/
 https://algo-x.cn/articles/Two-Dimensional-Hash-Solution-of-P10474/
 https://algo-x.cn/articles/Minimum-Positive-Number-of-Linear-Combinations-of-Coefficients/
 https://algo-x.cn/articles/Performance-Parameters-of-Rocket-Engines-During-Operation/
-https://algo-x.cn/articles/Note-24-06-30/
-https://algo-x.cn/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/
 https://algo-x.cn/articles/Modular-Multiplicative-Inverse/
 https://algo-x.cn/articles/Group-Theory/
 https://algo-x.cn/articles/Catalan/
@@ -23,9 +22,6 @@ https://algo-x.cn/articles/The-Tarjan-Algorithm-for-Strongly-Connected-Component
 https://algo-x.cn/articles/Solution-of-P4178/
 https://algo-x.cn/articles/Solution-of-P1084/
 https://algo-x.cn/articles/Salt-Production-from-Seawater/
-https://algo-x.cn/articles/Note-24-02-18/
-https://algo-x.cn/articles/Note-24-02-04/
-https://algo-x.cn/articles/Note-24-01-31/
 https://algo-x.cn/articles/Fuel-Card-SHMCEE-2023/
 https://algo-x.cn/articles/An-Example-of-Equivalent-Resistance/
 https://algo-x.cn/articles/0-1-Backpack/
@@ -36,7 +32,6 @@ https://algo-x.cn/articles/Solution-of-P3478/
 https://algo-x.cn/articles/Solution-of-AT-dp-l/
 https://algo-x.cn/articles/Solution-of-AT-dp-j/
 https://algo-x.cn/articles/Slope-Optimization/
-https://algo-x.cn/articles/Note-24-01-30/
 https://algo-x.cn/articles/Network-Flow-Algorithm/
 https://algo-x.cn/articles/Dynamic-Programming-with-Root-Replacement/
 https://algo-x.cn/articles/Dynamic-Programming/

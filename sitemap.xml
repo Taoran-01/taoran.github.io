@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://algo-x.cn/articles/SDCPC2024-Personal-Summary-and-Solution-Approach-Organization/</loc>
+    
+    <lastmod>2024-08-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://algo-x.cn/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/</loc>
+    
+    <lastmod>2024-08-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://algo-x.cn/articles/Maintaining-XOR-Extrema/</loc>
     
     <lastmod>2024-08-08</lastmod>
@@ -12,15 +30,6 @@
   
   <url>
     <loc>https://algo-x.cn/articles/Bitset/</loc>
-    
-    <lastmod>2024-08-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://algo-x.cn/articles/SDCPC-Personal-Summary-and-Solution-Approach-Organization/</loc>
     
     <lastmod>2024-08-07</lastmod>
     
@@ -119,24 +128,6 @@
   </url>
   
   <url>
-    <loc>https://algo-x.cn/articles/Note-24-06-30/</loc>
-    
-    <lastmod>2024-07-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://algo-x.cn/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/</loc>
-    
-    <lastmod>2024-07-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://algo-x.cn/articles/Modular-Multiplicative-Inverse/</loc>
     
     <lastmod>2024-07-17</lastmod>
@@ -219,33 +210,6 @@
   
   <url>
     <loc>https://algo-x.cn/articles/Salt-Production-from-Seawater/</loc>
-    
-    <lastmod>2024-06-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://algo-x.cn/articles/Note-24-02-18/</loc>
-    
-    <lastmod>2024-06-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://algo-x.cn/articles/Note-24-02-04/</loc>
-    
-    <lastmod>2024-06-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://algo-x.cn/articles/Note-24-01-31/</loc>
     
     <lastmod>2024-06-27</lastmod>
     
@@ -344,15 +308,6 @@
   </url>
   
   <url>
-    <loc>https://algo-x.cn/articles/Note-24-01-30/</loc>
-    
-    <lastmod>2024-06-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://algo-x.cn/articles/Network-Flow-Algorithm/</loc>
     
     <lastmod>2024-06-27</lastmod>
@@ -436,7 +391,7 @@
 
   <url>
     <loc>https://algo-x.cn/</loc>
-    <lastmod>2024-08-08</lastmod>
+    <lastmod>2024-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>

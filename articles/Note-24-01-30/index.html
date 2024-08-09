@@ -24,7 +24,7 @@
 <meta property="og:description" content="应试考试中，图论数据量都是$10^5$量级的，所以用邻接表。数组的定义记住估算一下空间，对数组大小有概念。二维int数组最大开到$5000\times5000$万不得已不要定义在主函数内。规范变量命名。    memsetSTL::memset头文件cstring使用方法memset(地址, 数值, 长度)将地址的每一个字节填充数值最大值填充0x3F即可  多少条边有向图：$C^2_n&amp;#x3D">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-30T10:13:07.000Z">
-<meta property="article:modified_time" content="2024-06-27T13:55:32.726Z">
+<meta property="article:modified_time" content="2024-08-09T10:19:40.893Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -296,7 +296,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年6月27日 晚上
+                    本文最后更新于 2024年8月9日 晚上
                   
                 
               </p>
@@ -330,7 +330,7 @@
 <p>m次操作，时间复杂度$O(m\log n)$</p>
 <hr>
 <h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><p>单源最短路算法：只有一个源点作为起点。<br>暴力$O(n^2)$<br>堆优化$O(m\log m)$<br>不能有负边存在</p>
-<p>源点$s$<br>最短路$d_i$<br>标记数组$v_i$<br>初始条件$d_1&#x3D;0$，其余为$\infin$。</p>
+<p>源点$s$<br>最短路$d_i$<br>标记数组$v_i$<br>初始条件$d_1&#x3D;0$，其余为$\infty$。</p>
 <p>贪心思想<br>因为没有负边，所以已求点最短路不会再变化。<br>两个集合，已求点（白点）和未求点（蓝点）。</p>
 <p>第一步：蓝点中找一个与白点距离最近的。<br>第二步：将这个点变为白点，用这个点更新蓝点距离。<br>$d_x+a_{x,y}$更新$d_y$，$x$为白点，$y$为蓝点。<br>第三步：重复，直到全部变成白点。</p>
 <p>暴力代码</p>
@@ -404,7 +404,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年6月27日</div>
+          <div>2024年8月9日</div>
         </div>
       
       
