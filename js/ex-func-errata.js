@@ -1,9 +1,24 @@
 // https://gist.github.com/Algo-X-Public-Account-02/01e0a06a706eb6a5840af3425d0d04ef
 
 const gistId='01e0a06a706eb6a5840af3425d0d04ef';
-const accessToken='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';
-// Please don't hack QWQ
-// PLEASE! PLEASE! PLEASE!
+var accessToken;
+
+function getAccessToken() {
+	xhr=createXHR();
+	xhr.open('GET', 'https://textdb.online/Algo-X-Errata-Access-Token', true);
+	xhr.onload=function() {
+		if (xhr.status >= 200 && xhr.status < 300) {
+			accessToken=xhr.responseText;
+		} else {
+			console.error('Token Request Failed.');
+		}
+	};
+	xhr.onerror=function() {
+		console.error('Token Request Failed.');
+	};
+	xhr.send();
+}
+getAccessToken();
 
 function readSubmitter() {
 	return document.getElementById('submitterInput').value;

@@ -1,4 +1,3 @@
-https://algo-x.cn/articles/Temp-Article/
 https://algo-x.cn/articles/Modular-Multiplicative-Inverse/
 https://algo-x.cn/errata/index.html
 https://algo-x.cn/articles/SDCPC2024-Personal-Summary-and-Solution-Approach-Organization/
