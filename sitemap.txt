@@ -1,3 +1,6 @@
+https://algo-x.cn/chemistry/symbols/index.html
+https://algo-x.cn/chemistry/ions/index.html
+https://algo-x.cn/articles/Blog-Errata/
 https://algo-x.cn/articles/Solution-of-SP22382/
 https://algo-x.cn/articles/Modular-Multiplicative-Inverse/
 https://algo-x.cn/errata/index.html
@@ -41,6 +44,4 @@ https://algo-x.cn/articles/Divide-and-Conquer-on-Trees/
 https://algo-x.cn/articles/Deterministic-Finite-Automaton/
 https://algo-x.cn/articles/Detailed-Explanation-of-EPS/
 https://algo-x.cn/articles/Aho-Corasick-Automaton/
-https://algo-x.cn/chemistry/ions/index.html
-https://algo-x.cn/chemistry/symbols/index.html
 https://algo-x.cn/
