@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://algo-x.cn/articles/WordNet-Linux-Configuration-Guide/</loc>
+    
+    <lastmod>2024-08-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://algo-x.cn/articles/Blog-Errata/</loc>
+    
+    <lastmod>2024-08-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://algo-x.cn/chemistry/symbols/index.html</loc>
     
     <lastmod>2024-08-22</lastmod>
@@ -12,15 +30,6 @@
   
   <url>
     <loc>https://algo-x.cn/chemistry/ions/index.html</loc>
-    
-    <lastmod>2024-08-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://algo-x.cn/articles/Blog-Errata/</loc>
     
     <lastmod>2024-08-22</lastmod>
     
@@ -418,7 +427,7 @@
 
   <url>
     <loc>https://algo-x.cn/</loc>
-    <lastmod>2024-08-22</lastmod>
+    <lastmod>2024-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
