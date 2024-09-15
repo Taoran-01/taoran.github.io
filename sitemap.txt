@@ -1,3 +1,5 @@
+https://algo-x.cn/articles/Problem-Solving-Summary-Aug19-Sep10/
+https://algo-x.cn/articles/Offline-2D-Point-Counting-Algorithm/
 https://algo-x.cn/articles/WordNet-Linux-Configuration-Guide/
 https://algo-x.cn/articles/Blog-Errata/
 https://algo-x.cn/chemistry/symbols/index.html

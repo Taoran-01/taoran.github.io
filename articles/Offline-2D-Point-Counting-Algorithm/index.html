@@ -16,21 +16,21 @@
   <meta name="author" content="Taoran">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言WordNet 是普林斯顿大学开发的一个大型的英文词汇数据库，旨在帮助计算机理解自然语言。它是由普林斯顿大学的计算机科学家 $\text{George A. Miller}$ 和他的团队创建的。WordNet 主要用于自然语言处理、计算语言学以及人工智能研究。 WordNet 将英语词汇组织成一个语义网络，其中的词汇按照其意义分组，并通过各种语义关系（如同义词、反义词、上下位词等）相互连接。">
+    <meta name="description" content="知识前置树状数组扫描线">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WordNet Linux 配置指南">
-<meta property="og:url" content="https://algo-x.cn/articles/WordNet-Linux-Configuration-Guide/index.html">
+<meta property="og:title" content="离线二维数点算法">
+<meta property="og:url" content="https://algo-x.cn/articles/Offline-2D-Point-Counting-Algorithm/index.html">
 <meta property="og:site_name" content="Algo-X.cn">
-<meta property="og:description" content="前言WordNet 是普林斯顿大学开发的一个大型的英文词汇数据库，旨在帮助计算机理解自然语言。它是由普林斯顿大学的计算机科学家 $\text{George A. Miller}$ 和他的团队创建的。WordNet 主要用于自然语言处理、计算语言学以及人工智能研究。 WordNet 将英语词汇组织成一个语义网络，其中的词汇按照其意义分组，并通过各种语义关系（如同义词、反义词、上下位词等）相互连接。">
+<meta property="og:description" content="知识前置树状数组扫描线">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-23T13:05:35.000Z">
-<meta property="article:modified_time" content="2024-09-08T08:45:59.932Z">
+<meta property="article:published_time" content="2024-09-08T09:36:31.000Z">
+<meta property="article:modified_time" content="2024-09-08T09:37:52.119Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>WordNet Linux 配置指南 - Algo-X.cn</title>
+  <title>离线二维数点算法 - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -232,7 +232,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="WordNet Linux 配置指南"></span>
+            <span id="subtitle" data-typed-text="离线二维数点算法"></span>
           
         </div>
 
@@ -243,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-23 21:05" pubdate>
-          2024年8月23日 晚上
+        <time datetime="2024-09-08 17:36" pubdate>
+          2024年9月8日 下午
         </time>
       </span>
     
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          676 字
+          11 字
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          6 分钟
+          1 分钟
         
       </span>
     
@@ -303,7 +303,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">WordNet Linux 配置指南</h1>
+            <h1 id="seo-header">离线二维数点算法</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -317,40 +317,7 @@
               <div class="markdown-body">
                 
                 <hr>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>WordNet 是普林斯顿大学开发的一个大型的英文词汇数据库，旨在帮助计算机理解自然语言。它是由普林斯顿大学的计算机科学家 $\text{George A. Miller}$ 和他的团队创建的。WordNet 主要用于自然语言处理、计算语言学以及人工智能研究。</p>
-<p>WordNet 将英语词汇组织成一个语义网络，其中的词汇按照其意义分组，并通过各种语义关系（如同义词、反义词、上下位词等）相互连接。这种结构使得计算机能够更好地理解词汇之间的关系，进而提高其在语言处理任务中的表现。</p>
-<p>这里是它的<a target="_blank" rel="noopener" href="https://wordnet.princeton.edu/">官网</a>和<a target="_blank" rel="noopener" href="https://wordnet.princeton.edu/documentation">技术文档</a>。</p>
-<p>本文将以 Raspberry Pi 为例，简单介绍 WordNet 在 Linux 中的安装及使用方法。</p>
-<hr>
-<h3 id="tcl-tk-安装"><a href="#tcl-tk-安装" class="headerlink" title="tcl&#x2F;tk 安装"></a>tcl&#x2F;tk 安装</h3><p>在终端中执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install tcl-dev &amp;&amp; sudo apt-get install tk-dev<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="WordNet-安装"><a href="#WordNet-安装" class="headerlink" title="WordNet 安装"></a>WordNet 安装</h3><p>新建一个文件夹，后面的操作都将在文件夹中进行。</p>
-<p>在终端中执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> WordNet &amp;&amp; <span class="hljs-built_in">cd</span> WordNet<br>wget https://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz<br>tar -zxvf WordNet-3.0.tar.gz<br><span class="hljs-built_in">cd</span> WordNet-3.0<br></code></pre></td></tr></table></figure>
-
-<p>WordNet 项目已于2006年停止更新。在此期间，tcl 经过了一次接口更改，导致直接编译无法运行。</p>
-<p>所以，我修改了一下源代码，以适配最新版的 tcl。<br>修改的文件是 <code>/src/stubs.c</code>，源码我放在了<a href="../../source/accessories/WordNet/stubs.c">本网站</a>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://algo-x.cn/source/accessories/WordNet/stubs.c<br>sudo <span class="hljs-built_in">mv</span> stubs.c ./src<br></code></pre></td></tr></table></figure>
-
-<p>接下来，生成并执行 <code>make</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure<br>make &amp;&amp; sudo make install<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="清理文件"><a href="#清理文件" class="headerlink" title="清理文件"></a>清理文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ../..<br>sudo <span class="hljs-built_in">rm</span> -r WordNet<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /usr/local/WordNet-3.0/bin<br></code></pre></td></tr></table></figure>
-<p>在这里，你可以执行可执行文件。</p>
-<p>以最常用的 <code>wn -over</code> 为例，输入 <code>./wn 单词 -over</code>，即可查阅单词的释义(overview)。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs applescript">Creative@Creative:/usr/<span class="hljs-keyword">local</span>/WordNet<span class="hljs-number">-3.0</span>/bin $ ./wn test -<span class="hljs-keyword">over</span><br><br>Overview <span class="hljs-keyword">of</span> noun test<br><br>The noun test has <span class="hljs-number">6</span> senses (<span class="hljs-keyword">first</span> <span class="hljs-number">5</span> <span class="hljs-keyword">from</span> tagged texts)<br><br><span class="hljs-number">1.</span> (<span class="hljs-number">19</span>) trial, trial <span class="hljs-built_in">run</span>, test, tryout <span class="hljs-comment">-- (trying something to find out about it; &quot;a sample for ten days free trial&quot;; &quot;a trial of progesterone failed to relieve the pain&quot;)</span><br><span class="hljs-number">2.</span> (<span class="hljs-number">7</span>) test, mental test, mental testing, psychometric test <span class="hljs-comment">-- (any standardized procedure for measuring sensitivity or memory or intelligence or aptitude or personality etc; &quot;the test was standardized on a large sample of students&quot;)</span><br><span class="hljs-number">3.</span> (<span class="hljs-number">2</span>) examination, exam, test <span class="hljs-comment">-- (a set of questions or exercises evaluating skill or knowledge; &quot;when the test was stolen the professor had to make a new set of questions&quot;)</span><br><span class="hljs-number">4.</span> (<span class="hljs-number">2</span>) test, trial <span class="hljs-comment">-- (the act of undergoing testing; &quot;he survived the great test of battle&quot;; &quot;candidates must compete in a trial of skill&quot;)</span><br><span class="hljs-number">5.</span> (<span class="hljs-number">2</span>) test, trial, <span class="hljs-built_in">run</span> <span class="hljs-comment">-- (the act of testing something; &quot;in the experimental trials the amount of carbon was measured separately&quot;; &quot;he called each flip of the coin a new trial&quot;)</span><br><span class="hljs-number">6.</span> test <span class="hljs-comment">-- (a hard outer covering as of some amoebas and sea urchins)</span><br><br>Overview <span class="hljs-keyword">of</span> verb test<br><br>The verb test has <span class="hljs-number">7</span> senses (<span class="hljs-keyword">first</span> <span class="hljs-number">3</span> <span class="hljs-keyword">from</span> tagged texts)<br><br><span class="hljs-number">1.</span> (<span class="hljs-number">32</span>) test, prove, <span class="hljs-keyword">try</span>, <span class="hljs-keyword">try</span> out, examine, essay <span class="hljs-comment">-- (put to the test, as for its quality, or give experimental use to; &quot;This approach has been tried with good results&quot;; &quot;Test this recipe&quot;)</span><br><span class="hljs-number">2.</span> (<span class="hljs-number">9</span>) screen, test <span class="hljs-comment">-- (test or examine for the presence of disease or infection; &quot;screen the blood for the HIV virus&quot;)</span><br><span class="hljs-number">3.</span> (<span class="hljs-number">4</span>) quiz, test <span class="hljs-comment">-- (examine someone&#x27;s knowledge of something; &quot;The teacher tests us every week&quot;; &quot;We got quizzed on French irregular verbs&quot;)</span><br><span class="hljs-number">4.</span> test <span class="hljs-comment">-- (show a certain characteristic when tested; &quot;He tested positive for HIV&quot;)</span><br><span class="hljs-number">5.</span> test <span class="hljs-comment">-- (achieve a certain score or rating on a test; &quot;She tested high on the LSAT and was admitted to all the good law schools&quot;)</span><br><span class="hljs-number">6.</span> test <span class="hljs-comment">-- (determine the presence or properties of (a substance))</span><br><span class="hljs-number">7.</span> test <span class="hljs-comment">-- (undergo a test; &quot;She doesn&#x27;t test well&quot;)</span><br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>项目启动者，计算机科学家 $\text{Dr. Miller}$ 于2012年7月22日离世，享年92岁。</p>
-<p>WordNet 的官方版本在很长一段时间里停留在2006年发布的 Linux 3.0 版本。但作为一个研究工具和资源，它仍然在学术界和自然语言处理领域中被广泛使用。</p>
-<p>讲得较为简略，欢迎大家前往<a target="_blank" rel="noopener" href="https://wordnet.princeton.edu/documentation">技术文档</a>探索 WordNet 的深层用法。</p>
-
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h4><h4 id="扫描线"><a href="#扫描线" class="headerlink" title="扫描线"></a>扫描线</h4>
                 
               </div>
             
@@ -373,7 +340,7 @@
   
     <span>></span>
     
-  <a href="/categories/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -395,8 +362,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>WordNet Linux 配置指南</div>
-      <div>https://algo-x.cn/articles/WordNet-Linux-Configuration-Guide/</div>
+      <div>离线二维数点算法</div>
+      <div>https://algo-x.cn/articles/Offline-2D-Point-Counting-Algorithm/</div>
     </div>
     <div class="license-meta">
       
@@ -408,7 +375,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月23日</div>
+          <div>2024年9月8日</div>
         </div>
       
       
@@ -451,9 +418,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Offline-2D-Point-Counting-Algorithm/" title="离线二维数点算法">
+                      <a href="/articles/Problem-Solving-Summary-Aug19-Sep10/" title="刷题记录 24-08-19 至 24-09-10">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">离线二维数点算法</span>
+                        <span class="hidden-mobile">刷题记录 24-08-19 至 24-09-10</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -461,8 +428,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/Blog-Errata/" title="Open Source Project - Blog Errata | 开源项目 - 勘误表">
-                        <span class="hidden-mobile">Open Source Project - Blog Errata | 开源项目 - 勘误表</span>
+                      <a href="/articles/WordNet-Linux-Configuration-Guide/" title="WordNet Linux 配置指南">
+                        <span class="hidden-mobile">WordNet Linux 配置指南</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
