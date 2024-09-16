@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://algo-x.cn/articles/Problem-Solving-Summary-Aug19-Sep10/</loc>
+    <loc>https://algo-x.cn/articles/Offline-2D-Point-Counting-Algorithm/</loc>
     
-    <lastmod>2024-09-15</lastmod>
+    <lastmod>2024-09-16</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://algo-x.cn/articles/Offline-2D-Point-Counting-Algorithm/</loc>
+    <loc>https://algo-x.cn/articles/Problem-Solving-Summary-Aug19-Sep10/</loc>
     
-    <lastmod>2024-09-08</lastmod>
+    <lastmod>2024-09-16</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -66,15 +66,6 @@
   
   <url>
     <loc>https://algo-x.cn/articles/Modular-Multiplicative-Inverse/</loc>
-    
-    <lastmod>2024-08-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://algo-x.cn/errata/index.html</loc>
     
     <lastmod>2024-08-11</lastmod>
     
@@ -445,7 +436,7 @@
 
   <url>
     <loc>https://algo-x.cn/</loc>
-    <lastmod>2024-09-15</lastmod>
+    <lastmod>2024-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>

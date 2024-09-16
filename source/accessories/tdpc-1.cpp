@@ -30,9 +30,7 @@ template <typename T> struct BIT {
 	void modify(int x, T k) {while (x<=n) c[x]=c[x]+k, x+=lowbit(x);}
 	T g(int x) {T ans=T(); while (x>0) ans=ans+c[x], x-=lowbit(x); return ans;}
 	T query(int x) {return g(x);} T query(int l, int r) {return g(r)-g(l-1);}
-};
-
-BIT<int> ta;
+}; BIT<int> ta;
 
 signed main() {
 	// freopen("a.in", "r", stdin);

@@ -69,6 +69,10 @@ async function updateErrata() {
 		return res;
 	}
 	updateText=`${res}\n${updateText}`;
+	return updateErrataDirectly(updateText);
+}
+
+async function updateErrataDirectly(updateText) {
 	console.log(updateText);
 	const requestData={
 		files: {

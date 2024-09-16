@@ -1,12 +1,11 @@
-https://algo-x.cn/articles/Problem-Solving-Summary-Aug19-Sep10/
 https://algo-x.cn/articles/Offline-2D-Point-Counting-Algorithm/
+https://algo-x.cn/articles/Problem-Solving-Summary-Aug19-Sep10/
 https://algo-x.cn/articles/WordNet-Linux-Configuration-Guide/
 https://algo-x.cn/articles/Blog-Errata/
 https://algo-x.cn/chemistry/symbols/index.html
 https://algo-x.cn/chemistry/ions/index.html
 https://algo-x.cn/articles/Solution-of-SP22382/
 https://algo-x.cn/articles/Modular-Multiplicative-Inverse/
-https://algo-x.cn/errata/index.html
 https://algo-x.cn/articles/SDCPC2024-Personal-Summary-and-Solution-Approach-Organization/
 https://algo-x.cn/articles/Fast-GCD-Algorithm-Based-on-Range-Preprocessing/
 https://algo-x.cn/articles/Maintaining-XOR-Extrema/

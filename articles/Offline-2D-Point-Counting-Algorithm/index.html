@@ -16,15 +16,15 @@
   <meta name="author" content="Taoran">
   <meta name="keywords" content="">
   
-    <meta name="description" content="知识前置树状数组扫描线">
+    <meta name="description" content="知识前置树状数组一种可以单点修改、区间查询的简便数据结构。结合差分可以实现区间修改、区间查询。详见OI-Wiki。 123456template &lt;typename T&gt; struct BIT &#123;	T c[N]; int lowbit(int x) &#123;return x&amp;(~x+1);&#125;	void modify(int x, T k) &#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="离线二维数点算法">
 <meta property="og:url" content="https://algo-x.cn/articles/Offline-2D-Point-Counting-Algorithm/index.html">
 <meta property="og:site_name" content="Algo-X.cn">
-<meta property="og:description" content="知识前置树状数组扫描线">
+<meta property="og:description" content="知识前置树状数组一种可以单点修改、区间查询的简便数据结构。结合差分可以实现区间修改、区间查询。详见OI-Wiki。 123456template &lt;typename T&gt; struct BIT &#123;	T c[N]; int lowbit(int x) &#123;return x&amp;(~x+1);&#125;	void modify(int x, T k) &#123;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-08T09:36:31.000Z">
-<meta property="article:modified_time" content="2024-09-08T09:37:52.119Z">
+<meta property="article:published_time" content="2024-09-16T04:30:36.000Z">
+<meta property="article:modified_time" content="2024-09-16T14:10:07.352Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -243,8 +243,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-08 17:36" pubdate>
-          2024年9月8日 下午
+        <time datetime="2024-09-16 12:30" pubdate>
+          2024年9月16日 下午
         </time>
       </span>
     
@@ -255,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          11 字
+          1.6k 字
         
       </span>
     
@@ -266,7 +266,7 @@
         
         
         
-          1 分钟
+          14 分钟
         
       </span>
     
@@ -308,7 +308,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年9月8日 下午
+                    本文最后更新于 2024年9月16日 晚上
                   
                 
               </p>
@@ -317,7 +317,58 @@
               <div class="markdown-body">
                 
                 <hr>
-<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h4><h4 id="扫描线"><a href="#扫描线" class="headerlink" title="扫描线"></a>扫描线</h4>
+<h3 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h3><h4 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h4><p>一种可以单点修改、区间查询的简便数据结构。结合差分可以实现区间修改、区间查询。详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/fenwick/">OI-Wiki</a>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt; <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BIT</span> &#123;<br>	T c[N]; <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lowbit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<span class="hljs-keyword">return</span> x&amp;(~x+<span class="hljs-number">1</span>);&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-type">int</span> x, T k)</span> </span>&#123;<span class="hljs-keyword">while</span> (x&lt;=n) c[x]=c[x]+k, x+=<span class="hljs-built_in">lowbit</span>(x);&#125;<br>	<span class="hljs-function">T <span class="hljs-title">g</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;T ans=<span class="hljs-built_in">T</span>(); <span class="hljs-keyword">while</span> (x&gt;<span class="hljs-number">0</span>) ans=ans+c[x], x-=<span class="hljs-built_in">lowbit</span>(x); <span class="hljs-keyword">return</span> ans;&#125;<br>	<span class="hljs-function">T <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">g</span>(x);&#125; <span class="hljs-function">T <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> </span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">g</span>(r)-<span class="hljs-built_in">g</span>(l<span class="hljs-number">-1</span>);&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h4 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h4><p>一种保留大小关系的映射，$O(V)\rightarrow O(n)$。详见<a target="_blank" rel="noopener" href="https://oi-wiki.org/misc/discrete/">OI-Wiki</a>。</p>
+<hr>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>平面上有 $n$ 个点，坐标 $(x_i,y_i)$。给出 $m$ 个矩形，左上角 $(x1_j,y1_j)$，右上角 $(x2_j,y2_j)$。询问有多少个点在各个矩阵里，即对于每个 $j$，满足 $x1_j\le x_i\le x2_j\land y1_j\le y_i\le y2_j$ 的 $i$ 的个数。$1\le i\le n$，$1\le j\le m。$</p>
+<hr>
+<h3 id="一、朴素算法"><a href="#一、朴素算法" class="headerlink" title="一、朴素算法"></a>一、朴素算法</h3><p>适用于 $n$、$m$ 的规模较小的情况，对 $x$ 和 $y$ 的值域无限制。</p>
+<p>枚举每个点和每个矩阵，检查点 $i$ 是否在矩阵 $j$ 内。若在，$\text{ans}_j\leftarrow \text{ans}_j+1$。<br>这样正确性可以保证，因为一个点和对一个矩阵只会做一次贡献。</p>
+<p>时间复杂度 $O(nm)$。</p>
+<hr>
+<h3 id="二、扫描线"><a href="#二、扫描线" class="headerlink" title="二、扫描线"></a>二、扫描线</h3><p>适用于 $x$ 值域无限制、$y$ 值域较小的情况。</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10814">洛谷P10814</a> 离线二维数点</p>
+<p>给你一个长为 $n$ 的序列 $a$，有 $m$ 次询问，每次询问给定 $l,r,x$，求 $[l,r]$ 区间中小于等于 $x$ 的元素个数。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>借助前缀和思想，我们将询问拆成两条：</p>
+<ol>
+<li>$[1,r]$ 的分询问，权值为 $1$；</li>
+<li>$[1,l-1]$ 的分询问，权值为 $-1$。</li>
+</ol>
+<p>分询问 $\times$ 权值 的和即为询问的答案。</p>
+<p>在平面上用一条线从左向右 (从 $1$ 到 $n$) 扫，每扫到一个点就将它“附着”在直线上。这样，$[1,x]$ 的询问就是直线扫到 $i&#x3D;x$ 后附着的点在区域 $[1,y]$ 内的答案。</p>
+<div style="display: block; margin-left: auto; margin-right: auto; aspect-ratio: 4/3; width: 100%;">
+    <iframe src="https://www.desmos.com/calculator/zufqboqk5h?embed" style="width: 100%; height: 100%; border: 1px solid #ccc;"></iframe>
+</div>
+
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p>实现上，使用 <code>vector&lt;node&gt; c[N]</code> 表示每个横坐标的查询。<br>使用值域树状数组维护单点修改和区间查询，查询小于等于某个高度的点数量。</p>
+<p>时间复杂度 $O(n\log n+km)$，$k&#x3D;2$。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/176082688">AC</a> 150.16MB 2.00s<br>由于用的不多，代码我放到了<a href="../../source/accessories/tdpc-1.cpp">这里</a>。</p>
+<hr>
+<h3 id="三、扫描线-离散化"><a href="#三、扫描线-离散化" class="headerlink" title="三、扫描线 + 离散化"></a>三、扫描线 + 离散化</h3><p>适用于 $x$、$y$ 值域无限制的情况。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2163">洛谷P2163</a> [SHOI2007] 园丁的烦恼<br>一上离散化就成蓝题了。</p>
+<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><p>使用离散化，将点的规模从 $O(V)$ 降至 $O(n)$。同时，由于插入&#x2F;查询只需要全序关系，所以正确性可以保证。</p>
+<p>将点和询问统一处理，点优先于询问处理。<br>类前缀和思想，将一个询问拆成四份，以处理一个矩形内的询问。</p>
+<p>时间复杂度 $O((n+km)\log(n+km))$，$k&#x3D;4$。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/176327207">AC</a> 54.70MB 1.25s<br>由于用的不多，代码我放到了<a href="../../source/accessories/tdpc-2.cpp">这里</a>。</p>
+<p>注：由于使用了离散化，时间复杂度有所增加，故不能通过 P10814。</p>
+<hr>
+<h3 id="四、带权的点"><a href="#四、带权的点" class="headerlink" title="四、带权的点"></a>四、带权的点</h3><p>不需要将带权点拆为 $k$ 个点，那样会使时间复杂度大幅增加。</p>
+<p>只需要在代码上做一点小改动即可，在树状数组上插入时将权值插入。</p>
+<h4 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3755">洛谷P3755</a> [CQOI2017] 老C的任务<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/176329996">AC</a> 27.35MB 1.06s</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">20</span>], *p1, *p2;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> getchar() (p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1&lt;&lt;20,stdin),p1==p2)?0:*p1++)</span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span> </span>&#123;<br>	ll x=<span class="hljs-number">0</span>, f=<span class="hljs-number">1</span>; <span class="hljs-type">char</span> ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span> (ch&lt;<span class="hljs-string">&#x27;0&#x27;</span>||ch&gt;<span class="hljs-string">&#x27;9&#x27;</span>) &#123;<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>; ch=<span class="hljs-built_in">getchar</span>();&#125;<br>	<span class="hljs-keyword">while</span> (ch&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) x=(x&lt;&lt;<span class="hljs-number">1</span>)+(x&lt;&lt;<span class="hljs-number">3</span>)+(ch^<span class="hljs-number">48</span>), ch=<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">return</span> x*f;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 500010</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> M 500010</span><br><span class="hljs-type">int</span> n, m; <span class="hljs-comment">// n modifications &amp; m queries in total.</span><br><br><span class="hljs-keyword">namespace</span> tdpc &#123;<br>	<span class="hljs-type">int</span> n, X[N+(M&lt;&lt;<span class="hljs-number">2</span>)], Y[N+(M&lt;&lt;<span class="hljs-number">2</span>)], nx, ny; ll ans[M]; <span class="hljs-comment">// n points in total.</span><br>	<span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span> &#123;<span class="hljs-type">int</span> x, y, val, id, cof;&#125; p[N+(M&lt;&lt;<span class="hljs-number">2</span>)]; <span class="hljs-comment">// M: val | Q: id, cof</span><br>	<span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>&lt;(node a, node b) &#123;<span class="hljs-keyword">return</span> a.x==b.x?<span class="hljs-built_in">abs</span>(a.cof)&lt;<span class="hljs-built_in">abs</span>(b.cof):a.x&lt;b.x;&#125;<br>	<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt; <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BIT</span> &#123;<br>		T c[N]; <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lowbit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<span class="hljs-keyword">return</span> x&amp;(~x+<span class="hljs-number">1</span>);&#125;<br>		<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-type">int</span> x, T k)</span> </span>&#123;<span class="hljs-keyword">while</span> (x&lt;=n) c[x]=c[x]+k, x+=<span class="hljs-built_in">lowbit</span>(x);&#125;<br>		<span class="hljs-function">T <span class="hljs-title">g</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;T ans=<span class="hljs-built_in">T</span>(); <span class="hljs-keyword">while</span> (x&gt;<span class="hljs-number">0</span>) ans=ans+c[x], x-=<span class="hljs-built_in">lowbit</span>(x); <span class="hljs-keyword">return</span> ans;&#125;<br>		<span class="hljs-function">T <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">g</span>(x);&#125; <span class="hljs-function">T <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> </span>&#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">g</span>(r)-<span class="hljs-built_in">g</span>(l<span class="hljs-number">-1</span>);&#125;<br>	&#125;; BIT&lt;ll&gt; ta;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">np</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> val, <span class="hljs-type">int</span> id, <span class="hljs-type">int</span> cof)</span> </span>&#123; <span class="hljs-comment">// Make a new point.</span><br>		p[++n]=&#123;x, y, val, id, cof&#125;, X[n]=x, Y[n]=y;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">set_point</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> val)</span> </span>&#123;<span class="hljs-built_in">np</span>(x, y, val, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">set_query</span><span class="hljs-params">(<span class="hljs-type">int</span> id, <span class="hljs-type">int</span> x1, <span class="hljs-type">int</span> y1, <span class="hljs-type">int</span> x2, <span class="hljs-type">int</span> y2)</span> </span>&#123;<br>		<span class="hljs-keyword">if</span> (x1&gt;x2) <span class="hljs-built_in">swap</span>(x1, x2); <span class="hljs-keyword">if</span> (y1&gt;y2) <span class="hljs-built_in">swap</span>(y1, y2);<br>		<span class="hljs-built_in">np</span>(x2, y2, <span class="hljs-number">0</span>, id, <span class="hljs-number">1</span>), <span class="hljs-built_in">np</span>(x1<span class="hljs-number">-1</span>, y1<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, id, <span class="hljs-number">1</span>);<br>		<span class="hljs-built_in">np</span>(x2, y1<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, id, <span class="hljs-number">-1</span>), <span class="hljs-built_in">np</span>(x1<span class="hljs-number">-1</span>, y2, <span class="hljs-number">0</span>, id, <span class="hljs-number">-1</span>);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">process</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-built_in">sort</span>(X+<span class="hljs-number">1</span>, X+n+<span class="hljs-number">1</span>), nx=<span class="hljs-built_in">unique</span>(X+<span class="hljs-number">1</span>, X+n+<span class="hljs-number">1</span>)-X<span class="hljs-number">-1</span>;<br>		<span class="hljs-built_in">sort</span>(Y+<span class="hljs-number">1</span>, Y+n+<span class="hljs-number">1</span>), ny=<span class="hljs-built_in">unique</span>(Y+<span class="hljs-number">1</span>, Y+n+<span class="hljs-number">1</span>)-Y<span class="hljs-number">-1</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) &#123;<br>			p[i].x=<span class="hljs-built_in">lower_bound</span>(X+<span class="hljs-number">1</span>, X+nx+<span class="hljs-number">1</span>, p[i].x)-X;<br>			p[i].y=<span class="hljs-built_in">lower_bound</span>(Y+<span class="hljs-number">1</span>, Y+ny+<span class="hljs-number">1</span>, p[i].y)-Y;<br>		&#125;<br>		<span class="hljs-built_in">sort</span>(p+<span class="hljs-number">1</span>, p+n+<span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) &#123;<br>			<span class="hljs-keyword">if</span> (p[i].cof==<span class="hljs-number">0</span>) &#123;ta.<span class="hljs-built_in">modify</span>(p[i].y, p[i].val); <span class="hljs-keyword">continue</span>;&#125;<br>			ans[p[i].id]+=p[i].cof*ta.<span class="hljs-built_in">query</span>(p[i].y);<br>		&#125;<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">// freopen(&quot;d.in&quot;, &quot;r&quot;, stdin);</span><br>	n=<span class="hljs-built_in">read</span>(), m=<span class="hljs-built_in">read</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) &#123;<br>		<span class="hljs-type">int</span> x=<span class="hljs-built_in">read</span>(), y=<span class="hljs-built_in">read</span>(), val=<span class="hljs-built_in">read</span>();<br>		tdpc::<span class="hljs-built_in">set_point</span>(x, y, val);<br>	&#125;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) &#123;<br>		<span class="hljs-type">int</span> x1=<span class="hljs-built_in">read</span>(), y1=<span class="hljs-built_in">read</span>(), x2=<span class="hljs-built_in">read</span>(), y2=<span class="hljs-built_in">read</span>();<br>		tdpc::<span class="hljs-built_in">set_query</span>(i, x1, y1, x2, y2);<br>	&#125;<br>	tdpc::<span class="hljs-built_in">process</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, tdpc::ans[i]);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>机房内一位大佬 $\texttt{wyz}$ 说我写的太长了，我也不知道哪里出了问题导致这么长 QWQ。</p>
+<hr>
+<h3 id="其他求解方法"><a href="#其他求解方法" class="headerlink" title="其他求解方法"></a>其他求解方法</h3><p>可以使用 CDQ 分治求解三位偏序的方法求解。</p>
+<p>还是考虑将原询问拆为四个，点和询问统一处理。然后构建三维偏序关系：</p>
+<ol>
+<li>第一维：$a_i&#x3D;x_i$，$a_i\le a_j$；</li>
+<li>第二维：$b_i&#x3D;y_i$，$b_i\le b_j$；</li>
+<li>第三维：$c_i&#x3D;[i\in\text{Points}]&#x3D;[i\notin\text{Queries}]$，$c_i&lt;c_j$。<br>这一维保证查询只能查询到点，而不会查询到别的询问。</li>
+</ol>
+<p>对于每个 $j$，满足偏序的 $i$ 的数量即为子询问 $j$ 的答案，再按对应位置权值加起来即可。</p>
+<p>由此可见，三位偏序一定可以解二维数点，但二维数点不能解三维偏序。</p>
+
                 
               </div>
             
@@ -375,13 +426,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月8日</div>
+          <div>2024年9月16日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年9月8日</div>
+          <div>2024年9月16日</div>
         </div>
       
       
@@ -418,18 +469,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/articles/Problem-Solving-Summary-Aug19-Sep10/" title="刷题记录 24-08-19 至 24-09-10">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">刷题记录 24-08-19 至 24-09-10</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/articles/WordNet-Linux-Configuration-Guide/" title="WordNet Linux 配置指南">
-                        <span class="hidden-mobile">WordNet Linux 配置指南</span>
+                      <a href="/articles/Problem-Solving-Summary-Aug19-Sep10/" title="刷题记录 24-08-19 至 24-09-10">
+                        <span class="hidden-mobile">刷题记录 24-08-19 至 24-09-10</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
