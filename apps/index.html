@@ -16,21 +16,21 @@
   <meta name="author" content="Taoran">
   <meta name="keywords" content="">
   
-    <meta name="description" content=".text-input {         width: 100%;         box-sizing: border-box;         resize: none;         min-height: 200px;     }     .read-button {         background-color: #005f9f;         color: w">
+    <meta name="description" content="化学 勘误表">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Algo-X 勘误表 - 管理员页面">
-<meta property="og:url" content="https://algo-x.cn/errata/admin/index.html">
+<meta property="og:title" content="应用">
+<meta property="og:url" content="https://algo-x.cn/apps/index.html">
 <meta property="og:site_name" content="Algo-X.cn">
-<meta property="og:description" content=".text-input {         width: 100%;         box-sizing: border-box;         resize: none;         min-height: 200px;     }     .read-button {         background-color: #005f9f;         color: w">
+<meta property="og:description" content="化学 勘误表">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-16T04:10:47.000Z">
-<meta property="article:modified_time" content="2024-09-16T04:28:35.116Z">
+<meta property="article:published_time" content="2024-10-04T11:24:22.000Z">
+<meta property="article:modified_time" content="2024-10-13T06:33:48.384Z">
 <meta property="article:author" content="Taoran">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Algo-X 勘误表 - 管理员页面 - Algo-X.cn</title>
+  <title>应用 - Algo-X.cn</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -130,7 +130,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/errata/" target="_self">
+              <a class="nav-link" href="/apps/errata/" target="_self">
                 <i class="iconfont icon-bug"></i>
                 <span>勘误表</span>
               </a>
@@ -166,9 +166,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/chemistry/" target="_self">
-                <i class="iconfont icon-exp-fill"></i>
-                <span>化学</span>
+              <a class="nav-link" href="/apps/" target="_self">
+                <i class="iconfont icon-briefcase"></i>
+                <span>应用</span>
               </a>
             </li>
           
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Algo-X 勘误表 - 管理员页面"></span>
+            <span id="subtitle" data-typed-text="应用"></span>
           
         </div>
 
@@ -254,75 +254,10 @@
                 
 
 <article class="page-content">
-  <script src="../../js/ex-func.js"></script>
-<script src="../../js/ex-func-errata.js"></script>
+  <!-- [洛谷绘版脚本](./luogu-paintboard-script/) -->
 
-<style>
-    .text-input {
-        width: 100%;
-        box-sizing: border-box;
-        resize: none;
-        min-height: 200px;
-    }
-    .read-button {
-        background-color: #005f9f;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        /* float: left;
-        margin-left: auto; */
-    }
-    .read-button:hover {
-        background-color: #003f7f;
-    }
-    .submit-button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        float: right;
-        margin-left: auto;
-    }
-    .submit-button:hover {
-        background-color: #45A049;
-    }
-    .errata-display-area {
-        padding: 10px;
-        border: 1px solid #000;
-        border-radius: 3px;
-        color: black;
-        background-color: #f0f0f0;
-        white-space: pre-wrap;
-    }
-</style>
-
-<div class="text-container">
-    <!-- 勘误表编辑文本框 -->
-    <textarea class="text-input" id="textInput" placeholder="勘误表待读取"></textarea>
-</div>
-
-<p><button class="read-button" id="readButton">读取勘误表</button> <button class="submit-button" id="submitButton">提交</button></p>
-<script>
-    document.getElementById('readButton').addEventListener('click', function() {
-        (async() => {
-            const res=await getErrata();
-            document.getElementById('textInput').value=res;
-        })();
-    });
-    document.getElementById('submitButton').addEventListener('click', function(){
-        (async() => {
-            const updateText=document.getElementById('textInput').value;
-            const res=await updateErrataDirectly(updateText);
-            document.getElementById('errataDisplayArea').textContent=res;
-        })();
-    });
-</script>
-
-<p class="errata-display-area" id="errataDisplayArea">未提交</p>
+<p><a href="./chemistry/">化学</a></p>
+<p><a href="./errata/">勘误表</a></p>
 
 
   

@@ -35,7 +35,43 @@ function generateRandomString(len) {
 
 function addToEachLine(inputString, insertString) {
     const lines=inputString.split('\n');
-    const modifiedLines=lines.map(line => insertString + line);
+    const modifiedLines=lines.map(line => insertString+line);
     const resultString=modifiedLines.join('\n');
     return resultString;
+}
+
+class CircularQueue {
+	constructor(maxSize) {
+		this.queue=new Array(maxSize);
+		this.maxSize=maxSize;
+		this.front=0;
+		this.rear=0;
+		this.size=0;
+	}
+	empty() {return this.size==0;}
+	full() {return this.size==this.maxSize;}
+	push(element) {
+		if (this.full()) throw new Error("Queue is full");
+		this.queue[this.rear]=element;
+		this.rear=(this.rear+1)%this.maxSize;
+		this.size++;
+	}
+	front() {
+		if (this.empty()) throw new Error("Queue is empty");
+		return this.queue[this.front];
+	}
+	pop() {
+		if (this.empty()) throw new Error("Queue is empty");
+		const element=this.queue[this.front];
+		this.queue[this.front]=undefined;
+		this.front=(this.front+1)%this.maxSize;
+		this.size--;
+		return element;
+	}
+	clear() {
+		this.front=0;
+		this.rear=0;
+		this.size=0;
+		this.queue=new Array(this.maxSize);
+	}
 }

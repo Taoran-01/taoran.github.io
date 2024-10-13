@@ -1,0 +1,81 @@
+.grey-button {
+	background-color: #999;
+	color: white;
+	padding: 5px 10px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.grey-button:hover {
+	background-color: #777;
+}
+.red-button {
+	background-color: #BF0000;
+	color: white;
+	padding: 5px 10px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.red-button:hover {
+	background-color: #7f0000;
+}
+.green-button {
+	background-color: #4C9F50;
+	color: white;
+	padding: 5px 10px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.green-button:hover {
+	background-color: #2C7F50;
+}
+.blue-button {
+	background-color: #005f9f;
+	color: white;
+	padding: 5px 10px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.blue-button:hover {
+	background-color: #003f7f;
+}
+.select-wrapper {
+	position: relative;
+}
+.select {
+	display: none;
+}
+.custom-select {
+	display: flex;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #999;
+	border-radius: 3px;
+	background-color: #fff;
+	cursor: pointer;
+	position: relative;
+}
+.custom-select:hover {
+	background-color: #efefef;
+}
+.options {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	border: 1px solid #999;
+	border-radius: 3px;
+	background-color: #fff;
+	z-index: 1;
+}
+.options div {
+	padding: 10px;
+	cursor: pointer;
+}
+.options div:hover {
+	background-color: #efefef;
+}
